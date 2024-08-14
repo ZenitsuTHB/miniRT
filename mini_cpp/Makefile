@@ -6,15 +6,17 @@
 #    By: avolcy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 12:42:26 by avolcy            #+#    #+#              #
-#    Updated: 2024/08/13 19:39:00 by avolcy           ###   ########.fr        #
+#    Updated: 2024/08/14 15:26:16 by avolcy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = mini
 
-all : 
+all :
+	clear
 	c++ *.cpp -o $(NAME)
 
 
 fclean :
 	rm -rf $(NAME)
+	clear
