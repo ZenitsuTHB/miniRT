@@ -6,8 +6,9 @@ LIBMLX	:= libs/MLX42
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+SRCSDIR := ./src
 
-SRCS	:= srs/main.c
+SRCS	:= main.c
 
 OBJS := ${SRCS:.c=.o}
 #OBJS	:= $(addprefix $(OBJS_DIR)/, ${SRCS:.c=.o})
@@ -17,7 +18,7 @@ all: libmlx $(NAME)
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-%.o: %.c
+%.o: $(SRCSDIR)/%.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
 
 $(NAME): $(OBJS)
