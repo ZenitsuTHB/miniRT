@@ -5,6 +5,6 @@
 int main(void)
 {
 
-	
-	return EXIT_SUCCESS;
+	printf("\n\nHALLO miniRT\n\n");
+	return (EXIT_SUCCESS);
 }
