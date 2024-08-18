@@ -27,9 +27,11 @@ $(NAME): $(OBJS)
 clean:
 	@rm -rf $(OBJS)
 	@rm -rf $(LIBMLX)/build
+	clear
 
 fclean: clean
 	@rm -rf $(NAME) $(OBJS_DIR)
+	clear
 
 re: clean all
 
