@@ -1,18 +1,23 @@
 NAME	:= miniRT
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
 LIBMLX	:= libs/MLX42
+LIBFT	:= libs/libft
 
 OBJS_DIR := ./build
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I ./headers/
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBS    += $(LIBFT)/libft.a
 SRCSDIR := ./src
 
 SRCS	:= main.c
 
 OBJS	:= $(addprefix $(OBJS_DIR)/, ${SRCS:.c=.o})
 
-all: libmlx $(NAME)
+all: libmlx libft $(NAME)
+
+libft:
+	@make -C $(LIBFT)
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
@@ -27,10 +32,12 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -rf $(OBJS)
+	@make clean -C $(LIBFT)
 	@rm -rf $(LIBMLX)/build
 	clear
 
 fclean: clean
+	@make fclean -C $(LIBFT)
 	@rm -rf $(NAME) $(OBJS_DIR)
 	clear
 

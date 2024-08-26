@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:45:16 by avolcy            #+#    #+#             */
-/*   Updated: 2024/08/26 11:17:15 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/08/26 18:54:11 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,14 @@ int check_args(int argc, char *scene)
 	printf("ARGUMENT : %s\n", scene);
 	while (scene[i] && scene[i] != '.')
 		i++;
-
+	printf("extension : %s\n", &scene[i]);
 	
+	if (ft_strncmp(&scene[i], ".rt", 4))
+	{
+		printf(YEL"\n\t%s\n\n"NC, ERROR_EXTENSION);
+		return (-1);
+	}
+
 	//check for file permision, Open file and 
 	//check if the file format meet the subject requierments
 	
