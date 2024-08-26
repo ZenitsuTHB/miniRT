@@ -19,6 +19,7 @@ libmlx:
 
 $(OBJS_DIR)/%.o: $(SRCSDIR)/%.c $(HEADER) Makefile
 	mkdir -p $(dir $@)
+	clear
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "\nCompiling: $(notdir $<)\n"
 
 $(NAME): $(OBJS)

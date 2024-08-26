@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Vector.h                                           :+:      :+:    :+:   */
+/*  vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,18 +13,15 @@
 #ifndef VECTOR_H
 # define VECTOR_H
 
-#include <math.h>
-#include <stdio.h>
+# include <math.h>
+# include <stdio.h>
 
-typedef struct s_vector 
+typedef struct s_vector
 {
-	double x;
-	double y;
-	double z;
-	
-} t_vector;
+	double	x;
+	double	y;
+	double	z;
 
-
-
+}			t_vector;
 
 #endif
