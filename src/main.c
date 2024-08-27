@@ -6,12 +6,19 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:45:16 by avolcy            #+#    #+#             */
-/*   Updated: 2024/08/26 18:54:11 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/08/27 20:10:46 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <minirt.h>
+
+int			error_message(char *color, char *msg)
+{
+	printf(RED"\n\tError\n");
+	printf("\t%s%s\n\n"NC, color, msg);
+	return (-1);
+}
 
 int check_args(int argc, char *scene)
 {
@@ -19,24 +26,21 @@ int check_args(int argc, char *scene)
 
 	i = 0;
 	if (argc != 2)
-	{
-		printf(RED"\n\t%s\n\n"NC, ERROR_ARG);
-		return (-1);
-	}
+		return (error_message(YEL, ERROR_ARG));
 	//check the extensions is correct 
 	printf("ARGUMENT : %s\n", scene);
 	while (scene[i] && scene[i] != '.')
 		i++;
 	printf("extension : %s\n", &scene[i]);
 	
-	if (ft_strncmp(&scene[i], ".rt", 4))
-	{
-		printf(YEL"\n\t%s\n\n"NC, ERROR_EXTENSION);
-		return (-1);
-	}
+	if (ft_strncmp(&scene[i], ".rt", 4) && ft_strlen(&scene[i]))
+		return (error_message(YEL, ERROR_EXTENSION));
 
 	//check for file permision, Open file and 
 	//check if the file format meet the subject requierments
+	//open, close, read, write,
+	//printf, malloc, free, perror,
+	//strerror, exit
 	
 	return 0;
 }
