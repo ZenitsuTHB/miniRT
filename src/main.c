@@ -32,9 +32,14 @@ int check_args(int argc, char *scene)
 	while (scene[i] && scene[i] != '.')
 		i++;
 	printf("extension : %s\n", &scene[i]);
-	
-	if (ft_strncmp(&scene[i], ".rt", 4) && ft_strlen(&scene[i]))
+
+  printf("len of file %ld\n", ft_strlen(&scene[i]));
+	if (ft_strncmp(&scene[i], ".rt", 4))
+  {
+    if (ft_strlen(scene) <= 3)
+      return (error_message(YEL, "not a file"));
 		return (error_message(YEL, ERROR_EXTENSION));
+  }
 
 	//check for file permision, Open file and 
 	//check if the file format meet the subject requierments
