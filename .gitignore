@@ -1,0 +1,11 @@
+*.txt
+*.o
+*.a
+miniRT
+*.swp
+*.swo
+*.d
+*.gch
+.DS_Store
+.
+..
