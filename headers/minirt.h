@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/08/26 16:55:43 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/08/28 14:28:21 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 typedef struct s_win
 {
-	void	*mlx_window;
-	void	*mlx_connection;
+	void	*mlx_img;
+	void	*mlx_con;
 
 }			t_win;
 
