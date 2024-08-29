@@ -6,11 +6,11 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:45:16 by avolcy            #+#    #+#             */
-/*   Updated: 2024/08/28 14:34:32 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:56:14 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../headers/minirt.h>
+#include "../headers/minirt.h"
 #include <math.h>
 
 void draw_sphere(t_win *mlx, int cx, int cy, int radius)
@@ -31,6 +31,20 @@ void draw_sphere(t_win *mlx, int cx, int cy, int radius)
     }
 }
 
+void my_key_function(mlx_key_data_t keydata, void* param)
+{
+    if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+    {
+        printf("Escape key pressed. Exiting...\n");
+        mlx_close_window((mlx_t*)param);
+    }
+    else
+    {
+        printf("Key pressed: %d\n", keydata.key);
+    }
+}
+
+//	void mlx_mouse_hook(mlx_t* mlx, mlx_mousefunc func, void* param)
 int	main()
 {
 	t_win	init;
@@ -48,17 +62,20 @@ int	main()
 	if (!init.mlx_img)
 		return (1);
 
-	// Dibujar esfera
-	
+
 	radius = 50;
 	draw_sphere(&init, WIDTH / 2, HEIGHT / 2, radius);
 
 	// Meter la imagen en la pantalla
 	
+	mlx_key_hook(init.mlx_con, my_key_function, init.mlx_con);
+//	mlx_mouse_hook(init.mlx_con, mouse_event, init.mlx);
 	mlx_image_to_window(init.mlx_con, init.mlx_img, 0, 0);
 
 	// Esperar a que el usuario cierre la pantalla
 	
 	mlx_loop(init.mlx_con);
-	
+
+	mlx_terminate(init.mlx_con);
+	return (0);	
 }

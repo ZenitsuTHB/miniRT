@@ -22,6 +22,9 @@ libft:
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
+debug: all
+	valgrind --show-leak-kinds=all --track-origins=yes --leak-check=full --track-fds=yes --child-silent-after-fork=yes ./$(NAME)
+
 $(OBJS_DIR)/%.o: $(SRCSDIR)/%.c $(HEADER) Makefile
 	mkdir -p $(dir $@)
 	clear
