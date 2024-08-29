@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:28:57 by avolcy            #+#    #+#             */
-/*   Updated: 2024/08/27 19:45:18 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/08/29 17:03:02 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 # include <math.h>
 #include "minirt.h"
 
-typedef struct s_win
+typedef struct s_mlx
 {
-	void	*mlx_window;
-	void	*mlx_connection;
+	void	*win;
+	void	*con;
 
-}			t_win;
+}			t_mlx;
 
 typedef struct s_vector
 {

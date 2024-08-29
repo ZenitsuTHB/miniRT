@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:45:16 by avolcy            #+#    #+#             */
-/*   Updated: 2024/08/29 16:58:40 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/08/29 17:04:35 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,18 @@ int check_args(int argc, char *scene)
 
 int main(int argc, char *argv[])
 {
-	t_win init;
+	t_mlx	mlx;
 
 	if (check_args(argc, argv[1]) == -1)
 		return (1);
-	init.mlx_connection = NULL;
-	init.mlx_connection = mlx_init(HEIGHT, WIDTH, "miniRT", true);
-	if (init.mlx_connection == NULL)
+	mlx.con = NULL;
+	mlx.con = mlx_init(HEIGHT, WIDTH, "miniRT", true);
+	if (mlx.con == NULL)
 		return (1);
 
-	mlx_loop(init.mlx_connection);
+	mlx_loop(mlx.con);
 
-	mlx_terminate(init.mlx_connection);
+	mlx_terminate(mlx.con);
 
 	//printf("\n\nHALLO miniRT\n\n");
 	return (EXIT_SUCCESS);
