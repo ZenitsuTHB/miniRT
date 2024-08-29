@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:45:16 by avolcy            #+#    #+#             */
-/*   Updated: 2024/08/28 18:36:27 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/08/29 16:58:40 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int check_args(int argc, char *scene)
 		return (error_message(YEL, ERROR_ARG));
 	//check the extensions is correct 
 	printf("ARGUMENT : %s\n", scene);
+	if (scene[0] == '.')
+		i++;
 	while (scene[i] && scene[i] != '.')
 		i++;
 	printf("extension : %s\n", &scene[i]);
