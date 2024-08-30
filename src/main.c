@@ -31,6 +31,20 @@ void draw_sphere(t_win *mlx, int cx, int cy, int radius)
     }
 }
 
+void  manage_escape(mlx_key_data_t keydata, void *param)
+{
+
+  if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+    {
+        printf("Escape key pressed. Exiting...\n");
+        mlx_close_window((mlx_t*)param);
+    }
+    else
+    {
+        printf("Key pressed: %d\n", keydata.key);
+    }
+}
+
 int	main()
 {
 	t_win	init;
@@ -49,7 +63,8 @@ int	main()
 		return (1);
 
 	// Dibujar esfera
-	
+
+  mlx_key_hook(init.mlx_con, manage_escape ,init.mlx_con);
 	radius = 50;
 	draw_sphere(&init, WIDTH / 2, HEIGHT / 2, radius);
 
