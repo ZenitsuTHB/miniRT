@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:45:16 by avolcy            #+#    #+#             */
-/*   Updated: 2024/08/29 16:58:40 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/08/29 17:04:35 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,21 @@ int	main()
 //int32_t mlx_image_to_window(mlx_t* mlx, mlx_image_t* img, int32_t x, int32_t y)
 //void mlx_set_instance_depth(mlx_instance_t* instance, int32_t zdepth)
 
+int main(int argc, char *argv[])
+{
+	t_mlx	mlx;
+
+	if (check_args(argc, argv[1]) == -1)
+		return (1);
+	mlx.con = NULL;
+	mlx.con = mlx_init(HEIGHT, WIDTH, "miniRT", true);
+	if (mlx.con == NULL)
+		return (1);
+
+	mlx_loop(mlx.con);
+
+	mlx_terminate(mlx.con);
+
+	//printf("\n\nHALLO miniRT\n\n");
+	return (EXIT_SUCCESS);
 }
