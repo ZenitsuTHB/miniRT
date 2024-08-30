@@ -6,11 +6,11 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:45:16 by avolcy            #+#    #+#             */
-/*   Updated: 2024/08/28 14:34:32 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/08/29 16:58:40 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../headers/minirt.h>
+#include <../include/minirt.h>
 #include <math.h>
 
 void draw_sphere(t_win *mlx, int cx, int cy, int radius)
@@ -76,4 +76,12 @@ int	main()
 	
 	mlx_loop(init.mlx_con);
 	
+
+//static void mlx_render_images(mlx_t* mlx)
+//void mlx_close_window(mlx_t* mlx)
+//void mlx_delete_image(mlx_t* mlx, mlx_image_t* image)
+//mlx_image_t* mlx_new_image(mlx_t* mlx, uint32_t width, uint32_t height)
+//int32_t mlx_image_to_window(mlx_t* mlx, mlx_image_t* img, int32_t x, int32_t y)
+//void mlx_set_instance_depth(mlx_instance_t* instance, int32_t zdepth)
+
 }
