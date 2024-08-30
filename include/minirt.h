@@ -21,15 +21,6 @@
 # include "../libs/libft/libft.h"
 # include <../libs/MLX42/include/MLX42/MLX42.h>
 
-# define WIDTH 1000
-# define HEIGHT 1400
-
-typedef struct s_win
-{
-	void	*mlx_img;
-	void	*mlx_con;
-
-}			t_win;
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓
 		INPUT
