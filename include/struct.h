@@ -16,10 +16,21 @@
 # include <math.h>
 #include "minirt.h"
 
+typedef struct s_img
+{
+	void	*ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
+
 typedef struct s_mlx
 {
-	void	*win;
 	void	*con;
+  t_img *img;
+  int   x;
+  int   y;
 
 }			t_mlx;
 

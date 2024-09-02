@@ -25,7 +25,6 @@
 # define WHT "\001\033[0;97m\002"
 # define YEL "\001\033[0;33m\002"
 
-
 # define WIDTH 1000
 # define HEIGHT 1400
 # define ERROR_ARG "Bad number of arguments detected !"
