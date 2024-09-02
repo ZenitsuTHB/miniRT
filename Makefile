@@ -30,6 +30,11 @@ $(OBJS_DIR)/%.o: $(SRCSDIR)/%.c $(HEADER) Makefile
 $(NAME): $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
+
+debug: all
+	valgrind --leak-check=full ./$(NAME)
+
+
 clean:
 	@rm -rf $(OBJS)
 	@make clean -C $(LIBFT)

@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:28:57 by avolcy            #+#    #+#             */
-/*   Updated: 2024/08/29 17:03:02 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/02 18:56:52 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include <math.h>
 #include "minirt.h"
+
+/*
+┏━━━━━━━━・▼・━━━━━━━━┓
+		INPUT
+┗━━━━━━━━・▼・━━━━━━━━┛
+*/
 
 typedef struct s_img
 {
@@ -27,20 +33,13 @@ typedef struct s_img
 
 typedef struct s_mlx
 {
+
+	int		x;
+	int		y;
 	void	*con;
-  t_img *img;
-  int   x;
-  int   y;
+	t_img	*img;
+} t_mlx;
 
-}			t_mlx;
-
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-	double	z;
-
-}			t_vec;
 
 typedef struct s_ambient
 {
@@ -104,6 +103,7 @@ typedef struct s_cylinder
 
 typedef struct s_raytracing 
 {
+	t_mlx		mlx;
 	t_amb		ambient;
 	t_cam		camera;
 	t_lite		light;

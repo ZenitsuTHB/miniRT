@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/02 16:32:00 by avolcy           ###   ########.fr       */
+/*   Created: 2024/09/02 13:25:21 by avolcy            #+#    #+#             */
+/*   Updated: 2024/09/02 19:18:36 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef VECTOR_H
+# define VECTOR_H
 
-# include <stdio.h>
-#include "vector.h"
-# include "macros.h"
-# include "struct.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include "../libs/libft/libft.h"
-# include <../libs/MLX42/include/MLX42/MLX42.h>
+# include <math.h>
 
-/*
-┏━━━━━━━━・▼・━━━━━━━━┓
-		INPUT
-┗━━━━━━━━・▼・━━━━━━━━┛
-*/
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+	double	z;
 
-int			error_message(char *color, char *msg);
-int			check_args(int argc, char *argv);
+} t_vec;
+
+//typedef struct  s_vector t_vec;
+typedef struct  s_vector t_point;
+typedef struct  s_vector t_color;
 
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓
+	VECTOR FUNCTIONS
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
+
+
 
 #endif
