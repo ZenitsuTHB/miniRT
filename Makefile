@@ -1,5 +1,5 @@
 NAME	:= miniRT
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast 
 LIBMLX	:= libs/MLX42
 LIBFT	:= libs/libft
 
@@ -28,10 +28,11 @@ $(OBJS_DIR)/%.o: $(SRCSDIR)/%.c $(HEADER) Makefile
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "\nCompiling: $(notdir $<)\n"
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) -fsanitize=address $(HEADERS) -o $(NAME)
 
 
 debug: all
+	#valgrind --leak-check=full --show-leak-kinds=all -s ./$(NAME)
 	valgrind --leak-check=full ./$(NAME)
 
 

@@ -15,13 +15,19 @@
 # include <../libs/MLX42/include/MLX42/MLX42.h>
 #define ERROR_WIND "Can't initialize Window !"
 
+
 void manage_escape(mlx_key_data_t keydata, void *param)
 {
+	t_mlx *mlx;
+
+	mlx = (t_mlx*)param;
     if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
     {
         printf("Escape key pressed. Exiting...\n");
-
-        mlx_close_window((mlx_t *)param);
+		//mlx_delete_image(mlx->con, mlx->img->ptr);
+		mlx_close_window((mlx->con));
+		mlx_terminate(mlx->con);
+		exit(0);
     }
     else
     {
@@ -38,11 +44,21 @@ int			error_message(char *color, char *msg)
 
 int	init_window(t_mlx *mlx)
 {
+	mlx_image_t *img;
+
+	mlx->x = 0;
+	mlx->y = 0;
+	img = mlx->img->ptr;
 	mlx->con = mlx_init(HEIGHT, WIDTH, "miniRT", true);
 	if (mlx->con == NULL)
 		return (1);
-	mlx_key_hook(mlx->con, manage_escape, mlx->con);
+	img =  mlx_new_image(mlx->con, WIDTH, HEIGHT);
+	if (img == NULL)
+		return (1);
+	mlx_image_to_window(mlx->con, img, mlx->x , mlx->y);
+	mlx_key_hook(mlx->con, manage_escape, mlx);
 	mlx_loop(mlx->con);
+	mlx_terminate(mlx->con);
 	return (0);
 }
 
