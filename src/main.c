@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/02 19:49:46 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/09/04 00:25:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,15 @@ int	init_window(t_mlx *mlx)
 	if (img == NULL)
 		return (1);
 	mlx_image_to_window(mlx->con, img, mlx->x , mlx->y);
+	while (mlx->y++ < HEIGHT )
+	{
+		while (mlx->x++ < WIDTH)
+		{
+			int brightness = 255;
+			uint32_t pixel_color = (brightness << 16) | (brightness << 8) | brightness;
+			mlx_put_pixel(img, WIDTH / 2 + mlx->y , HEIGHT /2 + mlx->x ,  pixel_color);
+		}
+	}
 	mlx_key_hook(mlx->con, manage_escape, mlx);
 	mlx_loop(mlx->con);
 	mlx_terminate(mlx->con);
@@ -68,6 +77,7 @@ int	init_master(t_ray *master)
 	
 	if (init_window(&master->mlx))
 		return (error_message( YEL ,ERROR_WIND));
+	
 	return (0);
 }
 
