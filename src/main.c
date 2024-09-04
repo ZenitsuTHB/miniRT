@@ -68,7 +68,7 @@ int	init_window(t_mlx *mlx)
 	mlx->x = 0;
 	while (mlx->x < WIDTH)
 	{
-    mlx->y = 0;
+   		mlx->y = 0;
 		while (mlx->y < HEIGHT)
 		{
       uint32_t color = gradient_color(mlx->y, HEIGHT);
