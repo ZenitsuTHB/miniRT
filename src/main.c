@@ -6,15 +6,26 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/04 00:25:27 by marvin           ###   ########.fr       */
+/*   Updated: 2024/09/04 12:09:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 # include <../libs/MLX42/include/MLX42/MLX42.h>
-#define ERROR_WIND "Can't initialize Window !"
 
+uint32_t gradient_color(int y, int height)
+{
+    // Calculate the interpolation factor (0 at the top, 1 at the bottom)
+    float factor = (float)y / height;
+
+    // Interpolating between blue (0x0000FF) and white (0xFFFFFF)
+    uint8_t r = (uint8_t)(255 * factor);   // Red component increases with factor
+    uint8_t g = (uint8_t)(255 * factor);   // Green component increases with factor
+    uint8_t b = 255;                       // Blue component stays 255
+
+    return (r << 24 | g << 16 | b << 8 | 255); // Returning as RGBA format
+}
 
 void manage_escape(mlx_key_data_t keydata, void *param)
 {
@@ -46,36 +57,35 @@ int	init_window(t_mlx *mlx)
 {
 	mlx_image_t *img;
 
-	mlx->x = 0;
-	mlx->y = 0;
+  
 	img = mlx->img->ptr;
-	mlx->con = mlx_init(HEIGHT, WIDTH, "miniRT", true);
+	mlx->con = mlx_init(HEIGHT, WIDTH, "miniRT", false);
 	if (mlx->con == NULL)
 		return (1);
 	img =  mlx_new_image(mlx->con, WIDTH, HEIGHT);
 	if (img == NULL)
 		return (1);
-	mlx_image_to_window(mlx->con, img, mlx->x , mlx->y);
-	while (mlx->y++ < HEIGHT )
+	mlx->x = 0;
+	while (mlx->x < WIDTH)
 	{
-		while (mlx->x++ < WIDTH)
+    mlx->y = 0;
+		while (mlx->y < HEIGHT)
 		{
-			int brightness = 255;
-			uint32_t pixel_color = (brightness << 16) | (brightness << 8) | brightness;
-			mlx_put_pixel(img, WIDTH / 2 + mlx->y , HEIGHT /2 + mlx->x ,  pixel_color);
+      mlx_put_pixel(img, mlx->x, mlx->y, 0xFFFFFF);
+			mlx->y++;
 		}
+		mlx->x++;
 	}
+	mlx_image_to_window(mlx->con, img, 0, 0);
 	mlx_key_hook(mlx->con, manage_escape, mlx);
 	mlx_loop(mlx->con);
 	mlx_terminate(mlx->con);
 	return (0);
 }
 
-int	init_master(t_ray *master)
+int	init_master(t_mlx *mlx)
 {
-	//master->mlx = NULL;
-	
-	if (init_window(&master->mlx))
+	if (init_window(mlx))
 		return (error_message( YEL ,ERROR_WIND));
 	
 	return (0);
@@ -83,7 +93,7 @@ int	init_master(t_ray *master)
 
 int main()
 {
-	t_ray	master;
+	t_mlx	master;
 	
 	if (init_master(&master) == -1)
 		return (EXIT_FAILURE);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:28:57 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/02 18:56:52 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/09/04 15:19:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <math.h>
 #include "minirt.h"
+# include <../libs/MLX42/include/MLX42/MLX42.h>
+
 
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓
@@ -24,7 +26,7 @@
 
 typedef struct s_img
 {
-	void	*ptr;
+	mlx_image_t	*ptr;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;

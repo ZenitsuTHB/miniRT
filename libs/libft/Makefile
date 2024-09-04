@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 21:16:09 by avolcy            #+#    #+#              #
-#    Updated: 2024/04/24 20:19:18 by avolcy           ###   ########.fr        #
+#    Updated: 2024/09/04 15:39:20 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ bonus : .bonus
 	@touch .bonus
 
 %.o: %.c $(HEADER) 
-	$(CC) $(CFLAGS) -c $^ 
+	$(CC) $(CFLAGS) -c $< 
 
 .PHONY : clean fclean re all
 

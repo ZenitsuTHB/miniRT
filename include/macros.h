@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:15:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/08/26 18:52:56 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/09/04 15:44:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@
 # define YEL "\001\033[0;33m\002"
 
 # define WIDTH 1000
-# define HEIGHT 1400
+# define HEIGHT 1000
 # define ERROR_ARG "Bad number of arguments detected !"
 # define ERROR_EXTENSION "Bad file extension !"
+# define ERROR_WIND "Can't initialize Window !"
 
 #endif

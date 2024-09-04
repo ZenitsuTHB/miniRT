@@ -5,7 +5,7 @@ LIBFT	:= libs/libft
 
 OBJS_DIR := ./build
 
-HEADERS	:= -I ./include -I $(LIBMLX)/include -I ./headers/
+HEADERS	:= -I./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBS    += $(LIBFT)/libft.a
 SRCSDIR := ./src
@@ -20,9 +20,9 @@ libft:
 	@make -C $(LIBFT)
 
 libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 
 
-$(OBJS_DIR)/%.o: $(SRCSDIR)/%.c $(HEADER) Makefile
+$(OBJS_DIR)/%.o: $(SRCSDIR)/%.c Makefile 
 	mkdir -p $(dir $@)
 	clear
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "\nCompiling: $(notdir $<)\n"
