@@ -71,7 +71,8 @@ int	init_window(t_mlx *mlx)
     mlx->y = 0;
 		while (mlx->y < HEIGHT)
 		{
-      mlx_put_pixel(img, mlx->x, mlx->y, 0xFFFFFF);
+      uint32_t color = gradient_color(mlx->y, HEIGHT);
+      mlx_put_pixel(img, mlx->x, mlx->y, color);
 			mlx->y++;
 		}
 		mlx->x++;
