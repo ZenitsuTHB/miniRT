@@ -6,11 +6,21 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:00:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/02 16:55:12 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/09/06 19:35:45 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
+
+ t_vec3	create_vec(double x, double y, double z)
+{
+	t_vec3 new_vec;
+
+	new_vec.x = x;
+	new_vec.y = y;
+	new_vec.z = z;
+	return (new_vec);
+}
 
 void init_vector(t_vector *vector)
 {
