@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:25:21 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/02 19:18:36 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/09/04 22:07:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ typedef struct s_vector
 	double	y;
 	double	z;
 
-} t_vec;
+} t_vec3;
 
 //typedef struct  s_vector t_vec;
 typedef struct  s_vector t_point;
-typedef struct  s_vector t_color;
+typedef struct  s_vector t_rgb;
 
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓

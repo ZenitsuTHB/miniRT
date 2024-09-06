@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:28:57 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/04 15:19:00 by marvin           ###   ########.fr       */
+/*   Updated: 2024/09/04 22:06:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,25 @@ typedef struct s_img
 
 typedef struct s_mlx
 {
-
 	int		x;
 	int		y;
 	void	*con;
 	t_img	*img;
 } t_mlx;
 
+//TODO if ft_strcmp()
+typedef enum s_object
+{
+	A,
+	C,
+	L,
+	sp,
+	pl,
+	cy
+}	t_obj;
 
 typedef struct s_ambient
 {
-	
-	char	A;
 	double	ratio; //[0.0 , 1.0] : 0.2
 	int		rgb_color; // [0-255]: 255, 255, 255
 }			t_amb;
@@ -57,9 +64,8 @@ typedef struct s_ambient
 typedef struct s_cam
 {
 	
-	char	C;
-	t_vec	*view_point;//-50.0,0,20
-	t_vec	*orientation;//[-1, 1] 0.0, 0.0, 1.0
+	t_vec3	*view_point;//-50.0,0,20
+	t_vec3	*orientation;//[-1, 1] 0.0, 0.0, 1.0
 	double	field_of_view;//horizontal view [0, 180]: 70, 
 	//closer to 0° = zoom in, closer to 180° = zoom out a FOV 70 
 	//extend 35° to left and 35° to right
@@ -67,53 +73,41 @@ typedef struct s_cam
 
 typedef struct  s_light
 {
-	
-	char	L;
-	t_vec	*light_point;//-4.0, 50.0, 0.0
+	t_vec3	*light_point;//-4.0, 50.0, 0.0
 	double	ratio;//[0.0, 1.0]: 0.6
-	int		rgb_color;//[0-255]: 10, 0, 255
+	t_rgb		color;//[0-255]: 10, 0, 255
 }			t_lite;
 
 typedef struct s_sphere
 {
-
-	char	sp;
-	t_vec	*center;// 0.0, 0.0, 20.6
+	t_vec3	*center;// 0.0, 0.0, 20.6
 	double	diameter;//12.6
-	int		rgb_color;
+	t_rgb		color;
 	
 }			t_sphere;
 
 typedef struct s_plane
 {
-
-	char	pl;
-	t_vec	*point;//0.0, 0.0, -10.0
-	double	normal;//[-1, 1] 0.0, 1.0, 0.0
-	int		rgb_color;
+	t_vec3		*point;//0.0, 0.0, -10.0
+	double		normal;//[-1, 1] 0.0, 1.0, 0.0
+	t_rgb		color;
 }			t_plane;
 
 typedef struct s_cylinder
 {
-	char	cy;
-	t_vec	*center;//50.0, 0.0, 20.6
-	double	normal;// 0.0, 0.0, 1.0
-	double	diameter;//14.2
-	double	height;//21.42
-	int		rgb_color;
-}			t_cyli;
+	t_vec3		*center;//50.0, 0.0, 20.6
+	double		normal;// 0.0, 0.0, 1.0
+	double		diameter;//14.2
+	double		height;//21.42
+	t_rgb		color;
+}				t_cyli;
 
 typedef struct s_raytracing 
 {
-	t_mlx		mlx;
-	t_amb		ambient;
-	t_cam		camera;
-	t_lite		light;
-	t_sphere	sphere;
-	t_plane		plane;
-	t_cyli		cylinder;
-	
-}			t_ray;
+	t_obj		object;
+	t_vec3		origin;
+    t_vec3		direction;
+}				t_ray;
 
 //BONUS DATA
 
