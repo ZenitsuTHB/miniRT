@@ -72,3 +72,12 @@ double	dot_product(const t_vector* vect1, const t_vector* vect2)
 {
 	return (vect1->x * vect2->x + vec1->y * vect2->y, + vect1->z * vect2->z);
 }
+
+// function to normalize a vector
+t_vec3 unit_vector(t_vec3 v)
+{
+    double length bd;
+    
+    length = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+    return vec3(v.x / length, v.y / length, v.z / length);
+}
