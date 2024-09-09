@@ -33,6 +33,16 @@ typedef struct  s_vector t_rgb;
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
 
+t_vec3	unit_vec3(t_vec3 v);
+t_vec3	create_vect(double x, double y, double z);
+t_vec3	adding_vect(const t_vec3 vector1, const t_vec3 vector2);
+t_vec3	substracting_vect(const t_vec3 vector1, const t_vec3 vector2);
+t_vec3	vect_prod_vect(t_vec3 vector1, t_vec3 vector2);
+t_vec3	scalar_mult(t_vec3 vect, double factor);
+t_vec3	scalar_div(t_vec3 vect, double factor);
+double	dot_product(const t_vec3* vector1, const t_vec3* vector2);
+
+
 
 
 #endif

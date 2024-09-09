@@ -11,83 +11,61 @@
 /* ************************************************************************** */
 
 #include "vector.h"
+#include "../libs/libft/libft.h"
 
- t_vec3	create_vec(double x, double y, double z)
+t_vec3	create_vect(double x, double y, double z)
 {
 	t_vec3 new_vec;
-
+	
+	ft_bzero(&new_vec, sizeof(t_vec3));
 	new_vec.x = x;
 	new_vec.y = y;
 	new_vec.z = z;
 	return (new_vec);
 }
 
-void init_vector(t_vector *vector)
+void init_vec3(t_vec3 *vector)
 {
-	ft_bzero(vector, sizeof(t_vector));
+	ft_bzero(vector, sizeof(t_vec3));
 }
 
-t_vector	adding_vect(const t_vector* vect1, const t_vector* vect2)
+t_vec3	adding_vect(const t_vec3 v1, const t_vec3 v2)
 {
-	t_vector result;
-
-	result.x = vect1->x + vect2->x;
-	result.y = vect1->y + vect2->y; 
-	result.z = vect1->z + vect2->z;
-
-	return  (result);
+	return  create_vect(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
 }
 
-t_vector	substracting_vect(const t_vector* vect1, const t_vector* vect2)
+t_vec3	substracting_vect(const t_vec3 v1, const t_vec3 v2)
 {
-	t_vector result;
-
-	result.x = vect1->x - vect2->x;
-	result.y = vect1->y - vect2->y; 
-	result.z = vect1->z - vect2->z;
-
-	return  (result);
+	return  create_vect(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
 }
 
-t_vector vect_prod_vect(t_vector *vect1, t_vector *vect2)
+t_vec3 vect_prod_vect(t_vec3 v1, t_vec3 v2)
 {
-	t_vector res;
-
-	res.x = vect1->x * vect2->x;
-	res.y = vect1->y * vect2->y;
-	res.z = vect1->z * vect2->z;
-
-	return (res);
+	return create_vect(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
 }
 
-
-
-void	product_vect(t_vector* vect, double factor)
+// a vector multiplied by a scalar
+t_vec3	scalar_mult(t_vec3 v, double scalar)
 {
-	vect.x *= factor;
-	vect.y *= factor; 
-	vect.z *= factor;
+	return create_vect(v.x * scalar, v.y * scalar, v.z * scalar);
 }
 
-void	division_vect(t_vector* vect, double factor)
+// a vector divided by a scalar
+t_vec3	scalar_div(t_vec3 v, double scalar)
 {
-	vect.x /= factor;
-	vect.y /= factor; 
-	vect.z /= factor;
-
-	return  (result);
+	return create_vect(v.x / scalar, v.y / scalar, v.z / scalar);
 }
 
-double	dot_product(const t_vector* vect1, const t_vector* vect2)
+double	dot_product(const t_vec3* v1, const t_vec3* v2)
 {
-	return (vect1->x * vect2->x + vec1->y * vect2->y, + vect1->z * vect2->z);
+	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
 }
 
 // function to normalize a vector
-t_vec3 unit_vector(t_vec3 v)
+t_vec3 unit_vec3(t_vec3 v)
 {
-    double length bd;
+    double length;
     
     length = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
-    return vec3(v.x / length, v.y / length, v.z / length);
+    return create_vect(v.x / length, v.y / length, v.z / length);
 }

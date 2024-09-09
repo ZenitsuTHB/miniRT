@@ -5,12 +5,13 @@ LIBFT	:= libs/libft
 
 OBJS_DIR := ./build
 
+INC := ./include/minirt.h
 HEADERS	:= -I./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBS    += $(LIBFT)/libft.a
 SRCSDIR := ./src
 
-SRCS	:= main.c
+SRCS	:= main.c vector_op.c
 
 OBJS	:= $(addprefix $(OBJS_DIR)/, ${SRCS:.c=.o})
 
@@ -22,7 +23,7 @@ libft:
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 
 
-$(OBJS_DIR)/%.o: $(SRCSDIR)/%.c Makefile 
+$(OBJS_DIR)/%.o: $(SRCSDIR)/%.c Makefile $(INC)
 	mkdir -p $(dir $@)
 	clear
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "\nCompiling: $(notdir $<)\n"

@@ -14,7 +14,7 @@
 # define MINIRT_H
 
 # include <stdio.h>
-#include "vector.h"
+# include "vector.h"
 # include "macros.h"
 # include "struct.h"
 # include <stdlib.h>

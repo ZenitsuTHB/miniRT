@@ -35,10 +35,11 @@ typedef struct s_img
 
 typedef struct s_mlx
 {
-	int		x;
-	int		y;
+	double		x;
+	double		y;
 	void	*con;
-	t_img	*img;
+	//t_img	*img;
+	mlx_image_t	*img;
 } t_mlx;
 
 //TODO if ft_strcmp()
@@ -55,7 +56,7 @@ typedef enum s_object
 typedef struct s_ambient
 {
 	double	ratio; //[0.0 , 1.0] : 0.2
-	int		rgb_color; // [0-255]: 255, 255, 255
+	t_rgb	color; // [0-255]: 255, 255, 255
 }			t_amb;
 
 //A vector is normalize when its magnitude(length) = 1;
@@ -64,7 +65,7 @@ typedef struct s_ambient
 typedef struct s_cam
 {
 	
-	t_vec3	*view_point;//-50.0,0,20
+	t_point	*view_point;//-50.0,0,20
 	t_vec3	*orientation;//[-1, 1] 0.0, 0.0, 1.0
 	double	field_of_view;//horizontal view [0, 180]: 70, 
 	//closer to 0° = zoom in, closer to 180° = zoom out a FOV 70 
@@ -73,7 +74,7 @@ typedef struct s_cam
 
 typedef struct  s_light
 {
-	t_vec3	*light_point;//-4.0, 50.0, 0.0
+	t_point	*light_point;//-4.0, 50.0, 0.0
 	double	ratio;//[0.0, 1.0]: 0.6
 	t_rgb		color;//[0-255]: 10, 0, 255
 }			t_lite;
@@ -88,7 +89,7 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	t_vec3		*point;//0.0, 0.0, -10.0
+	t_point		*point;//0.0, 0.0, -10.0
 	double		normal;//[-1, 1] 0.0, 1.0, 0.0
 	t_rgb		color;
 }			t_plane;
@@ -104,8 +105,9 @@ typedef struct s_cylinder
 
 typedef struct s_raytracing 
 {
+	uint32_t 	color;
 	t_obj		object;
-	t_vec3		origin;
+	t_point		origin;
     t_vec3		direction;
 }				t_ray;
 
