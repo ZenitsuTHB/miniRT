@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/04 12:09:12 by marvin           ###   ########.fr       */
+/*   Updated: 2024/09/09 23:29:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ uint32_t gradient_color(t_rgb color)
     //uint8_t g = (uint8_t)(255 * factor);   // Green component increases with factor
     //uint8_t b = 255;                       // Blue component stays 255
 	
-	int r = (int)(color.x * 255.99);
-    int g = (int)(color.y * 255.99);
-    int b = (int)(color.z * 255.99);
+	uint8_t r = (int)(color.x * 255.99);
+    uint8_t g = (int)(color.y * 255.99);
+    uint8_t b = (int)(color.z * 255.99);
 
     return (r << 24 | g << 16 | b << 8 | 255); // Returning as RGBA format
 }
@@ -77,7 +77,7 @@ int	init_window(t_mlx *mlx)
 	t_ray ray;
 
 	ray.origin = create_vect(0.0, 0.0, 0.0);
-	ray.direction = create_vect(0.0, -1.0, 0.0);
+	ray.direction = create_vect(0.0, 0.0, 0.0);
 
 	mlx->con = mlx_init(HEIGHT, WIDTH, "miniRT", false);
 	if (mlx->con == NULL)
@@ -85,10 +85,10 @@ int	init_window(t_mlx *mlx)
 	mlx->img =  mlx_new_image(mlx->con, WIDTH, HEIGHT);
 	if (mlx->img == NULL)
 		return (1);
-	mlx->y = 0;
+	mlx->y = 0.0;
 	while (mlx->y < HEIGHT)
 	{
-   		mlx->x = 0;
+   		mlx->x = 0.0;
 		while (mlx->x < WIDTH)
 		{
 			ray.direction = create_vect(((double)mlx->x / HEIGHT), ((double)mlx->y / WIDTH), 0.0);
