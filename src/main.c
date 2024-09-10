@@ -6,12 +6,31 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/09 23:29:09 by marvin           ###   ########.fr       */
+/*   Updated: 2024/09/11 01:24:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 # include <../libs/MLX42/include/MLX42/MLX42.h>
+
+void draw_sphere(t_mlx *mlx, int cx, int cy, int radius)
+{
+    int x, y;
+    for (x = -radius; x <= radius; x++)
+    {
+        for (y = -radius; y <= radius; y++)
+        {
+            if (x * x + y * y <= radius * radius)
+            {
+                int z = sqrt(radius * radius - x * x - y * y);
+                int brightness = (z * 255) / radius;
+                uint32_t pixel_color = (brightness << 24) | (brightness << 16) | 255;
+                mlx_put_pixel(mlx->img, cx + x, cy + y, pixel_color);
+            }
+        }
+    }
+}
+
 
 t_rgb ray_color(const t_ray *ray)
 {
@@ -75,7 +94,10 @@ int			error_message(char *color, char *msg)
 int	init_window(t_mlx *mlx)
 {
 	t_ray ray;
+	t_sphere sp;
 
+	sp->center = create_vect(0.0, 0.0, 20.6);
+	sp->diameter = 12.6;
 	ray.origin = create_vect(0.0, 0.0, 0.0);
 	ray.direction = create_vect(0.0, 0.0, 0.0);
 
@@ -85,19 +107,26 @@ int	init_window(t_mlx *mlx)
 	mlx->img =  mlx_new_image(mlx->con, WIDTH, HEIGHT);
 	if (mlx->img == NULL)
 		return (1);
-	mlx->y = 0.0;
-	while (mlx->y < HEIGHT)
+	mlx->x = 0.0;
+	while (mlx->x < WIDTH)
 	{
-   		mlx->x = 0.0;
-		while (mlx->x < WIDTH)
+   		mlx->y = 0.0;
+		while (mlx->y < HEIGHT)
 		{
-			ray.direction = create_vect(((double)mlx->x / HEIGHT), ((double)mlx->y / WIDTH), 0.0);
+			//double vertical_factor = (double)mlx->y / HEIGHT; // from 0 at top to 1 at bottom
+       	 	//double horizontal_factor = fabs(((double)mlx->x - WIDTH / 2) / (WIDTH / 2)); // distance from the center
+
+        	// Weight the vertical more heavily to make the gradient focus vertically
+        	//double blend_factor = vertical_factor * (0.0 - horizontal_factor);
+			ray.direction = create_vect(mlx->x - WIDTH / 2, 1.0 - (mlx->y - HEIGHT / 2), 0.0);
       		ray.color = gradient_color(ray_color(&ray));
       		mlx_put_pixel(mlx->img, mlx->x, mlx->y, ray.color);
-			mlx->x++;
+			mlx->y++;
 		}
-		mlx->y++;
+		mlx->x++;
 	}
+	int radius = 200;
+	draw_sphere(mlx, WIDTH / 2, HEIGHT / 2, radius);
 	mlx_image_to_window(mlx->con, mlx->img, 0, 0);
 	mlx_key_hook(mlx->con, manage_escape, mlx);
 	mlx_loop(mlx->con);
