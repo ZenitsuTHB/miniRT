@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:28:57 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/04 22:06:54 by marvin           ###   ########.fr       */
+/*   Updated: 2024/09/12 15:44:01 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,40 +24,19 @@
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
 
-typedef struct s_img
-{
-	mlx_image_t	*ptr;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_img;
-
 typedef struct s_mlx
 {
 	double		x;
 	double		y;
-	void	*con;
-	//t_img	*img;
+	void		*con;
 	mlx_image_t	*img;
 } t_mlx;
-
-//TODO if ft_strcmp()
-typedef enum s_object
-{
-	A,
-	C,
-	L,
-	sp,
-	pl,
-	cy
-}	t_obj;
 
 typedef struct s_ambient
 {
 	double	ratio; //[0.0 , 1.0] : 0.2
 	t_rgb	color; // [0-255]: 255, 255, 255
-}			t_amb;
+}			t_ambient;
 
 //A vector is normalize when its magnitude(length) = 1;
 //Normalization is done by dividing each vect component by the vect magnitude
@@ -77,7 +56,7 @@ typedef struct  s_light
 	t_point	*light_point;//-4.0, 50.0, 0.0
 	double	ratio;//[0.0, 1.0]: 0.6
 	t_rgb		color;//[0-255]: 10, 0, 255
-}			t_lite;
+}			t_light;
 
 typedef struct s_sphere
 {
@@ -89,9 +68,9 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	t_point		*point;//0.0, 0.0, -10.0
-	double		normal;//[-1, 1] 0.0, 1.0, 0.0
 	t_rgb		color;
+	t_vec3		normal;//[-1, 1]( 0.0, 1.0, 0.0)
+	t_point		*origin;//(0.0, 0.0, -10.0)
 }			t_plane;
 
 typedef struct s_cylinder
@@ -101,17 +80,35 @@ typedef struct s_cylinder
 	double		diameter;//14.2
 	double		height;//21.42
 	t_rgb		color;
-}				t_cyli;
-
-typedef struct s_raytracing 
+}
+				t_cylinder;
+typedef struct s_cone
 {
-	uint32_t 	color;
-	t_obj		object;
-	t_point		origin;
-    t_vec3		direction;
-}				t_ray;
+	t_vec3		pos;
+	t_vec3		normal;
+	double		diameter;
+	double		height;
+	t_rgb		color;
+}
+				t_cone;
+typedef struct s_scene
+{
+	//t_ambient	*ambient;
+	//t_cam		*camera;
+	//t_light		*light;
+	//t_sphere	*spheres;
+	t_plane		*planes;
+	//t_cylinder	*cylinders;
+	//t_cone		*cones;
+}				t_scene;
+
+// typedef struct s_raytracing 
+// {
+// 	uint32_t 	color;
+// 	t_point		origin;
+//     t_vec3		direction;
+// }				t_ray;
 
 //BONUS DATA
-
 
 #endif // !_STRUCT_H

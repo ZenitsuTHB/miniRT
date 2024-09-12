@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/11 01:24:23 by marvin           ###   ########.fr       */
+/*   Updated: 2024/09/12 15:35:41 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,33 @@ int			error_message(char *color, char *msg)
 	return (-1);
 }
 
-int	init_window(t_mlx *mlx)
+int	init_window(t_scene *scene)
 {
-	t_ray ray;
-	t_sphere sp;
+	//	sp->center = create_vect(0.0, 0.0, 20.6);
+	//	sp->diameter = 12.6;
+	
+	scene->planes->origin = create_vect(0.0, 0.0, 0.0);
+	ray.direction = create_vect(0.0, 0.0, 0.0);
 
-	sp->center = create_vect(0.0, 0.0, 20.6);
-	sp->diameter = 12.6;
+	mlx->con = mlx_init(HEIGHT, WIDTH, "miniRT", false);
+	if (mlx->con == NULL)
+		return (1);
+	mlx->img =  mlx_new_image(mlx->con, WIDTH, HEIGHT);
+	if (mlx->img == NULL)
+		return (1);
+	return (0);
+}
+
+int	init_master(t_mlx *mlx)
+{
+	t_ray scene;
+
+	if (init_window(&scene))
+		return (error_message( YEL ,ERROR_WIND));
+//	t_sphere sp;
+
+//	sp->center = create_vect(0.0, 0.0, 20.6);
+//	sp->diameter = 12.6;
 	ray.origin = create_vect(0.0, 0.0, 0.0);
 	ray.direction = create_vect(0.0, 0.0, 0.0);
 
@@ -118,26 +138,20 @@ int	init_window(t_mlx *mlx)
 
         	// Weight the vertical more heavily to make the gradient focus vertically
         	//double blend_factor = vertical_factor * (0.0 - horizontal_factor);
-			ray.direction = create_vect(mlx->x - WIDTH / 2, 1.0 - (mlx->y - HEIGHT / 2), 0.0);
+			ray.direction = create_vect(mlx->x / 2, (mlx->y / 2), 0.0);
       		ray.color = gradient_color(ray_color(&ray));
       		mlx_put_pixel(mlx->img, mlx->x, mlx->y, ray.color);
 			mlx->y++;
 		}
 		mlx->x++;
 	}
-	int radius = 200;
-	draw_sphere(mlx, WIDTH / 2, HEIGHT / 2, radius);
+	//int radius = 200;
+//	draw_sphere(mlx, WIDTH / 2, HEIGHT / 2, radius);
 	mlx_image_to_window(mlx->con, mlx->img, 0, 0);
 	mlx_key_hook(mlx->con, manage_escape, mlx);
 	mlx_loop(mlx->con);
 	mlx_terminate(mlx->con);
-	return (0);
-}
 
-int	init_master(t_mlx *mlx)
-{
-	if (init_window(mlx))
-		return (error_message( YEL ,ERROR_WIND));
 
 	return (0);
 }
