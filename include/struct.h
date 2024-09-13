@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:28:57 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/12 15:44:01 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/09/13 17:39:37 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_mlx
 {
 	double		x;
 	double		y;
-	void		*con;
+	mlx_t		*con;
 	mlx_image_t	*img;
 } t_mlx;
 
@@ -93,6 +93,7 @@ typedef struct s_cone
 				t_cone;
 typedef struct s_scene
 {
+	t_mlx	*mlx;
 	//t_ambient	*ambient;
 	//t_cam		*camera;
 	//t_light		*light;
