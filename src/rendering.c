@@ -6,12 +6,37 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/13 20:59:58 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/09/15 21:47:24 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minirt.h"
 # include <../libs/MLX42/include/MLX42/MLX42.h>
+
+t_rgb ray_color(const t_ *ray)
+{
+	double a;
+	t_rgb blue;
+	t_rgb white;
+    t_vec3 unit_direction;
+	
+	unit_direction = unit_vec3(ray->direction);
+    a = 0.5 * (unit_direction.y + 1.0);
+    
+    white = create_vect(1.0, 1.0, 1.0);
+    blue = create_vect(0.5, 0.7, 1.0);
+
+    return adding_vect(scalar_mult(white, 1.0 - a), scalar_mult(blue, a));
+}
+
+uint32_t gradient_color(t_rgb color)
+{
+	uint8_t r = (int)(color.x * 255.99);
+    uint8_t g = (int)(color.y * 255.99);
+    uint8_t b = (int)(color.z * 255.99);
+
+    return (r << 24 | g << 16 | b << 8 | 255); // Returning as RGBA format
+}
 
 int	render_object(t_scene *scene)
 {
