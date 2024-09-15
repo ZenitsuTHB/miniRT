@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:28:57 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/13 17:39:37 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/09/15 19:26:22 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_plane
 {
 	t_rgb		color;
 	t_vec3		normal;//[-1, 1]( 0.0, 1.0, 0.0)
-	t_point		*origin;//(0.0, 0.0, -10.0)
+	t_vec3		origin;//(0.0, 0.0, -10.0)
 }			t_plane;
 
 typedef struct s_cylinder

@@ -1,5 +1,5 @@
 *.txt
-*.o
+.o
 *.a
 miniRT
 *.swp

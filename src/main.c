@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/13 21:00:20 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/09/15 19:27:15 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 int init_scene(t_scene *scene)
 {
 
-	scene->planes->origin = create_vect(0.0, 0.0, 0.0);
-	scene->planes->normal = create_vect(0.0, 0.0, 0.0);
+	scene->planes->origin = create_vect(0.0, 0.0, -10.0);
+	scene->planes->normal = create_vect(0.0, 1.0, 0.0);
+	return (0);
 	
 }
 
