@@ -1,29 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 10:45:16 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/16 16:09:30 by adrmarqu         ###   ########.fr       */
+/*   Created: 2024/09/16 16:40:34 by adrmarqu          #+#    #+#             */
+/*   Updated: 2024/09/16 18:02:22 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minirt.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "../../headers/macros.h"
 
-int	error_message(char *color, char *msg)
+void	error_parser(char *color, char *msg)
 {
 	printf(RED"\n\tError\n");
 	printf("\t%s%s\n\n"NC, color, msg);
-	return (-1);
 }
 
-int	main(int argc, char *argv[])
+void	free_split(char **split)
 {
-	t_scene	scene;
+	int	i;
 
-	if (read_file(argc, argv[1], &scene))
-		return (1);
-	return (EXIT_SUCCESS);
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
+int		ft_splitlen(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+		i++;
+	return (i);
 }

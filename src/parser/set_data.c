@@ -1,0 +1,83 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_data.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/16 16:59:55 by adrmarqu          #+#    #+#             */
+/*   Updated: 2024/09/16 18:55:51 by adrmarqu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../headers/parser.h"
+#include "../../libs/libft/libft.h"
+#include <stdio.h>
+
+static char	*get_id(char *str)
+{
+	char	**split;
+	char	*id;
+
+	split = ft_split(str, ' ');
+	if (!split)
+		return (NULL);
+	id = ft_strdup(split[0]);
+	free_split(split);
+	return (id);
+}
+
+static int	put_data_scene(char *id, char *data, t_scene *scene)
+{
+	if (!ft_strncmp(id, "A", 1))
+		return (set_ambient(scene->ambient, data));
+	else if (!ft_strncmp(id, "C", 1))
+		return (set_camera(scene->camera, data));
+	else if (!ft_strncmp(id, "L", 1))
+		return (set_light(scene->light, data));
+	else if (!ft_strncmp(id, "sp", 2))
+		return (set_sphere(scene->spheres, data));
+	else if (!ft_strncmp(id, "pl", 2))
+		return (set_plane(scene->planes, data));
+	else if (!ft_strncmp(id, "cy", 2))
+		return (set_cylinder(scene->cylinders, data));
+	else if (!ft_strncmp(id, "co", 2))
+		return (set_cone(scene->cones, data));
+	return (printf(RED "\n\tError\n" YEL "\t%s%s\n\n" NC, MSG_OBJ, id), 1);
+}
+
+static int	dup_control(char *id)
+{
+	static int	ambient = 0;
+	static int	camera = 0;
+	static int	light = 0;
+
+	if (!ft_strncmp(id, "A", 1))
+		ambient++;
+	if (!ft_strncmp(id, "C", 1))
+		camera++;
+	if (!ft_strncmp(id, "L", 1))
+		light++;
+	if (ambient > 1)
+		return (error_parser(YEL, MSG_TAMB), 1);
+	if (camera > 1)
+		return (error_parser(YEL, MSG_TCAM), 1);
+	if (light > 1)
+		return (error_parser(YEL, MSG_TLIGHT), 1);
+	return (0);
+}
+
+int	set_data(t_scene *scene, char *str)
+{
+	char		*id;
+
+	id = get_id(str);
+	if (!id)
+		return (error_parser(YEL, MSG_MEM), 1);
+	if (dup_control(id))
+		return (free(id), 1);
+	if (put_data_scene(id, str, scene))
+		return (free(id), 1);
+	free(id);
+	return (0);
+}
