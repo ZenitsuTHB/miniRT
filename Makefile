@@ -1,17 +1,20 @@
 NAME	:= miniRT
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast 
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g 
 LIBMLX	:= libs/MLX42
 LIBFT	:= libs/libft
 
 OBJS_DIR := ./build
 
-INC := ./include/minirt.h
+INC = ./include/minirt.h
+INC += ./include/macros.h
+INC += ./include/struct.h
+INC += ./include/vector.h
 HEADERS	:= -I./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBS    += $(LIBFT)/libft.a
 SRCSDIR := ./src
 
-SRCS	:= main.c vector_op.c mlx_use.c rendering.c
+SRCS	:= main.c vector_op.c mlx_use.c rendering.c camera.c
 
 OBJS	:= $(addprefix $(OBJS_DIR)/, ${SRCS:.c=.o})
 

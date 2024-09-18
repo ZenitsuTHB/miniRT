@@ -28,15 +28,18 @@
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
 
-uint32_t	gradient_color(t_rgb color);
-int			init_window(t_mlx *mlx);
+int       init_window(t_mlx *mlx);
+uint32_t  gradient_color(t_rgb color);
 
-int			render_object(t_scene *scene);
+//RENDER
+int       render_object(t_scene *scene);
+int       setting_camera(t_camera *camera);
+void      generate_ray(t_camera *camera, t_ray *ray, int i, int j);
 
-int			error_message(char *color, char *msg);
-int			check_args(int argc, char *argv);
+int       error_message(char *color, char *msg);
+int       check_args(int argc, char *argv);
 
-void manage_escape(mlx_key_data_t keydata, void *param);
+void      manage_escape(mlx_key_data_t keydata, void *param);
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓
 ┗━━━━━━━━・▼・━━━━━━━━┛

@@ -27,6 +27,8 @@
 
 # define WIDTH 1000
 # define HEIGHT 1000
+# define IMG_W 1000 //WIDTH
+# define IMG_H 1000 //HEIGHT
 # define ERROR_ARG "Bad number of arguments detected !"
 # define ERROR_EXTENSION "Bad file extension !"
 # define ERROR_WIND "Can't initialize Window !"
