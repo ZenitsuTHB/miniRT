@@ -19,22 +19,15 @@ void  generate_ray(t_camera *camera, t_ray *ray, int i, int j)
     double image_plane_height;
 
     ray->ratio = (double)WIDTH / (double)HEIGHT;
-    // Calculate the image plane dimensions
     image_plane_height = 2 * tan(camera->fov / 2);
     image_plane_width = image_plane_height * ray->ratio;
-    // Calculate normalized coordinates for the pixel
-    double u = (i + 0.5) / WIDTH * 2 - 1;  // Horizontal pixel position in [-1, 1]
-    double v = 1 - (j + 0.5) / HEIGHT * 2;  // Vertical pixel position in [-1, 1]
-    // Scale by the image plane size
+    double u = ((i + 0.5) / WIDTH) * 2 - 1;// Horizontal pixel position in [-1, 1]
+    double v = 1 - ((j + 0.5) / HEIGHT) * 2;// Vertical pixel position in [-1, 1]
     double u_scaled = u * (image_plane_width / 2);
     double v_scaled = v * (image_plane_height / 2);
-    // Calculate the ray direction
-    direction = substract_vec3(add_vec3(add_vec3(cam->lower_left_corner,
-                    multiply_vec3(cam->horizontal, s)),
-                    multiply_vec3(cam->vertical, t)), origin);
-    ray->direction = unit_vec3(camera->cam_dir + u_scaled * camera->right + 
-                    v_scaled * camera->up);
-    // Create and return the ray
+    ray->direction = unit_vec3(add_vec3(camera->cam_dir, 
+                    add_vec3(scalar_mult(camera->right, u_scaled), 
+                    scalar_mult(camera->up, v_scaled))));
     ray->origin = camera->pos;
 }
 

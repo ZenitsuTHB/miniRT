@@ -71,5 +71,6 @@ int main(int argc, char *argv[])
 	  mlx_key_hook(scene.mlx->con, &manage_escape, scene.mlx);
 	  mlx_loop(scene.mlx->con);
 	  mlx_terminate(scene.mlx->con);
+    exit(0);
 	  return (EXIT_SUCCESS);
 }

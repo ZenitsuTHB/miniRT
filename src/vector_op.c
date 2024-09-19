@@ -57,7 +57,7 @@ t_vec3	scalar_div(t_vec3 v, double scalar)
 }
 
 //or scalar product
-double	dot_product(const t_vec3* v1, const t_vec3* v2)
+double  dot_product(const t_vec3* v1, const t_vec3* v2)
 {
 	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
 }

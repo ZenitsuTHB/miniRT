@@ -13,18 +13,17 @@
 # include "minirt.h"
 # include <../libs/MLX42/include/MLX42/MLX42.h>
 
-t_rgb ray_color(const t_scene *ray)
+t_rgb ray_color(int y, int height)
 {
-	  double a;
-	  t_rgb blue;
-	  t_rgb white;
-    t_vec3 unit_direction;
-
-    unit_direction = unit_vec3(ray->planes->normal);
-    a = 0.5 * (unit_direction.y + 1.0);
-    white = create_vec3(1.0, 1.0, 1.0);
-    blue = create_vec3(0.5, 0.7, 1.0);
-    return add_vec3(scalar_mult(white, 1.0 - a), scalar_mult(blue, a));
+    double  t;
+    t_rgb   blue;
+    t_rgb   white;
+    
+    t = (double)y / (height - 1);// Normalized y value (from 0 at the top to 1 at the bottom)
+    white = create_vec3(1.0, 1.0, 1.0);// Color for the bottom (white)
+    blue = create_vec3(0.5, 0.7, 1.0);// Color for the top (blue)
+    // Linearly interpolate between blue and white based on the y-position (t)
+    return add_vec3(scalar_mult(white, t), scalar_mult(blue, 1.0 - t));
 }
 
 uint32_t gradient_color(t_rgb color)
@@ -52,7 +51,8 @@ int	render_object(t_scene *scene)
 		while (mlx->y < HEIGHT)
 		{
       generate_ray(scene->camera, scene->ray, mlx->x, mlx->y);
-      mlx_put_pixel(mlx->img, mlx->x, mlx->y, gradient_color(ray_color(scene)));
+      t_rgb color = ray_color(mlx->y, HEIGHT);
+      mlx_put_pixel(mlx->img, mlx->x, mlx->y, gradient_color(color));
 			mlx->y++;
 		}
 		mlx->x++;
