@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:28:57 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/16 17:20:55 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:03:00 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_plane
 	t_vec3				pos;
 	t_vec3				normal;
 	t_rgb				color;
-	struct s_plne		*next;
+	struct s_plane		*next;
 	struct s_plane		*prev;
 }	t_plane;
 
@@ -109,6 +109,5 @@ typedef struct s_scene
 	t_cylinder			*cylinders;
 	t_cone				*cones;
 }	t_scene;
-
 
 #endif // !_STRUCT_H

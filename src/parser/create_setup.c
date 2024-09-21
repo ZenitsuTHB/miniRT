@@ -6,39 +6,93 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:05:09 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/16 18:53:15 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/21 12:12:12 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/parser.h"
 #include <stdlib.h>
 
-t_ambient	*new_ambient(void)
+void	*new_setup(int type)
 {
-	t_ambient	*new;
+	void	*new;
 
-	new = malloc(sizeof(t_ambient));
+	new = NULL;
+	if (type == 1)
+		new = malloc(sizeof(t_ambient *));
+	else if (type == 2)
+		new = malloc(sizeof(t_camera *));
+	else if (type == 3)
+		new = malloc(sizeof(t_light *));
 	if (!new)
 		return (error_parser(YEL, MSG_MEM), NULL);
 	return (new);
 }
 
-t_camera	*new_camera(void)
+t_sphere	*new_sphere(t_sphere *prev)
 {
-	t_camera	*new;
+	t_sphere	*new;
 
-	new = malloc(sizeof(t_camera));
+	new = malloc(sizeof(t_sphere *));
 	if (!new)
 		return (error_parser(YEL, MSG_MEM), NULL);
+	while (prev->next)
+		prev = prev->next;
+	new->next = NULL;
+	if (prev)
+		new->prev = prev;
+	else
+		new->prev = NULL;
 	return (new);
 }
 
-t_light	*new_light(void)
+t_plane	*new_plane(t_plane *prev)
 {
-	t_light	*new;
+	t_plane	*new;
 
-	new = malloc(sizeof(t_light));
+	new = malloc(sizeof(t_plane *));
 	if (!new)
 		return (error_parser(YEL, MSG_MEM), NULL);
+	while (prev->next)
+		prev = prev->next;
+	new->next = NULL;
+	if (prev)
+		new->prev = prev;
+	else
+		new->prev = NULL;
+	return (new);
+}
+
+t_cylinder	*new_cylinder(t_cylinder *prev)
+{
+	t_cylinder	*new;
+
+	new = malloc(sizeof(t_cylinder *));
+	if (!new)
+		return (error_parser(YEL, MSG_MEM), NULL);
+	while (prev->next)
+		prev = prev->next;
+	new->next = NULL;
+	if (prev)
+		new->prev = prev;
+	else
+		new->prev = NULL;
+	return (new);
+}
+
+t_cone	*new_cone(t_cone *prev)
+{
+	t_cone	*new;
+
+	new = malloc(sizeof(t_cone *));
+	if (!new)
+		return (error_parser(YEL, MSG_MEM), NULL);
+	while (prev->next)
+		prev = prev->next;
+	new->next = NULL;
+	if (prev)
+		new->prev = prev;
+	else
+		new->prev = NULL;
 	return (new);
 }

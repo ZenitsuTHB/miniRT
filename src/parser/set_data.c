@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:59:55 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/16 18:55:51 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:31:28 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,18 @@ static char	*get_id(char *str)
 
 static int	put_data_scene(char *id, char *data, t_scene *scene)
 {
+	int	error;
+
+	error = 0;
 	if (!ft_strncmp(id, "A", 1))
-		return (set_ambient(scene->ambient, data));
+	{
+		printf("XDXDXD\n\n\n");
+		scene->ambient = set_ambient(data, &error);
+	}
 	else if (!ft_strncmp(id, "C", 1))
-		return (set_camera(scene->camera, data));
+		scene->camera = set_camera(data, &error);
 	else if (!ft_strncmp(id, "L", 1))
-		return (set_light(scene->light, data));
+		scene->light = set_light(data, &error);
 	else if (!ft_strncmp(id, "sp", 2))
 		return (set_sphere(scene->spheres, data));
 	else if (!ft_strncmp(id, "pl", 2))
@@ -43,7 +49,9 @@ static int	put_data_scene(char *id, char *data, t_scene *scene)
 		return (set_cylinder(scene->cylinders, data));
 	else if (!ft_strncmp(id, "co", 2))
 		return (set_cone(scene->cones, data));
-	return (printf(RED "\n\tError\n" YEL "\t%s%s\n\n" NC, MSG_OBJ, id), 1);
+	else
+		return (printf(RED "\n\tError\n" YEL "\t%s%s\n\n" NC, MSG_OBJ, id), 1);
+	return (error);
 }
 
 static int	dup_control(char *id)

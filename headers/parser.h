@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:11:18 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/16 18:51:59 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:12:22 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,24 @@
 
 int			set_data(t_scene *scene, char *str);
 
-int			set_ambient(t_ambient *amb, char *str);
-int			set_camera(t_camera *cam, char *str);
-int			set_light(t_light *light, char *str);
+t_ambient	*set_ambient(char *str, int *error);
+t_camera	*set_camera(char *str, int *error);
+t_light		*set_light(char *str, int *error);
 
 int			set_sphere(t_sphere *sphere, char *str);
 int			set_plane(t_plane *plane, char *str);
 int			set_cylinder(t_cylinder *cyl, char *str);
 int			set_cone(t_cone *cone, char *str);
 
-t_ambient	*new_ambient(void);
-t_camera	*new_camera(void);
-t_light		*new_light(void);
+void		*new_setup(int type);
+t_sphere	*new_sphere(t_sphere *prev);
+t_plane		*new_plane(t_plane *prev);
+t_cylinder	*new_cylinder(t_cylinder *prev);
+t_cone		*new_cone(t_cone *prev);
+
+int			set_color(char *str, t_rgb *rgb);
+int			set_pos(char *str, t_vec3 *pos);
+int			set_normal(char *str, t_vec3 *normal);
 
 void		error_parser(char *color, char *msg);
 void		free_split(char **split);
