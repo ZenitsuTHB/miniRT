@@ -6,14 +6,14 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:05:09 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/21 14:30:45 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:38:43 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/parser.h"
 #include <stdlib.h>
 
-void	*new_setup( type)
+void	*new_setup(int type)
 {
 	void	*new;
 

@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:09:15 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/16 18:43:09 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:38:19 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*parse_sign(char *str, int *sign)
 	*sign = 1;
 	while (*str == ' ' || *str == '\t')
 		str++;
-	if (*str == '-' || *str== '+')
+	if (*str == '-' || *str == '+')
 		if (*(str++) == '-')
 			*sign = -1;
 	return (str);

@@ -6,14 +6,14 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:34:09 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/21 14:36:03 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:39:32 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/parser.h"
 #include "../../libs/libft/libft.h"
 
-void add_sphere(t_sphere **sphere, char *str, int *error)
+void	add_sphere(t_sphere **sphere, char *str, int *error)
 {
 	t_sphere	*sp;
 	char		**split;
@@ -37,25 +37,22 @@ void add_sphere(t_sphere **sphere, char *str, int *error)
 	*sphere = sp;
 }
 
-void add_plane(t_plane **plane, char *str, int *error)
+void	add_plane(t_plane **plane, char *str, int *error)
 {
-
 	plane++;
 	str++;
 	*error = 0;
 }
 
-void add_cylinder(t_cylinder **cyl, char *str, int *error)
+void	add_cylinder(t_cylinder **cyl, char *str, int *error)
 {
-	
 	cyl++;
 	str++;
 	*error = 0;
 }
 
-void add_cone(t_cone **cone, char *str, int *error)
+void	add_cone(t_cone **cone, char *str, int *error)
 {
-
 	cone++;
 	str++;
 	*error = 0;

@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:30:27 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/21 13:17:20 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:37:56 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_camera	*set_camera(char *str, int *error)
 	return (cam);
 }
 
-t_light		*set_light(char *str, int *error)
+t_light	*set_light(char *str, int *error)
 {
 	t_light	*light;
 	char	**split;

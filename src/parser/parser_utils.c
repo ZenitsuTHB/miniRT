@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:40:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/16 18:02:22 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:38:06 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	free_split(char **split)
 	free(split);
 }
 
-int		ft_splitlen(char **split)
+int	ft_splitlen(char **split)
 {
 	int	i;
 
