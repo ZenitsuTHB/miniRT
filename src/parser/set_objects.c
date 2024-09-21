@@ -6,39 +6,57 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:34:09 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/16 17:38:24 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:36:03 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/parser.h"
+#include "../../libs/libft/libft.h"
 
-int	set_sphere(t_sphere *sphere, char *str)
+void add_sphere(t_sphere **sphere, char *str, int *error)
 {
-	sphere++;
-	str++;
-	return (0);
+	t_sphere	*sp;
+	char		**split;
+	char		*err;
+
+	*error = 1;
+	sp = new_sphere(*sphere);
+	if (!sp)
+		return ;
+	split = ft_split(str, ' ');
+	if (!split)
+		return ;
+	if (set_pos(split[1], &sp->pos))
+		return (free_split(split));
+	sp->diameter = ft_strtod(split[2], &err);
+	if (*err)
+		return (free_split(split));
+	if (set_color(split[3], &sp->color))
+		return (free_split(split));
+	*error = 0;
+	*sphere = sp;
 }
 
-int set_plane(t_plane *plane, char *str)
+void add_plane(t_plane **plane, char *str, int *error)
 {
 
 	plane++;
 	str++;
-	return (0);
+	*error = 0;
 }
 
-int set_cylinder(t_cylinder *cyl, char *str)
+void add_cylinder(t_cylinder **cyl, char *str, int *error)
 {
 	
 	cyl++;
 	str++;
-	return (0);
+	*error = 0;
 }
 
-int	set_cone(t_cone *cone, char *str)
+void add_cone(t_cone **cone, char *str, int *error)
 {
 
 	cone++;
 	str++;
-	return (0);
+	*error = 0;
 }

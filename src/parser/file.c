@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/21 13:23:28 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:50:25 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ static int	read_data(int fd, t_scene *scene)
 				return (free(line), 1);
 		free(line);
 	}
-	//if (!scene->ambient)
-	//	return (error_parser(YEL, MSG_AMB), 1);
-	//if (!scene->camera)
-	//	return (error_parser(YEL, MSG_CAM), 1);
-	//if (!scene->light)
-	//	return (error_parser(YEL, MSG_LIGHT), 1);
+	if (!scene->ambient)
+		return (error_parser(YEL, MSG_AMB), 1);
+	if (!scene->camera)
+		return (error_parser(YEL, MSG_CAM), 1);
+	if (!scene->light)
+		return (error_parser(YEL, MSG_LIGHT), 1);
 	return (0);
 }
 

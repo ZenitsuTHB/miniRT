@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:11:18 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/21 13:12:22 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:05:11 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ t_ambient	*set_ambient(char *str, int *error);
 t_camera	*set_camera(char *str, int *error);
 t_light		*set_light(char *str, int *error);
 
-int			set_sphere(t_sphere *sphere, char *str);
-int			set_plane(t_plane *plane, char *str);
-int			set_cylinder(t_cylinder *cyl, char *str);
-int			set_cone(t_cone *cone, char *str);
+void		add_sphere(t_sphere **sphere, char *str, int *error);
+void		add_plane(t_plane **plane, char *str, int *error);
+void		add_cylinder(t_cylinder **cyl, char *str, int *error);
+void		add_cone(t_cone **cone, char *str, int *error);
 
 void		*new_setup(int type);
 t_sphere	*new_sphere(t_sphere *prev);

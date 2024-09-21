@@ -6,7 +6,6 @@ LIBFT	:= libs/libft
 OBJS_DIR := ./build
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I ./headers/
-LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBS    += $(LIBFT)/libft.a
 
 SRCSDIR := ./src
@@ -16,13 +15,10 @@ SRCS	:= main.c parser/file.c parser/parser_utils.c parser/set_data.c \
 
 OBJS	:= $(addprefix $(OBJS_DIR)/, ${SRCS:.c=.o})
 
-all: libmlx libft $(NAME)
+all: libft $(NAME)
 
 libft:
 	@make -C $(LIBFT)
-
-libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 $(OBJS_DIR)/%.o: $(SRCSDIR)/%.c $(HEADER) Makefile
 	mkdir -p $(dir $@)
@@ -45,4 +41,4 @@ fclean: clean
 
 re: clean all
 
-.PHONY: all, clean, fclean, re, libmlx
+.PHONY: all, clean, fclean, re

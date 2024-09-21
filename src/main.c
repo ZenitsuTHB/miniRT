@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:45:16 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/21 13:24:48 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:35:24 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,38 @@ int	error_message(char *color, char *msg)
 	return (-1);
 }
 
+void print_spheres(t_sphere *s)
+{
+	int	i;
+
+	while (s->prev)
+		s = s->prev;
+	i = 1;
+	while (s)
+	{
+		printf("Esfera %d:\n\n", i);
+		
+		printf("Pos x: %lf\n", s->pos.x);
+		printf("Pos y: %lf\n", s->pos.y);
+		printf("Pos z: %lf\n", s->pos.z);
+
+		printf("Diameter: %lf\n", s->diameter);
+
+		printf("Color red: %d\n", s->color.red);
+		printf("Color green: %d\n", s->color.green);
+		printf("Color blue: %d\n", s->color.blue);
+		
+		printf("\n");
+
+		i++;
+		s = s->next;
+	}
+
+}
+
 void print_scene(t_scene scene)
 {
+/*
 	printf("Ambient(A): \n\n");
 	
 	printf("Ratio: %lf\n", scene.ambient->ratio);
@@ -60,6 +90,11 @@ void print_scene(t_scene scene)
 	printf("Color green: %d\n", scene.light->color.green);
 	
 	printf("\n");
+*/
+	print_spheres(scene.spheres);
+	//print_planes(&scene.planes);
+	//print_cylinders(&scene.cylinders);
+	//print_cones(&scene.cones);
 }
 
 int	main(int argc, char *argv[])
