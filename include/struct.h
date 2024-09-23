@@ -77,8 +77,8 @@ typedef struct  s_light
 typedef struct s_sphere
 {
 	t_rgb     color;
-	double    diameter;//12.6
 	t_vec3    center;// 0.0, 0.0, 20.6
+	double    diameter;//12.6
 }           t_sphere;
 
 typedef struct s_plane
@@ -92,18 +92,18 @@ typedef struct s_cylinder
 {
 	t_rgb     color;
 	double    height;//21.42
-	double    diameter;//14.2
 	double    normal;// 0.0, 0.0, 1.0
 	t_vec3    center;//50.0, 0.0, 20.6
+	double    diameter;//14.2
 }           t_cylinder;
 
 typedef struct s_cone
 {
 	t_vec3    pos;
-	t_vec3    normal;
-	double    diameter;
-	double    height;
 	t_rgb     color;
+	t_vec3    normal;
+	double    height;
+	double    diameter;
 }           t_cone;
 
 typedef struct s_raytracing
@@ -113,12 +113,27 @@ typedef struct s_raytracing
   t_vec3    direction;
 }           t_ray;
 
+// typedef struct s_objects
+// {
+//   void*            object;
+//   struct s_objects next;
+// }           t_objects;
+
+typedef struct s_hit
+{
+    double    t;//Distance from the ray's origin to the intersection point
+    t_vec3    point;//Intersection point
+    t_vec3    normal;//Normal vector at the intersection point
+    t_objects *object;//Pointer to the intersected object
+} t_hit;
+
 typedef struct s_scene
 {
   t_ray     *ray;
 	t_mlx     *mlx;
 	t_plane   *planes;
 	t_camera  *camera;
+  //t_objects *objects;//instead of having them all
 	//t_cone		*cones;
 	//t_light   *light;
 	//t_sphere    *spheres;

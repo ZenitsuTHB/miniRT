@@ -19,10 +19,9 @@ t_rgb ray_color(int y, int height)
     t_rgb   blue;
     t_rgb   white;
     
-    t = (double)y / (height - 1);// Normalized y value (from 0 at the top to 1 at the bottom)
-    white = create_vec3(1.0, 1.0, 1.0);// Color for the bottom (white)
-    blue = create_vec3(0.5, 0.7, 1.0);// Color for the top (blue)
-    // Linearly interpolate between blue and white based on the y-position (t)
+    t = (double)y / (height - 1);
+    white = create_vec3(1.0, 1.0, 1.0);
+    blue = create_vec3(0.5, 0.7, 1.0);
     return add_vec3(scalar_mult(white, t), scalar_mult(blue, 1.0 - t));
 }
 

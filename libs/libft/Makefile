@@ -66,7 +66,7 @@ clean :
 	@clear
 
 fclean : clean
-	@$(RM) $(NAME) .bonus
+	@$(RM) $(NAME) .bonus bonus
 
 re : fclean all
 
