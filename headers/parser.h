@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:11:18 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/21 14:05:11 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:35:56 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void		error_parser(char *color, char *msg);
 void		free_split(char **split);
 int			ft_splitlen(char **split);
 double		ft_strtod(char *str, char **error);
+int			ft_atoi_error(const char *str, int *error);
 
 #endif

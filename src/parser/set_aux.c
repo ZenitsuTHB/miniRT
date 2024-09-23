@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 12:16:52 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/21 13:30:20 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:34:40 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,22 @@
 int	set_color(char *str, t_rgb *rgb)
 {
 	char	**split;
-	char	*error;
+	int		error;
 
 	split = ft_split(str, ',');
 	if (!split)
 		return (error_parser(YEL, MSG_MEM), 1);
 	if (ft_splitlen(split) != 3)
 		return (free_split(split), error_parser(YEL, MSG_NUM), 1);
-	rgb->red = ft_strtod(split[0], &error);
-	if (*error || rgb->red < 0 || rgb->red > 255)
+	error = 0;
+	rgb->red = ft_atoi_error(split[0], &error);
+	if (error || rgb->red < 0 || rgb->red > 255)
 		return (free_split(split), error_parser(YEL, MSG_DATA), 1);
-	rgb->green = ft_strtod(split[1], &error);
-	if (*error || rgb->green < 0 || rgb->green > 255)
+	rgb->green = ft_atoi_error(split[1], &error);
+	if (error || rgb->green < 0 || rgb->green > 255)
 		return (free_split(split), error_parser(YEL, MSG_DATA), 1);
-	rgb->blue = ft_strtod(split[2], &error);
-	if (*error || rgb->blue < 0 || rgb->blue > 255)
+	rgb->blue = ft_atoi_error(split[2], &error);
+	if (error || rgb->blue < 0 || rgb->blue > 255)
 		return (free_split(split), error_parser(YEL, MSG_DATA), 1);
 	free_split(split);
 	return (0);

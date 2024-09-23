@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:28:57 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/23 17:09:31 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:21:41 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_camera
 	
 	t_vec3				pos;
 	t_vec3				normal;
-	double				fov; 
+	int					fov; 
 }	t_camera;
 
 typedef struct s_light

@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:45:16 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/23 17:11:38 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:35:00 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ void print_scene(t_scene scene)
 	printf("Normal y: %lf\n", scene.camera->normal.y);
 	printf("Normal z: %lf\n", scene.camera->normal.z);
 	
-	printf("Fov: %lf\n", scene.camera->fov);
+	printf("Fov: %d\n", scene.camera->fov);
 
 	printf("\n");
 	

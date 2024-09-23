@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:30:27 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/21 14:37:56 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:34:10 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_camera	*set_camera(char *str, int *error)
 {
 	t_camera	*cam;
 	char		**split;
-	char		*err;
+	int			err;
 
 	cam = new_setup(2);
 	if (!cam)
@@ -60,8 +60,9 @@ t_camera	*set_camera(char *str, int *error)
 		return (free_split(split), set_error(error), NULL);
 	if (set_normal(split[2], &cam->normal))
 		return (free_split(split), set_error(error), NULL);
-	cam->fov = ft_strtod(split[3], &err);
-	if (*err || cam->fov < 0 || cam->fov > 180)
+	err = 0;
+	cam->fov = ft_atoi_error(split[3], &err);
+	if (err || cam->fov < 0 || cam->fov > 180)
 		return (free_split(split), set_error(error), NULL);
 	free_split(split);
 	return (cam);
