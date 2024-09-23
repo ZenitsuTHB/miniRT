@@ -14,7 +14,7 @@ LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBS    += $(LIBFT)/libft.a
 SRCSDIR := ./src
 
-SRCS	:= main.c vector_op.c mlx_use.c rendering.c camera.c
+SRCS	:= main.c vector_op.c mlx_use.c rendering.c camera.c vector_op1.c vector_op2.c
 
 OBJS	:= $(addprefix $(OBJS_DIR)/, ${SRCS:.c=.o})
 

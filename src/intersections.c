@@ -10,11 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minirt.h"
-# include <../libs/MLX42/include/MLX42/MLX42.h>
+#include "minirt.h"
+#include <../libs/MLX42/include/MLX42/MLX42.h>
 
-bool  hit_sphere(t_ray *ray, t_sphere *sp, double t)
+bool	hit_sphere(t_ray *ray, t_sphere *sp, double t)
 {
-
-
 }

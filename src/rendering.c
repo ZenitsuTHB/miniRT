@@ -10,48 +10,52 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minirt.h"
-# include <../libs/MLX42/include/MLX42/MLX42.h>
+#include "minirt.h"
+#include <../libs/MLX42/include/MLX42/MLX42.h>
 
-t_rgb ray_color(int y, int height)
+t_rgb	ray_color(int y, int height)
 {
-    double  t;
-    t_rgb   blue;
-    t_rgb   white;
-    
-    t = (double)y / (height - 1);
-    white = create_vec3(1.0, 1.0, 1.0);
-    blue = create_vec3(0.5, 0.7, 1.0);
-    return add_vec3(scalar_mult(white, t), scalar_mult(blue, 1.0 - t));
+	double	t;
+	t_rgb	blue;
+	t_rgb	white;
+
+	t = (double)y / (height - 1);
+	white = create_vec3(1.0, 1.0, 1.0);
+	blue = create_vec3(0.5, 0.7, 1.0);
+	return (add_vec3(scalar_mult(white, t), scalar_mult(blue, 1.0 - t)));
 }
 
-uint32_t gradient_color(t_rgb color)
+uint32_t	gradient_color(t_rgb color)
 {
-	  uint8_t r = (int)(color.x * 255.99);
-    uint8_t g = (int)(color.y * 255.99);
-    uint8_t b = (int)(color.z * 255.99);
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
 
-    return (r << 24 | g << 16 | b << 8 | 255); // Returning as RGBA format
+	r = (int)(color.x * 255.99);
+	g = (int)(color.y * 255.99);
+	b = (int)(color.z * 255.99);
+	return (r << 24 | g << 16 | b << 8 | 255); // Returning as RGBA format
 }
 
 int	render_object(t_scene *scene)
 {
-	t_mlx *mlx;
+	t_mlx	*mlx;
+	t_rgb	color;
 
 	if (init_window(scene->mlx))
-		return (error_message( YEL ,ERROR_WIND));
-  if (setting_camera(scene->camera))
-    return (error_message(YEL, "Failed to setting up camera."));
-  mlx = scene->mlx;
+		return (error_message(YEL, ERROR_WIND));
+	if (setting_camera(scene->camera))
+		return (error_message(YEL, "Failed to setting up camera."));
+	mlx = scene->mlx;
 	mlx->x = 0;
 	while (mlx->x < WIDTH)
 	{
-    mlx->y = 0;
+		mlx->y = 0;
 		while (mlx->y < HEIGHT)
 		{
-      generate_ray(scene->camera, scene->ray, mlx->x, mlx->y);
-      t_rgb color = ray_color(mlx->y, HEIGHT);
-      mlx_put_pixel(mlx->img, mlx->x, mlx->y, gradient_color(color));
+			generate_ray(scene->camera, scene->ray, mlx->x, mlx->y);
+			color = ray_color(mlx->y, HEIGHT);
+			mlx_put_pixel(mlx->img, mlx->x, mlx->y, gradient_color(color));
 			mlx->y++;
 		}
 		mlx->x++;
