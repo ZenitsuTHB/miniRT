@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:34:09 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/21 14:39:32 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:43:30 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,104 @@
 
 void	add_sphere(t_sphere **sphere, char *str, int *error)
 {
-	t_sphere	*sp;
+	t_sphere	*obj;
 	char		**split;
 	char		*err;
 
 	*error = 1;
-	sp = new_sphere(*sphere);
-	if (!sp)
+	obj = new_sphere(*sphere);
+	if (!obj)
 		return ;
 	split = ft_split(str, ' ');
 	if (!split)
 		return ;
-	if (set_pos(split[1], &sp->pos))
+	if (set_pos(split[1], &obj->pos))
 		return (free_split(split));
-	sp->diameter = ft_strtod(split[2], &err);
+	obj->diameter = ft_strtod(split[2], &err);
 	if (*err)
 		return (free_split(split));
-	if (set_color(split[3], &sp->color))
+	if (set_color(split[3], &obj->color))
 		return (free_split(split));
 	*error = 0;
-	*sphere = sp;
+	*sphere = obj;
 }
 
 void	add_plane(t_plane **plane, char *str, int *error)
 {
-	plane++;
-	str++;
+	t_plane		*obj;
+	char		**split;
+
+	*error = 1;
+	obj = new_plane(*plane);
+	if (!obj)
+		return ;
+	split = ft_split(str, ' ');
+	if (!split)
+		return ;
+	if (set_pos(split[1], &obj->pos))
+		return (free_split(split));
+	if (set_normal(split[2], &obj->normal))
+		return (free_split(split));
+	if (set_color(split[3], &obj->color))
+		return (free_split(split));
 	*error = 0;
+	*plane = obj;
 }
 
 void	add_cylinder(t_cylinder **cyl, char *str, int *error)
 {
-	cyl++;
-	str++;
+	t_cylinder	*obj;
+	char		**split;
+	char		*err;
+
+	*error = 1;
+	obj = new_cylinder(*cyl);
+	if (!obj)
+		return ;
+	split = ft_split(str, ' ');
+	if (!split)
+		return ;
+	if (set_pos(split[1], &obj->pos))
+		return (free_split(split));
+	if (set_normal(split[2], &obj->normal))
+		return (free_split(split));
+	obj->diameter = ft_strtod(split[3], &err);
+	if (*err)
+		return (free_split(split));
+	obj->height = ft_strtod(split[4], &err);
+	if (*err)
+		return (free_split(split));
+	if (set_color(split[5], &obj->color))
+		return (free_split(split));
 	*error = 0;
+	*cyl = obj;
 }
 
 void	add_cone(t_cone **cone, char *str, int *error)
 {
-	cone++;
-	str++;
+	t_cone		*obj;
+	char		**split;
+	char		*err;
+
+	*error = 1;
+	obj = new_cone(*cone);
+	if (!obj)
+		return ;
+	split = ft_split(str, ' ');
+	if (!split)
+		return ;
+	if (set_pos(split[1], &obj->pos))
+		return (free_split(split));
+	if (set_normal(split[2], &obj->normal))
+		return (free_split(split));
+	obj->diameter = ft_strtod(split[3], &err);
+	if (*err)
+		return (free_split(split));
+	obj->height = ft_strtod(split[4], &err);
+	if (*err)
+		return (free_split(split));
+	if (set_color(split[5], &obj->color))
+		return (free_split(split));
 	*error = 0;
+	*cone = obj;
 }

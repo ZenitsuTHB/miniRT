@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:45:16 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/21 14:35:24 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:41:02 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,112 @@ int	error_message(char *color, char *msg)
 	return (-1);
 }
 
+void	print_planes(t_plane *s)
+{
+	int	i;
+
+	if (!s)
+		return ;
+	while (s->prev)
+		s = s->prev;
+	i = 1;
+	while (s)
+	{
+		printf("Plano %d:\n\n", i);
+		
+		printf("Pos x: %lf\n", s->pos.x);
+		printf("Pos y: %lf\n", s->pos.y);
+		printf("Pos z: %lf\n", s->pos.z);
+
+		printf("Normal x: %lf\n", s->normal.x);
+		printf("Normal y: %lf\n", s->normal.y);
+		printf("Normal z: %lf\n", s->normal.z);
+		
+		printf("Color red: %d\n", s->color.red);
+		printf("Color green: %d\n", s->color.green);
+		printf("Color blue: %d\n", s->color.blue);
+		
+		printf("\n");
+
+		i++;
+		s = s->next;
+	}
+}
+void	print_cylinders(t_cylinder *s)
+{
+	int	i;
+
+	if (!s)
+		return ;
+	while (s->prev)
+		s = s->prev;
+	i = 1;
+	while (s)
+	{
+		printf("Cylindro %d:\n\n", i);
+		
+		printf("Pos x: %lf\n", s->pos.x);
+		printf("Pos y: %lf\n", s->pos.y);
+		printf("Pos z: %lf\n", s->pos.z);
+
+		printf("Normal x: %lf\n", s->normal.x);
+		printf("Normal y: %lf\n", s->normal.y);
+		printf("Normal z: %lf\n", s->normal.z);
+		
+		printf("Diameter: %lf\n", s->diameter);
+		printf("Height: %lf\n", s->height);
+
+		printf("Color red: %d\n", s->color.red);
+		printf("Color green: %d\n", s->color.green);
+		printf("Color blue: %d\n", s->color.blue);
+		
+		printf("\n");
+
+		i++;
+		s = s->next;
+	}
+}
+void	print_cones(t_cone *s)
+{
+	int	i;
+
+	if (!s)
+		return ;
+	while (s->prev)
+		s = s->prev;
+	i = 1;
+	while (s)
+	{
+		printf("Cono %d:\n\n", i);
+		
+		printf("Pos x: %lf\n", s->pos.x);
+		printf("Pos y: %lf\n", s->pos.y);
+		printf("Pos z: %lf\n", s->pos.z);
+
+		printf("Normal x: %lf\n", s->normal.x);
+		printf("Normal y: %lf\n", s->normal.y);
+		printf("Normal z: %lf\n", s->normal.z);
+		
+		printf("Diameter: %lf\n", s->diameter);
+		printf("Height: %lf\n", s->height);
+
+		printf("Color red: %d\n", s->color.red);
+		printf("Color green: %d\n", s->color.green);
+		printf("Color blue: %d\n", s->color.blue);
+		
+		printf("\n");
+
+		i++;
+		s = s->next;
+	}
+}
+
 void print_spheres(t_sphere *s)
 {
 	int	i;
 
+	if (!s)
+		return ;
 	while (s->prev)
 		s = s->prev;
 	i = 1;
@@ -45,12 +147,11 @@ void print_spheres(t_sphere *s)
 		i++;
 		s = s->next;
 	}
-
 }
 
 void print_scene(t_scene scene)
 {
-/*
+
 	printf("Ambient(A): \n\n");
 	
 	printf("Ratio: %lf\n", scene.ambient->ratio);
@@ -90,11 +191,11 @@ void print_scene(t_scene scene)
 	printf("Color green: %d\n", scene.light->color.green);
 	
 	printf("\n");
-*/
+
 	print_spheres(scene.spheres);
-	//print_planes(&scene.planes);
-	//print_cylinders(&scene.cylinders);
-	//print_cones(&scene.cones);
+	print_planes(scene.planes);
+	print_cylinders(scene.cylinders);
+	print_cones(scene.cones);
 }
 
 int	main(int argc, char *argv[])
