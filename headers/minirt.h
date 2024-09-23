@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/16 16:12:54 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:56:51 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 
 int			error_message(char *color, char *msg);
 int			read_file(int ac, char *file, t_scene *scene);
+
+void		free_scene(t_scene *scene);
 
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓

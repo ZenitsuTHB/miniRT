@@ -11,7 +11,7 @@ LIBS    += $(LIBFT)/libft.a
 SRCSDIR := ./src
 SRCS	:= main.c parser/file.c parser/parser_utils.c parser/set_data.c \
 		   parser/set_setup.c parser/set_objects.c parser/set_utils.c \
-		   parser/create_setup.c parser/set_aux.c
+		   parser/create_setup.c parser/set_aux.c free_scene.c
 
 OBJS	:= $(addprefix $(OBJS_DIR)/, ${SRCS:.c=.o})
 
@@ -26,7 +26,7 @@ $(OBJS_DIR)/%.o: $(SRCSDIR)/%.c $(HEADER) Makefile
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "\nCompiling: $(notdir $<)\n"
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) -fsanitize=address $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:
 	@rm -rf $(OBJS)

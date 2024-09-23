@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:34:09 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/23 16:43:30 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:07:20 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	add_sphere(t_sphere **sphere, char *str, int *error)
 	char		**split;
 	char		*err;
 
-	*error = 1;
 	obj = new_sphere(*sphere);
 	if (!obj)
 		return ;
@@ -33,6 +32,7 @@ void	add_sphere(t_sphere **sphere, char *str, int *error)
 		return (free_split(split));
 	if (set_color(split[3], &obj->color))
 		return (free_split(split));
+	free_split(split);
 	*error = 0;
 	*sphere = obj;
 }
@@ -42,7 +42,6 @@ void	add_plane(t_plane **plane, char *str, int *error)
 	t_plane		*obj;
 	char		**split;
 
-	*error = 1;
 	obj = new_plane(*plane);
 	if (!obj)
 		return ;
@@ -55,6 +54,7 @@ void	add_plane(t_plane **plane, char *str, int *error)
 		return (free_split(split));
 	if (set_color(split[3], &obj->color))
 		return (free_split(split));
+	free_split(split);
 	*error = 0;
 	*plane = obj;
 }
@@ -65,7 +65,6 @@ void	add_cylinder(t_cylinder **cyl, char *str, int *error)
 	char		**split;
 	char		*err;
 
-	*error = 1;
 	obj = new_cylinder(*cyl);
 	if (!obj)
 		return ;
@@ -84,6 +83,7 @@ void	add_cylinder(t_cylinder **cyl, char *str, int *error)
 		return (free_split(split));
 	if (set_color(split[5], &obj->color))
 		return (free_split(split));
+	free_split(split);
 	*error = 0;
 	*cyl = obj;
 }
@@ -94,7 +94,6 @@ void	add_cone(t_cone **cone, char *str, int *error)
 	char		**split;
 	char		*err;
 
-	*error = 1;
 	obj = new_cone(*cone);
 	if (!obj)
 		return ;
@@ -113,6 +112,7 @@ void	add_cone(t_cone **cone, char *str, int *error)
 		return (free_split(split));
 	if (set_color(split[5], &obj->color))
 		return (free_split(split));
+	free_split(split);
 	*error = 0;
 	*cone = obj;
 }

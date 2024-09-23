@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:45:16 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/23 17:35:00 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:10:22 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,8 +203,8 @@ int	main(int argc, char *argv[])
 	t_scene	scene;
 
 	if (read_file(argc, argv[1], &scene))
-		return (EXIT_FAILURE);
-
+		return (free_scene(&scene), EXIT_FAILURE);
+	free_scene(&scene);
 	//print_scene(scene);
 	return (EXIT_SUCCESS);
 }
