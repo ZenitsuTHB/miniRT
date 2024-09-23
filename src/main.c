@@ -6,18 +6,11 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:45:16 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/23 16:41:02 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:11:38 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
-
-int	error_message(char *color, char *msg)
-{
-	printf(RED"\n\tError\n");
-	printf("\t%s%s\n\n"NC, color, msg);
-	return (-1);
-}
 
 void	print_planes(t_plane *s)
 {
@@ -177,7 +170,7 @@ void print_scene(t_scene scene)
 
 	printf("\n");
 	
-	
+
 	printf("Light(L): \n\n");
 
 	printf("Pos x: %lf\n", scene.light->pos.x);
@@ -198,12 +191,20 @@ void print_scene(t_scene scene)
 	print_cones(scene.cones);
 }
 
+int	error_message(char *color, char *msg)
+{
+	printf(RED"\n\tError\n");
+	printf("\t%s%s\n\n"NC, color, msg);
+	return (-1);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_scene	scene;
 
 	if (read_file(argc, argv[1], &scene))
-		return (1);
-	print_scene(scene);
+		return (EXIT_FAILURE);
+
+	//print_scene(scene);
 	return (EXIT_SUCCESS);
 }

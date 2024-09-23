@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/21 13:50:25 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:10:18 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ static int	ft_open_file(char *name)
 	int	fd;
 	int	len;
 
+	fd = open(name, O_RDONLY);
+	if (fd == -1)
+		return (error_parser(YEL, MSG_OPEN), fd);
 	len = ft_strlen(name) - 3;
 	if (len <= 3 || ft_strncmp(name + len, ".rt", 3))
 		return (error_parser(YEL, MSG_EXT), -1);
-	fd = open(name, O_RDONLY);
-	if (fd == -1)
-		error_parser(YEL, MSG_OPEN);
 	return (fd);
 }
 

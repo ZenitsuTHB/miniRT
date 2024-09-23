@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:28:57 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/21 13:03:00 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:09:31 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,4 @@ typedef struct s_scene
 	t_cone				*cones;
 }	t_scene;
 
-#endif // !_STRUCT_H
+#endif
