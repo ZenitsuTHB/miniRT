@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/23 17:10:18 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/28 12:42:54 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static int	read_data(int fd, t_scene *scene)
 {
 	char	*line;
 
-	init_scene(scene);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -80,6 +79,7 @@ int	read_file(int ac, char *file, t_scene *scene)
 {
 	int		fd;
 
+	init_scene(scene);
 	if (ac < 2)
 		return (error_parser(YEL, MSG_FEW), 1);
 	else if (ac > 2)

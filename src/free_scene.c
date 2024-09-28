@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 17:46:40 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/23 18:09:53 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/28 12:42:15 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	free_cones(t_cone *obj)
 
 void	free_scene(t_scene *scene)
 {
+	if (!scene)
+		return ;
 	if (scene->ambient)
 		free(scene->ambient);
 	if (scene->camera)
