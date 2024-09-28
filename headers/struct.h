@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:28:57 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/23 17:21:41 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/28 13:27:30 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ typedef struct s_mlx
 {
 	void				*win;
 	void				*con;
-
 }	t_mlx;
 
 typedef struct s_rgb
@@ -27,7 +26,7 @@ typedef struct s_rgb
 	int					red;
 	int					green;
 	int					blue;
-
+	unsigned int		hex_color;
 }	t_rgb;
 
 typedef struct s_vector
@@ -35,7 +34,6 @@ typedef struct s_vector
 	double				x;
 	double				y;
 	double				z;
-
 }	t_vec3;
 
 typedef struct s_ambient
@@ -46,7 +44,6 @@ typedef struct s_ambient
 
 typedef struct s_camera
 {
-	
 	t_vec3				pos;
 	t_vec3				normal;
 	int					fov; 

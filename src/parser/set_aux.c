@@ -6,12 +6,17 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 12:16:52 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/23 17:34:40 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/28 13:27:47 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/parser.h"
 #include "../../libs/libft/libft.h"
+
+static unsigned int	get_hex_color(const t_rgb *rgb)
+{
+	return ((rgb->red << 16) | (rgb->green << 8) | rgb->blue);
+}
 
 int	set_color(char *str, t_rgb *rgb)
 {
@@ -34,6 +39,7 @@ int	set_color(char *str, t_rgb *rgb)
 	if (error || rgb->blue < 0 || rgb->blue > 255)
 		return (free_split(split), error_parser(YEL, MSG_DATA), 1);
 	free_split(split);
+	rgb->hex_color = get_hex_color(rgb);
 	return (0);
 }
 
