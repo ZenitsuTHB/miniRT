@@ -1,5 +1,5 @@
 *.txt
-*.o
+.o
 *.a
 miniRT
 *.swp
@@ -9,3 +9,6 @@ miniRT
 .DS_Store
 .
 ..
+.bonus
+.json
+.vscode
