@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:28:57 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/28 13:27:30 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:20:29 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 # define _STRUCT_H
 
 # include <math.h>
-
-typedef struct s_mlx
-{
-	void				*win;
-	void				*con;
-}	t_mlx;
 
 typedef struct s_rgb
 {
@@ -59,7 +53,7 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	t_vec3				pos;
-	double				diameter;
+	double				radious;
 	t_rgb				color;
 	struct s_sphere		*next;
 	struct s_sphere		*prev;
@@ -78,7 +72,7 @@ typedef struct s_cylinder
 {
 	t_vec3				pos;
 	t_vec3				normal;
-	double				diameter;
+	double				radious;
 	double				height;
 	t_rgb				color;
 	struct s_cylinder	*next;
@@ -89,7 +83,7 @@ typedef struct s_cone
 {
 	t_vec3				pos;
 	t_vec3				normal;
-	double				diameter;
+	double				radious;
 	double				height;
 	t_rgb				color;
 	struct s_cone		*next;
@@ -98,6 +92,7 @@ typedef struct s_cone
 
 typedef struct s_scene
 {
+	void				*img;
 	t_ambient			*ambient;
 	t_camera			*camera;
 	t_light				*light;

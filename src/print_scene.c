@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/30 16:48:07 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:21:11 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_planes(t_plane *s)
 		printf("Color red: %d\n", s->color.red);
 		printf("Color green: %d\n", s->color.green);
 		printf("Color blue: %d\n", s->color.blue);
-		printf("Color: %u\n", s->color.hex_color);
+		printf("Color: %#010x\n", s->color.hex_color);
 		printf("\n");
 		i++;
 		s = s->next;
@@ -59,12 +59,12 @@ void	print_cylinders(t_cylinder *s)
 		printf("Normal x: %lf\n", s->normal.x);
 		printf("Normal y: %lf\n", s->normal.y);
 		printf("Normal z: %lf\n", s->normal.z);
-		printf("Diameter: %lf\n", s->diameter);
+		printf("Radious: %lf\n", s->radious);
 		printf("Height: %lf\n", s->height);
 		printf("Color red: %d\n", s->color.red);
 		printf("Color green: %d\n", s->color.green);
 		printf("Color blue: %d\n", s->color.blue);
-		printf("Color: %u\n", s->color.hex_color);
+		printf("Color: %#010x\n", s->color.hex_color);
 		printf("\n");
 		i++;
 		s = s->next;
@@ -89,12 +89,12 @@ void	print_cones(t_cone *s)
 		printf("Normal x: %lf\n", s->normal.x);
 		printf("Normal y: %lf\n", s->normal.y);
 		printf("Normal z: %lf\n", s->normal.z);
-		printf("Diameter: %lf\n", s->diameter);
+		printf("Radious: %lf\n", s->radious);
 		printf("Height: %lf\n", s->height);
 		printf("Color red: %d\n", s->color.red);
 		printf("Color green: %d\n", s->color.green);
 		printf("Color blue: %d\n", s->color.blue);
-		printf("Color: %u\n", s->color.hex_color);
+		printf("Color: %#010x\n", s->color.hex_color);
 		printf("\n");
 		i++;
 		s = s->next;
@@ -116,11 +116,11 @@ void	print_spheres(t_sphere *s)
 		printf("Pos x: %lf\n", s->pos.x);
 		printf("Pos y: %lf\n", s->pos.y);
 		printf("Pos z: %lf\n", s->pos.z);
-		printf("Diameter: %lf\n", s->diameter);
+		printf("Radious: %lf\n", s->radious);
 		printf("Color red: %d\n", s->color.red);
 		printf("Color green: %d\n", s->color.green);
 		printf("Color blue: %d\n", s->color.blue);
-		printf("Color: %u\n", s->color.hex_color);
+		printf("Color: %#010x\n", s->color.hex_color);
 		printf("\n");
 		i++;
 		s = s->next;
@@ -134,7 +134,7 @@ void	print_scene(t_scene scene)
 	printf("Color red: %d\n", scene.ambient->color.red);
 	printf("Color blue: %d\n", scene.ambient->color.blue);
 	printf("Color green: %d\n", scene.ambient->color.green);
-	printf("Color: %u\n\n", scene.ambient->color.hex_color);
+	printf("Color: %#010x\n\n", scene.ambient->color.hex_color);
 	printf("Camera(C): \n\n");
 	printf("Pos x: %lf\n", scene.camera->pos.x);
 	printf("Pos y: %lf\n", scene.camera->pos.y);
@@ -151,7 +151,7 @@ void	print_scene(t_scene scene)
 	printf("Color red: %d\n", scene.light->color.red);
 	printf("Color blue: %d\n", scene.light->color.blue);
 	printf("Color green: %d\n", scene.light->color.green);
-	printf("Color: %u\n\n", scene.light->color.hex_color);
+	printf("Color: %#010x\n\n", scene.light->color.hex_color);
 	print_spheres(scene.spheres);
 	print_planes(scene.planes);
 	print_cylinders(scene.cylinders);

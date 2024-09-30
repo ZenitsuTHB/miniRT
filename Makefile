@@ -1,45 +1,75 @@
-NAME	:= miniRT
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
-LIBMLX	:= libs/MLX42
-LIBFT	:= libs/libft
+#<-------------------------------|VARIABLES|---------------------------------->#
 
-OBJS_DIR := ./build
+NAME		= miniRT
+CC			= cc
+CFLAGS		= -Wextra -Wall -Werror -I .
+MLXFLAGS	= -ldl -lglfw -pthread -lm
 
-HEADERS	:= -I ./include -I $(LIBMLX)/include -I ./headers/
-LIBS    += $(LIBFT)/libft.a
+#<-------------------------------|LIBRARIES|---------------------------------->#
 
-SRCSDIR := ./src
-SRCS	:= main.c parser/file.c parser/parser_utils.c parser/set_data.c \
+MLX		= libmlx42.a
+MLX_D	= ./libs/MLX42/build/
+LIBFT	= libft.a
+LIBFT_D	= ./libs/libft/
+
+#<---------------------------------|FILES|------------------------------------>#
+
+SRC_D	= ./src/
+SRC_F	= main.c parser/file.c parser/parser_utils.c parser/set_data.c \
 		   parser/set_setup.c parser/set_objects.c parser/set_utils.c \
 		   parser/create_setup.c parser/set_aux.c free_scene.c \
-		   print_scene.c
+		   print_scene.c draw.c
 
-OBJS	:= $(addprefix $(OBJS_DIR)/, ${SRCS:.c=.o})
+OBJ_D	= ./objects/
+OBJ_F	= $(SRC_F:.c=.o)
+OBJ 	= $(addprefix $(OBJ_D), $(OBJ_F))
 
-all: libft $(NAME)
+DEP_D	= ./dependencies/
+DEP_F	= $(SRC_F:.c=.d)
+DEP		= $(addprefix $(DEP_D), $(DEP_F))
+
+#<---------------------------------|RULES|------------------------------------>#
+
+all: libmlx libft $(NAME)
 
 libft:
-	@make -C $(LIBFT)
+	make -C $(LIBFT_D)
 
-$(OBJS_DIR)/%.o: $(SRCSDIR)/%.c $(HEADER) Makefile
-	mkdir -p $(dir $@)
-	clear
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "\nCompiling: $(notdir $<)\n"
+libmlx: $(MLX_D)
+	cmake ./libs/MLX42 -B $(MLX_D) && make -C $(MLX_D) -j4
 
-$(NAME): $(OBJS)
-	@$(CC) $(OBJS) -fsanitize=address $(LIBS) $(HEADERS) -o $(NAME)
+$(OBJ_D)%.o: $(SRC_D)%.c Makefile
+	$(CC) $(CFLAGS) -MMD -o $@ -c $<
+	mv ${@:.o=.d} ${DEP_D}
+
+$(NAME): $(DEP_D) $(OBJ_D) $(OBJ)
+	$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJ) $(MLX_D)$(MLX) $(LIBFT_D)$(LIBFT) -o $(NAME)
+
+#<------------------------------|DIRECTORIES|--------------------------------->#
+
+$(DEP_D):
+	mkdir $(DEP_D)
+
+$(OBJ_D):
+	mkdir $(OBJ_D)
+	mkdir $(OBJ_D)parser
+
+$(MLX_D):
+	mkdir $(MLX_D)
+
+#<---------------------------------|PHONY|------------------------------------>#
 
 clean:
-	@rm -rf $(OBJS)
-	@make clean -C $(LIBFT)
-	@rm -rf $(LIBMLX)/build
-	clear
+	rm -rf $(OBJ_D) $(DEP_D)
 
 fclean: clean
-	@make fclean -C $(LIBFT)
-	@rm -rf $(NAME) $(OBJS_DIR)
-	clear
+	rm -rf $(MLX_D)
+	make fclean -C $(LIBFT_D)
+	rm -rf $(NAME)
 
 re: clean all
 
-.PHONY: all, clean, fclean, re
+-include $(DEP)
+
+.PHONY: all clean fclean re libmlx
+#<---------------------------------------------------------------------------->#

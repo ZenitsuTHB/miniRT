@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 12:16:52 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/28 13:27:47 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:46:29 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static unsigned int	get_hex_color(const t_rgb *rgb)
 {
-	return ((rgb->red << 16) | (rgb->green << 8) | rgb->blue);
+	return ((rgb->red << 24) | (rgb->green << 16) | (rgb->blue << 8) | 255);
 }
 
 int	set_color(char *str, t_rgb *rgb)
