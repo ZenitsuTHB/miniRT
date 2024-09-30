@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/30 11:16:18 by marvin           ###   ########.fr       */
+/*   Updated: 2024/09/30 12:47:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "macros.h"
 # include "struct.h"
 # include "vector.h"
+# include "parser.h"
 # include <../libs/MLX42/include/MLX42/MLX42.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -41,9 +42,14 @@ int			error_message(char *color, char *msg);
 int			check_args(int argc, char *argv);
 
 void		manage_escape(mlx_key_data_t keydata, void *param);
+
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓
+    PARSER
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
+
+void   free_scene(t_scene *scene);
+int read_file(int ac, char *file, t_scene *scene);
 
 #endif

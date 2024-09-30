@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:09:15 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/23 17:35:48 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:43:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libs/libft/libft.h"
+#include "../../include/minirt.h"
 
 static double	parse_digits(char *str, char **error)
 {

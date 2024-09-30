@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/parser.h"
+#include "../../include/parser.h"
 #include "../../libs/libft/libft.h"
 #include <fcntl.h>
 #include <unistd.h>
@@ -53,11 +53,11 @@ static int	read_data(int fd, t_scene *scene)
 		free(line);
 	}
 	if (!scene->ambient)
-		return (error_parser(YEL, MSG_AMB), 1);
+		return (error_parser(YEL, MSG_AMB));
 	if (!scene->camera)
-		return (error_parser(YEL, MSG_CAM), 1);
+		return (error_parser(YEL, MSG_CAM));
 	if (!scene->light)
-		return (error_parser(YEL, MSG_LIGHT), 1);
+		return (error_parser(YEL, MSG_LIGHT));
 	return (0);
 }
 
@@ -81,9 +81,9 @@ int	read_file(int ac, char *file, t_scene *scene)
 
 	init_scene(scene);
 	if (ac < 2)
-		return (error_parser(YEL, MSG_FEW), 1);
+		return (error_parser(YEL, MSG_FEW));
 	else if (ac > 2)
-		return (error_parser(YEL, MSG_TOO), 1);
+		return (error_parser(YEL, MSG_TOO));
 	fd = ft_open_file(file);
 	if (fd == -1)
 		return (1);

@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:11:18 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/23 17:35:56 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:46:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "struct.h"
-# include "macros.h"
+# include "minirt.h"
 
 int			set_data(t_scene *scene, char *str);
 
@@ -37,7 +36,7 @@ int			set_color(char *str, t_rgb *rgb);
 int			set_pos(char *str, t_vec3 *pos);
 int			set_normal(char *str, t_vec3 *normal);
 
-void		error_parser(char *color, char *msg);
+int         error_parser(char *color, char *msg);
 void		free_split(char **split);
 int			ft_splitlen(char **split);
 double		ft_strtod(char *str, char **error);

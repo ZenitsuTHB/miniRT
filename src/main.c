@@ -10,32 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../include/minirt.h"
 #include <../libs/MLX42/include/MLX42/MLX42.h>
 
-#define MALLOC_ERROR "Allocation Failed !!!"
-#define RENDER_ERROR "Failed to Render_Image"
-
-int	error_message(char *color, char *msg)
+int error_message(char *color, char *msg)
 {
 	printf(RED "\n\tError\n");
 	printf("\t%s%s\n\n" NC, color, msg);
 	return (1);
 }
 
-
-int	main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-	t_scene	scene;
+	t_scene scene;
 
 	if (read_file(argc, argv[1], &scene))
 		return (free_scene(&scene), EXIT_FAILURE);
-	free_scene(&scene);
 	if (render_object(&scene))
 		return (error_message(YEL, RENDER_ERROR));
 	mlx_key_hook(scene.mlx->con, &manage_escape, scene.mlx);
 	mlx_loop(scene.mlx->con);
 	mlx_terminate(scene.mlx->con);
+	//free_scene(&scene);
 	exit(0);
 	return (EXIT_SUCCESS);
 }

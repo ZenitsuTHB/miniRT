@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_objects.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:34:09 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/23 18:07:20 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:22:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/parser.h"
-#include "../../libs/libft/libft.h"
+#include "../../include/minirt.h"
 
 void	add_sphere(t_sphere **sphere, char *str, int *error)
 {
@@ -27,7 +26,7 @@ void	add_sphere(t_sphere **sphere, char *str, int *error)
 		return ;
 	if (set_pos(split[1], &obj->pos))
 		return (free_split(split));
-	obj->diameter = ft_strtod(split[2], &err);
+	obj->radius = ft_strtod(split[2], &err);
 	if (*err)
 		return (free_split(split));
 	if (set_color(split[3], &obj->color))
@@ -48,7 +47,7 @@ void	add_plane(t_plane **plane, char *str, int *error)
 	split = ft_split(str, ' ');
 	if (!split)
 		return ;
-	if (set_pos(split[1], &obj->pos))
+	if (set_pos(split[1], &obj->origin))
 		return (free_split(split));
 	if (set_normal(split[2], &obj->normal))
 		return (free_split(split));

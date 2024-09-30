@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:59:55 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/23 18:07:25 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:44:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/parser.h"
-#include "../../libs/libft/libft.h"
-#include <stdio.h>
+#include "../../include/minirt.h"
 
 static char	*get_id(char *str)
 {

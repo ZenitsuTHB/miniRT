@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_setup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:05:09 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/21 14:38:43 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:23:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/parser.h"
+#include "../../include/parser.h"
 #include <stdlib.h>
 
 void	*new_setup(int type)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../include/minirt.h"
 #include <../libs/MLX42/include/MLX42/MLX42.h>
 
 int	init_window(t_mlx *mlx)
