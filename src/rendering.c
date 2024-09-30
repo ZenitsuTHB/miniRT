@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/30 19:56:17 by marvin           ###   ########.fr       */
+/*   Updated: 2024/09/30 23:08:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,14 @@ bool hit_objects(t_scene *scene, t_hit *hit, t_rgb *color)
 				*color = sp->color;
     			return(true);
   			}
+		}
+		else if (obj->type == PL)
+		{
+			if (hit_plane(scene->ray, scene->planes, &hit->t))
+			{
+				*color = scene->planes->color;
+				return (true);
+			}
 		}
 		obj = obj->next;
 	}
