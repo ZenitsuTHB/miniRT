@@ -37,15 +37,43 @@ uint32_t	gradient_color(t_rgb color)
 	return (r << 24 | g << 16 | b << 8 | 255); // Returning as RGBA format
 }
 
+void  render_pixie(mlx_image_t *img, int x, int y, t_scene *sc)
+{
+	t_rgb color;
+  uint32_t final_color;
+
+  (void)sc;
+  color = ray_color(y, HEIGHT);
+  final_color = gradient_color(color);
+  mlx_put_pixel(img, x, y, final_color);
+}
+
+bool hit_objects(t_scene *scene, t_hit *hit)
+{
+  if(hit_sphere(scene->ray, scene->spheres, &hit->t))
+  {
+    printf("RAY HIT SPHERE  \n");
+    return(true);
+  }
+  return (false);
+}
+
+void  init_ray(t_camera *camera, t_ray *ray)
+{
+  ray->ratio = (double)WIDTH / (double)HEIGHT;
+	ray->img_pl_height = 2 * tan(camera->fov / 2);
+	ray->img_pl_width = ray->img_pl_height * ray->ratio;
+}
+
 int	render_object(t_scene *scene)
 {
 	t_mlx	*mlx;
-	t_rgb	color;
-
-	if (init_window(scene->mlx))
-		return (error_message(YEL, ERROR_WIND));
+  
+  init_ray(scene->camera, scene->ray);
 	if (setting_camera(scene->camera))
 		return (error_message(YEL, "Failed to setting up camera."));
+	if (init_window(scene->mlx))
+		return (error_message(YEL, ERROR_WIND));
 	mlx = scene->mlx;
 	mlx->x = 0;
 	while (mlx->x < WIDTH)
@@ -54,8 +82,8 @@ int	render_object(t_scene *scene)
 		while (mlx->y < HEIGHT)
 		{
 			generate_ray(scene->camera, scene->ray, mlx->x, mlx->y);
-			color = ray_color(mlx->y, HEIGHT);
-			mlx_put_pixel(mlx->img, mlx->x, mlx->y, gradient_color(color));
+      hit_objects(scene, scene->hit);
+      render_pixie(mlx->img, mlx->x, mlx->y, scene);
 			mlx->y++;
 		}
 		mlx->x++;

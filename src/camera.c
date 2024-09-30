@@ -15,22 +15,17 @@
 
 // u is Horizontal pixel position in [-1, 1]
 // v is Vertical pixel position in [-1,1]
-void	generate_ray(t_camera *camera, t_ray *ray, int i, int j)
+void  generate_ray(t_camera *camera, t_ray *ray, int i, int j)
 {
-	double	image_plane_width;
-	double	image_plane_height;
-	double	u_scaled;
-	double	v_scaled;
-	double	u;
-	double	v;
+	double  u_scaled;
+	double  v_scaled;
+	double  u;
+	double  v;
 
-	ray->ratio = (double)WIDTH / (double)HEIGHT;
-	image_plane_height = 2 * tan(camera->fov / 2);
-	image_plane_width = image_plane_height * ray->ratio;
 	u = ((i + 0.5) / WIDTH) * 2 - 1;
 	v = 1 - ((j + 0.5) / HEIGHT) * 2;
-	u_scaled = u * (image_plane_width / 2);
-	v_scaled = v * (image_plane_height / 2);
+	u_scaled = u * (ray->img_pl_width / 2);
+	v_scaled = v * (ray->img_pl_height / 2);
 	ray->direction = unit_vec3(add_vec3(camera->cam_dir,
 				add_vec3(scalar_mult(camera->right, u_scaled),
 					scalar_mult(camera->up, v_scaled))));

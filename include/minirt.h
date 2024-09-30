@@ -35,6 +35,7 @@ uint32_t	gradient_color(t_rgb color);
 int			render_object(t_scene *scene);
 int			setting_camera(t_camera *camera);
 void		generate_ray(t_camera *camera, t_ray *ray, int i, int j);
+bool	hit_sphere(t_ray *ray, t_sphere *sp, double *t);
 
 int			error_message(char *color, char *msg);
 int			check_args(int argc, char *argv);

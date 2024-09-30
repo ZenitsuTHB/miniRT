@@ -29,17 +29,7 @@ int	init_scene(t_scene *scene)
 	scene->mlx = malloc(sizeof(t_mlx));
 	if (!scene->mlx)
 		return (error_message(RED, MALLOC_ERROR));
-	// RAY
-	scene->ray = malloc(sizeof(t_ray));
-	if (!scene->ray)
-		return (error_message(RED, MALLOC_ERROR));
-	// PLANES
-	scene->planes = malloc(sizeof(t_plane));
-	if (!scene->planes)
-		return (error_message(RED, MALLOC_ERROR));
-	scene->planes->origin = (t_vec3){0.0, 0.0, -10.0};
-	scene->planes->normal = (t_vec3){0.0, 1.0, 0.0};
-	// CAMERA
+			// CAMERA
 	scene->camera = malloc(sizeof(t_camera));
 	if (!scene->camera)
 		return (error_message(RED, MALLOC_ERROR));
@@ -49,9 +39,30 @@ int	init_scene(t_scene *scene)
 	scene->camera->pos = (t_vec3){-50.0, 0.0, 20.0};
 	scene->camera->cam_dir = (t_vec3){0.0, 0.0, -1};
 	scene->camera->normal = (t_vec3){0.0, 0.0, 1.0};
+  // RAY
+	scene->ray = malloc(sizeof(t_ray));
+	if (!scene->ray)
+		return (error_message(RED, MALLOC_ERROR));
+   // PLANES
+	scene->planes = malloc(sizeof(t_plane));
+	if (!scene->planes)
+		return (error_message(RED, MALLOC_ERROR));
+	scene->planes->origin = (t_vec3){0.0, 0.0, -10.0};
+	scene->planes->normal = (t_vec3){0.0, 1.0, 0.0};
 	//SPHERE
-	
-	return (0);
+  scene->spheres = malloc(sizeof(t_sphere));
+  if (!scene->spheres)
+    return(error_message(RED, MALLOC_ERROR));
+  scene->spheres->radius = 12.6; 	
+  scene->spheres->center = (t_vec3){0.0, 0.0, 20.6};
+	 //INTERSECTIONS
+  scene->hit = malloc(sizeof(t_hit));
+  if (!scene->hit)
+    return (error_message(RED, MALLOC_ERROR));
+  scene->hit->t = 2.0;
+  scene->hit->point = (t_vec3){0.0, 0.0, 0.0};
+  scene->hit->normal = (t_vec3){0.0, 0.0, 0.0};
+  return (0);
 }
 // if (init_window(scene.mlx))
 // return (error_message( YEL ,ERROR_WIND));

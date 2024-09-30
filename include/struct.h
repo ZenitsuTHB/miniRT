@@ -111,30 +111,32 @@ typedef struct s_raytracing
 	double		ratio;
 	t_point		origin;
 	t_vec3		direction;
-}				t_ray;
+	double    img_pl_width;
+  double    img_pl_height;
+}           t_ray;
 
-// typedef struct s_objects
-// {
-//   void*            object;
-//   struct s_objects next;
-// }           t_objects;
+ typedef struct s_objects
+ {
+   void             *object;
+   struct s_objects *next;
+}           t_objects;
 
 typedef struct s_hit
 {
 	double t;      // Distance from the ray's origin to the intersection point
 	t_vec3 point;  // Intersection point
 	t_vec3 normal; // Normal vector at the intersection point
-					// t_objects *object;//Pointer to the intersected object
+	t_objects *object;//Pointer to the intersected object
 }				t_hit;
 
 typedef struct s_scene
 {
-	t_ray		*ray;
 	t_mlx		*mlx;
+	t_ray		*ray;
+  t_hit   *hit;//has a t_objects to carry the objects
 	t_plane		*planes;
 	t_sphere	*spheres;
 	t_camera	*camera;
-	// t_objects *objects;//instead of having them all
 	// t_cone		*cones;
 	// t_light   *light;
 	// t_ambient   *ambient;
