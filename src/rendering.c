@@ -72,7 +72,7 @@ int	render_object(t_scene *scene)
   init_ray(scene->camera, scene->ray);
 	if (setting_camera(scene->camera))
 		return (error_message(YEL, "Failed to setting up camera."));
-	if (init_window(scene->mlx))
+  if (init_window(scene->mlx))
 		return (error_message(YEL, ERROR_WIND));
 	mlx = scene->mlx;
 	mlx->x = 0;
