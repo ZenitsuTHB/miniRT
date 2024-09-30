@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/23 17:35:47 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/09/30 20:03:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <../libs/MLX42/include/MLX42/MLX42.h>
 
-#define MALLOC_ERROR "Allocation Failed !!!"
-#define RENDER_ERROR "Failed to Render_Image"
 
 int	error_message(char *color, char *msg)
 {
@@ -37,7 +35,8 @@ int	init_scene(t_scene *scene)
 	scene->camera->focal_len = 1.0;
 	scene->camera->ratio = WIDTH / HEIGHT;
 	scene->camera->pos = (t_vec3){-50.0, 0.0, 20.0};
-	scene->camera->cam_dir = (t_vec3){0.0, 0.0, -1};
+	scene->camera->cam_dir = unit_vec3(substract_vec3((t_vec3){0.0, 0.0, 20.6}, scene->camera->pos));
+	//scene->camera->cam_dir = (t_vec3){0.0, 0.0, -1};
 	scene->camera->normal = (t_vec3){0.0, 0.0, 1.0};
   // RAY
 	scene->ray = malloc(sizeof(t_ray));
@@ -53,15 +52,29 @@ int	init_scene(t_scene *scene)
   scene->spheres = malloc(sizeof(t_sphere));
   if (!scene->spheres)
     return(error_message(RED, MALLOC_ERROR));
-  scene->spheres->radius = 12.6; 	
+  scene->spheres->radius = 8.6; 	
   scene->spheres->center = (t_vec3){0.0, 0.0, 20.6};
-	 //INTERSECTIONS
+  scene->spheres->color = create_vec3(1.0, 0.0, 0.0);
+  scene->spheres->next = malloc(sizeof(t_sphere));
+  if (!scene->spheres->next)
+    return(error_message(RED, MALLOC_ERROR));
+  scene->spheres->next->radius = 4.6; 	
+  scene->spheres->next->center = (t_vec3){2.0, 0.0, 10.6};
+  scene->spheres->next->color = create_vec3(1.0, 0.0, 1.0);
+  scene->spheres->next->next = NULL;
+	//INTERSECTIONS
   scene->hit = malloc(sizeof(t_hit));
   if (!scene->hit)
     return (error_message(RED, MALLOC_ERROR));
-  scene->hit->t = 2.0;
+  scene->hit->t = INFINITY;
   scene->hit->point = (t_vec3){0.0, 0.0, 0.0};
   scene->hit->normal = (t_vec3){0.0, 0.0, 0.0};
+  scene->hit->object = malloc(sizeof(t_objects));
+  if (!scene->hit->object)
+  	return(error_message(RED, MALLOC_ERROR));
+  scene->hit->object->obj = scene->spheres;
+  scene->hit->object->type = SP;
+  scene->hit->object->next = NULL;
   return (0);
 }
 // if (init_window(scene.mlx))

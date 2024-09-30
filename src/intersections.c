@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/26 18:28:50 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/09/30 15:22:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	hit_sphere(t_ray *ray, t_sphere *sp, double *t)
 	double  coef[3];
   double  delta;
 
-	oc = substract_vec3(ray->direction, sp->center);
+	oc = substract_vec3(ray->origin, sp->center);
 	coef[0] = dot_product(&ray->direction, &ray->direction);//a
 	coef[1] = 2.0 * dot_product(&oc, &ray->direction);//b
 	coef[2] = dot_product(&oc, &oc) - (sp->radius * sp->radius);//c
@@ -31,9 +31,9 @@ bool	hit_sphere(t_ray *ray, t_sphere *sp, double *t)
   res[1] = (-coef[1] + sqrt(delta)) / (2.0 * coef[0]);
   if (res[0] > 0 || res[1] > 0)
   {
-    if (res[0] < *t)
+    if (res[0] && res[0] < *t)
       *t = res[0];
-    else if (res[1] < *t)
+    else if (res[1] && res[1] < *t)
       *t = res[1];
     return (true);
   }

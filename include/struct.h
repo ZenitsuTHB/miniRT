@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/26 18:23:06 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/09/30 16:55:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct s_sphere
 	t_rgb		color;
 	t_vec3 center;   // 0.0, 0.0, 20.6
 	double radius; // 12.6
+	struct s_sphere	*next;
+	
 }				t_sphere;
 
 typedef struct s_plane
@@ -112,13 +114,14 @@ typedef struct s_raytracing
 	t_point		origin;
 	t_vec3		direction;
 	double    img_pl_width;
-  double    img_pl_height;
+  	double    img_pl_height;
 }           t_ray;
 
- typedef struct s_objects
- {
-   void             *object;
-   struct s_objects *next;
+typedef struct s_objects
+{
+	int					type;
+	void				*obj;
+	struct s_objects	*next;
 }           t_objects;
 
 typedef struct s_hit
@@ -133,7 +136,7 @@ typedef struct s_scene
 {
 	t_mlx		*mlx;
 	t_ray		*ray;
-  t_hit   *hit;//has a t_objects to carry the objects
+	t_hit		*hit;//has a t_objects to carry the objects
 	t_plane		*planes;
 	t_sphere	*spheres;
 	t_camera	*camera;

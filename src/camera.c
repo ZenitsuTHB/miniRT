@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/15 19:27:15 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/09/30 17:08:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	setting_camera(t_camera *cam)
 
 	cam->viewport_height = 2.0 * tan(deg_to_rad(cam->fov) / 2.0)
 		* cam->focal_len;
-	cam->viewport_width = cam->viewport_width * cam->ratio;
+	cam->viewport_width = cam->viewport_height * cam->ratio;
 	half_width = cam->viewport_width;
 	half_height = cam->viewport_height;
 	w = unit_vec3(scalar_mult(cam->cam_dir, -1));
