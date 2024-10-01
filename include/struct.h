@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/30 16:55:45 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/01 17:13:25 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,8 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	t_rgb		color;
-	t_vec3 center;   // 0.0, 0.0, 20.6
-	double radius; // 12.6
-	struct s_sphere	*next;
-	
+	t_vec3 center;
+	double radius;
 }				t_sphere;
 
 typedef struct s_plane

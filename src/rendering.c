@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/30 23:08:28 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/01 20:08:43 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void  render_pixie(mlx_image_t *img, int x, int y, t_scene *sc, bool hit, t_rgb 
 	}
 	else
   	{
-		t_rgb bg_color = ray_color(y, HEIGHT);
+		t_rgb bg_color =ray_color(y, HEIGHT);
 		final_color = gradient_color(bg_color);
 	}
   mlx_put_pixel(img, x, y, final_color);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/30 17:08:47 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/01 17:07:43 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	setting_camera(t_camera *cam)
 			add_vec3(scalar_mult(cam->right, half_width * cam->focal_len),
 				add_vec3(scalar_mult(cam->up, half_height * cam->focal_len),
 					scalar_mult(w, cam->focal_len))));
-	cam->horizontal = scalar_mult(cam->right, 2 * half_width * cam->focal_len);
-	cam->vertical = scalar_mult(cam->up, 2 * half_height * cam->focal_len);
+	//cam->horizontal = scalar_mult(cam->right, 2 * half_width * cam->focal_len);
+	//cam->vertical = scalar_mult(cam->up, 2 * half_height * cam->focal_len);
 	return (0);
 }

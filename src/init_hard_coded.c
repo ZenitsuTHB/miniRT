@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 22:48:22 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/30 22:48:22 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/01 20:09:26 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,6 @@ int	init_scene(t_scene *scene)
   scene->spheres->radius = 5.6; 	
   scene->spheres->center = (t_vec3){0.0, 0.0, 20.6};
   scene->spheres->color = create_vec3(1.0, 0.0, 0.0);
-  scene->spheres->next = malloc(sizeof(t_sphere));
-  if (!scene->spheres->next)
-    return(error_message(RED, MALLOC_ERROR));
-  scene->spheres->next->radius = 4.6; 	
-  scene->spheres->next->center = (t_vec3){0.0, 0.0, 10.6};
-  scene->spheres->next->color = create_vec3(1.0, 0.0, 1.0);
-  scene->spheres->next->next = NULL;
 	//INTERSECTIONS
   scene->hit = malloc(sizeof(t_hit));
   if (!scene->hit)
@@ -75,13 +68,6 @@ int	init_scene(t_scene *scene)
   printf("the plane address is %p \n", scene->hit->object->next);
   scene->hit->object->next->obj = scene->planes;
   scene->hit->object->next->type = PL;
-  //3rd
-  scene->hit->object->next->next = malloc(sizeof(t_objects));
-  if (!scene->hit->object->next->next)
-  	return(error_message(RED, MALLOC_ERROR));
-  printf("the new address is %p \n", scene->hit->object->next->next);
-  scene->hit->object->next->next->obj = scene->spheres->next;
-  scene->hit->object->next->next->type = SP;
-  scene->hit->object->next->next->next = NULL;
+  scene->hit->object->next->next = NULL;
   return (0);
 }
