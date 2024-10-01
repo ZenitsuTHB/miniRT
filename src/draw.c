@@ -1,16 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_input.c                                      :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 11:38:00 by avolcy            #+#    #+#             */
-/*   Updated: 2024/08/27 14:19:45 by avolcy           ###   ########.fr       */
+/*   Created: 2024/09/30 17:56:54 by adrmarqu          #+#    #+#             */
+/*   Updated: 2024/09/30 18:21:47 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "../headers/minirt.h"
 
+//mlx_put_pixel(scene->img, x, y, color);
 
-
+void	draw_scene(t_scene *scene)
+{
+	printf("%lf\n", scene->spheres->radious);
+	//draw_cylinder();
+}

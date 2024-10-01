@@ -12,6 +12,7 @@ INC += ./include/vector.h
 HEADERS	:= -I./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBS    += $(LIBFT)/libft.a
+
 SRCSDIR := ./src
 
 SRCS	:= main.c mlx_use.c  init_hard_coded.c print_scene.c free_scene.c 
@@ -34,7 +35,10 @@ OBJS	+= $(addprefix $(OBJS_DIR)/intersections/, ${HIT:.c=.o})
 all: libmlx libft $(NAME)
 
 libft:
-	@make -C $(LIBFT)
+	make -C $(LIBFT_D)
+
+libmlx: $(MLX_D)
+	cmake ./libs/MLX42 -B $(MLX_D) && make -C $(MLX_D) -j4
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 
@@ -54,15 +58,12 @@ debug: all
 
 
 clean:
-	@rm -rf $(OBJS)
-	@make clean -C $(LIBFT)
-	@rm -rf $(LIBMLX)/build
-	clear
+	rm -rf $(OBJ_D) $(DEP_D)
 
 fclean: clean
-	@make fclean -C $(LIBFT)
-	@rm -rf $(NAME) $(OBJS_DIR)
-	clear
+	rm -rf $(MLX_D)
+	make fclean -C $(LIBFT_D)
+	rm -rf $(NAME)
 
 re: fclean all
 
