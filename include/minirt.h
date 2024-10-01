@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/30 12:47:08 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/01 12:50:59 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void		generate_ray(t_camera *camera, t_ray *ray, int i, int j);
 bool	hit_sphere(t_ray *ray, t_sphere *sp, double *t);
 
 int			error_message(char *color, char *msg);
-int			check_args(int argc, char *argv);
+int			read_file(int ac, char *file, t_scene *scene);
+void		draw_scene(t_scene *scene);
 
 void		manage_escape(mlx_key_data_t keydata, void *param);
 

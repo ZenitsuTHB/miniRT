@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_aux.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 12:16:52 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/01 12:02:26 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/01 12:53:53 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static unsigned int	get_hex_color(const t_rgb *rgb)
 {
-	return ((rgb->red << 16) | (rgb->green << 8) | rgb->blue);
+	return ((rgb->red << 24) | (rgb->green << 16) | (rgb->blue << 8) | 255);
 }
 
 int	set_color(char *str, t_rgb *rgb)

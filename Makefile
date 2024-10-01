@@ -17,14 +17,25 @@ SRCSDIR := ./src
 SRCS	:= main.c vector_op.c mlx_use.c rendering.c camera.c vector_op1.c vector_op2.c intersections.c parser/file.c parser/parser_utils.c parser/set_data.c \
 		   parser/set_setup.c parser/set_objects.c parser/set_utils.c \
 		   parser/create_setup.c parser/set_aux.c free_scene.c \
-		   print_scene.c
+		   print_scene.c draw.c
 
-OBJS	:= $(addprefix $(OBJS_DIR)/, ${SRCS:.c=.o})
+OBJ_D	= ./objects/
+OBJ_F	= $(SRC_F:.c=.o)
+OBJ 	= $(addprefix $(OBJ_D), $(OBJ_F))
 
-all: libft $(NAME)
+DEP_D	= ./dependencies/
+DEP_F	= $(SRC_F:.c=.d)
+DEP		= $(addprefix $(DEP_D), $(DEP_F))
+
+#<---------------------------------|RULES|------------------------------------>#
+
+all: libmlx libft $(NAME)
 
 libft:
-	@make -C $(LIBFT)
+	make -C $(LIBFT_D)
+
+libmlx: $(MLX_D)
+	cmake ./libs/MLX42 -B $(MLX_D) && make -C $(MLX_D) -j4
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 
@@ -44,16 +55,16 @@ debug: all
 
 
 clean:
-	@rm -rf $(OBJS)
-	@make clean -C $(LIBFT)
-	@rm -rf $(LIBMLX)/build
-	clear
+	rm -rf $(OBJ_D) $(DEP_D)
 
 fclean: clean
-	@make fclean -C $(LIBFT)
-	@rm -rf $(NAME) $(OBJS_DIR)
-	clear
+	rm -rf $(MLX_D)
+	make fclean -C $(LIBFT_D)
+	rm -rf $(NAME)
 
 re: clean all
 
-.PHONY: all, clean, fclean, re
+-include $(DEP)
+
+.PHONY: all clean fclean re libmlx
+#<---------------------------------------------------------------------------->#
