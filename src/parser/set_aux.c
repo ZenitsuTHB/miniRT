@@ -6,22 +6,19 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 12:16:52 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/30 17:46:29 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/01 12:25:38 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/parser.h"
+#include "../../headers/minirt.h"
 #include "../../libs/libft/libft.h"
 
-static unsigned int	get_hex_color(const t_rgb *rgb)
-{
-	return ((rgb->red << 24) | (rgb->green << 16) | (rgb->blue << 8) | 255);
-}
-
-int	set_color(char *str, t_rgb *rgb)
+int	set_color(char *str, unsigned int *color)
 {
 	char	**split;
 	int		error;
+	t_rgb	rgb;
 
 	split = ft_split(str, ',');
 	if (!split)
@@ -29,17 +26,17 @@ int	set_color(char *str, t_rgb *rgb)
 	if (ft_splitlen(split) != 3)
 		return (free_split(split), error_parser(YEL, MSG_NUM), 1);
 	error = 0;
-	rgb->red = ft_atoi_error(split[0], &error);
-	if (error || rgb->red < 0 || rgb->red > 255)
+	rgb.x = ft_atoi_error(split[0], &error);
+	if (error || rgb.x < 0 || rgb.x > 255)
 		return (free_split(split), error_parser(YEL, MSG_DATA), 1);
-	rgb->green = ft_atoi_error(split[1], &error);
-	if (error || rgb->green < 0 || rgb->green > 255)
+	rgb.y = ft_atoi_error(split[1], &error);
+	if (error || rgb.y < 0 || rgb.y > 255)
 		return (free_split(split), error_parser(YEL, MSG_DATA), 1);
-	rgb->blue = ft_atoi_error(split[2], &error);
-	if (error || rgb->blue < 0 || rgb->blue > 255)
+	rgb.z = ft_atoi_error(split[2], &error);
+	if (error || rgb.z < 0 || rgb.z > 255)
 		return (free_split(split), error_parser(YEL, MSG_DATA), 1);
 	free_split(split);
-	rgb->hex_color = get_hex_color(rgb);
+	*color = gradient_color(rgb);
 	return (0);
 }
 

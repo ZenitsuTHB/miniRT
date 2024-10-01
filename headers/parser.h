@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:11:18 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/23 17:35:56 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/01 12:22:49 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_plane		*new_plane(t_plane *prev);
 t_cylinder	*new_cylinder(t_cylinder *prev);
 t_cone		*new_cone(t_cone *prev);
 
-int			set_color(char *str, t_rgb *rgb);
+int			set_color(char *str, unsigned int *color);
 int			set_pos(char *str, t_vec3 *pos);
 int			set_normal(char *str, t_vec3 *normal);
 
