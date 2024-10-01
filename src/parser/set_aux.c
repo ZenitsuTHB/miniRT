@@ -6,11 +6,11 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 12:16:52 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/28 13:27:47 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/01 12:02:26 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/parser.h"
+#include "../../include/parser.h"
 #include "../../libs/libft/libft.h"
 
 static unsigned int	get_hex_color(const t_rgb *rgb)
