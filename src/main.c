@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:45:16 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/01 13:33:12 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:12:22 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int	main(int argc, char *argv[])
 	if (read_file(argc, argv[1], &scene))
 		return (free_scene(&scene), EXIT_FAILURE);
 	print_scene(scene);
-	if (render_object(&scene))
-		return (error_message(YEL, RENDER_ERROR));
-	mlx_key_hook(scene.mlx->con, &manage_escape, scene.mlx);
-	mlx_loop(scene.mlx->con);
-	mlx_terminate(scene.mlx->con);
+	//if (render_object(&scene))
+	//	return (error_message(YEL, RENDER_ERROR));
+	//mlx_key_hook(scene.mlx->con, &manage_escape, scene.mlx);
+	//mlx_loop(scene.mlx->con);
+	//mlx_terminate(scene.mlx->con);
 	free_scene(&scene);
 	return (EXIT_SUCCESS);
 }

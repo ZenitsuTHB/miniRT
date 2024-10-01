@@ -16,8 +16,10 @@ SRC_D	= ./src/
 SRC_F	= main.c parser/file.c parser/parser_utils.c parser/set_data.c \
 		  parser/create_setup.c parser/set_aux.c parser/set_utils.c \
 		  parser/set_objects.c parser/set_setup.c print_scene.c	\
-		  camera.c free_scene.c rendering.c vector_op2.c \
-	   	  intersections.c mlx_use.c vector_op1.c vector_op.c
+		 	free_scene.c 
+		#camera.c
+		  #rendering.c vector_op2.c \
+	   		#intersections.c mlx_use.c vector_op1.c vector_op.c
 		  
 
 OBJ_D	= ./objects/

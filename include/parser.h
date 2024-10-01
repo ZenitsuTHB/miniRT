@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:11:18 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/01 13:24:41 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/01 13:48:13 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			set_data(t_scene *scene, char *str);
 
 t_ambient	*set_ambient(char *str, int *error);
 t_camera	*set_camera(char *str, int *error);
-t_light		*set_light(char *str, int *error);
+void		add_light(t_light **light, char *str, int *error);
 
 void		add_sphere(t_sphere **sphere, char *str, int *error);
 void		add_plane(t_plane **plane, char *str, int *error);
@@ -36,7 +36,7 @@ int			set_color(char *str, t_rgb *rgb);
 int			set_pos(char *str, t_vec3 *pos);
 int			set_normal(char *str, t_vec3 *normal);
 
-int         error_parser(char *color, char *msg);
+void        error_parser(char *color, char *msg);
 void		free_split(char **split);
 int			ft_splitlen(char **split);
 double		ft_strtod(char *str, char **error);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/01 13:19:45 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/01 13:37:26 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_light
 	double 	bright;
 	double ratio;       
 	t_rgb color;        
+	struct s_light	*next;
+	struct s_light	*prev;
 	t_point light_point;
 }				t_light;
 

@@ -6,12 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:30:27 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/30 12:44:14 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/01 14:45:42 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
-
 
 t_ambient	*set_ambient(char *str, int *error)
 {
@@ -22,7 +21,7 @@ t_ambient	*set_ambient(char *str, int *error)
 	amb = new_setup(1);
 	if (!amb)
 		return (NULL);
-	split = ft_split(str, ' ');
+	split = ft_splitset(str, " \t");
 	if (!split)
 		return (error_parser(YEL, MSG_MEM), NULL);
 	if (ft_splitlen(split) != 3)
@@ -46,7 +45,7 @@ t_camera	*set_camera(char *str, int *error)
 	cam = new_setup(2);
 	if (!cam)
 		return (NULL);
-	split = ft_split(str, ' ');
+	split = ft_splitset(str, " \t");
 	if (!split)
 		return (error_parser(YEL, MSG_MEM), NULL);
 	if (ft_splitlen(split) != 4)
@@ -64,28 +63,46 @@ t_camera	*set_camera(char *str, int *error)
 	return (cam);
 }
 
-t_light	*set_light(char *str, int *error)
+static t_light	*new_light(t_light *prev)
 {
-	t_light	*light;
+	t_light	*new;
+
+	new = malloc(sizeof(t_light));
+	if (!new)
+		return (error_parser(YEL, MSG_MEM), NULL);
+	new->next = NULL;
+	if (prev)
+	{
+		prev->next = new;
+		new->prev = prev;
+	}
+	else
+		new->prev = NULL;
+	return (new);
+}
+
+void	add_light(t_light **light, char *str, int *error)
+{
+	t_light	*obj;
 	char	**split;
 	char	*err;
 
-	light = new_setup(3);
-	if (!light)
-		return (NULL);
-	split = ft_split(str, ' ');
+	obj = new_light(*light);
+	if (!obj)
+		return ;
+	split = ft_splitset(str, " \t");
 	if (!split)
-		return (NULL);
+		return ;
 	if (ft_splitlen(split) != 4)
-		return (error_parser(YEL, MSG_NUM), NULL);
-	if (set_pos(split[1], &light->pos))
-		return (free_split(split), NULL);
-	light->bright = ft_strtod(split[2], &err);
-	if (*err || light->bright < 0.0 || light->bright > 1.0)
-		return (free_split(split), NULL);
-	if (set_color(split[3], &light->color))
-		return (free_split(split), NULL);
+		return (error_parser(YEL, MSG_NUM));
+	if (set_pos(split[1], &obj->pos))
+		return (free_split(split));
+	obj->bright = ft_strtod(split[2], &err);
+	if (*err || obj->bright < 0.0 || obj->bright > 1.0)
+		return (free_split(split));
+	if (set_color(split[3], &obj->color))
+		return (free_split(split));
 	free_split(split);
 	*error = 0;
-	return (light);
+	*light = obj;
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:34:09 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/01 13:25:40 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:45:20 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	add_sphere(t_sphere **sphere, char *str, int *error)
 	obj = new_sphere(*sphere);
 	if (!obj)
 		return ;
-	split = ft_split(str, ' ');
+	split = ft_splitset(str, " \t");
 	if (!split)
 		return ;
 	if (set_pos(split[1], &obj->pos))
@@ -44,7 +44,7 @@ void	add_plane(t_plane **plane, char *str, int *error)
 	obj = new_plane(*plane);
 	if (!obj)
 		return ;
-	split = ft_split(str, ' ');
+	split = ft_splitset(str, " \t");
 	if (!split)
 		return ;
 	if (set_pos(split[1], &obj->pos))
@@ -67,7 +67,7 @@ void	add_cylinder(t_cylinder **cyl, char *str, int *error)
 	obj = new_cylinder(*cyl);
 	if (!obj)
 		return ;
-	split = ft_split(str, ' ');
+	split = ft_splitset(str, " \t");
 	if (!split)
 		return ;
 	if (set_pos(split[1], &obj->pos))
@@ -96,7 +96,7 @@ void	add_cone(t_cone **cone, char *str, int *error)
 	obj = new_cone(*cone);
 	if (!obj)
 		return ;
-	split = ft_split(str, ' ');
+	split = ft_splitset(str, " \t");
 	if (!split)
 		return ;
 	if (set_pos(split[1], &obj->pos))

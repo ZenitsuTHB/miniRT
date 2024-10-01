@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/01 13:30:35 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:15:36 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,30 @@ static void	print_spheres(t_sphere *s)
 	}
 }
 
+static void	print_lights(t_light *s)
+{
+	int	i;
+
+	if (!s)
+		return ;
+	while (s->prev)
+		s = s->prev;
+	i = 1;
+	while (s)
+	{
+		printf("Light(L): \n\n");
+		printf("Pos x: %lf\n", s->pos.x);
+		printf("Pos y: %lf\n", s->pos.y);
+		printf("Pos z: %lf\n", s->pos.z);
+		printf("Bright: %lf\n", s->bright);
+		printf("Color red: %lf\n", s->color.x);
+		printf("Color blue: %lf\n", s->color.z);
+		printf("Color green: %lf\n\n", s->color.y);
+		i++;
+		s = s->next;
+	}
+}
+
 void	print_scene(t_scene scene)
 {
 	printf("Ambient(A): \n\n");
@@ -138,14 +162,7 @@ void	print_scene(t_scene scene)
 	printf("Normal y: %lf\n", scene.camera->normal.y);
 	printf("Normal z: %lf\n", scene.camera->normal.z);
 	printf("Fov: %d\n\n", scene.camera->fov);
-	printf("Light(L): \n\n");
-	printf("Pos x: %lf\n", scene.light->pos.x);
-	printf("Pos y: %lf\n", scene.light->pos.y);
-	printf("Pos z: %lf\n", scene.light->pos.z);
-	printf("Bright: %lf\n", scene.light->bright);
-	printf("Color red: %lf\n", scene.light->color.x);
-	printf("Color blue: %lf\n", scene.light->color.z);
-	printf("Color green: %lf\n\n", scene.light->color.y);
+	print_lights(scene.light);
 	print_spheres(scene.spheres);
 	print_planes(scene.planes);
 	print_cylinders(scene.cylinders);

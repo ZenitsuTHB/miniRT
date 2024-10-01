@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 17:46:40 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/01 13:26:22 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/01 13:57:20 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,20 @@ void	free_cones(t_cone *obj)
 	}
 }
 
+void	free_lights(t_light *obj)
+{
+	void		*next;
+
+	while (obj->prev)
+		obj = obj->prev;
+	while (obj)
+	{
+		next = obj->next;
+		free(obj);
+		obj = next;
+	}
+}
+
 void	free_scene(t_scene *scene)
 {
 	if (!scene)
@@ -79,7 +93,7 @@ void	free_scene(t_scene *scene)
 	if (scene->camera)
 		free(scene->camera);
 	if (scene->light)
-		free(scene->light);
+		free_lights(scene->light);
 	if (scene->spheres)
 		free_spheres(scene->spheres);
 	if (scene->planes)

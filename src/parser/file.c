@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/28 12:42:54 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/01 13:49:07 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ static int	read_data(int fd, t_scene *scene)
 		free(line);
 	}
 	if (!scene->ambient)
-		return (error_parser(YEL, MSG_AMB));
+		return (error_parser(YEL, MSG_AMB), 1);
 	if (!scene->camera)
-		return (error_parser(YEL, MSG_CAM));
+		return (error_parser(YEL, MSG_CAM), 1);
 	if (!scene->light)
-		return (error_parser(YEL, MSG_LIGHT));
+		return (error_parser(YEL, MSG_LIGHT), 1);
 	return (0);
 }
 
@@ -81,9 +81,9 @@ int	read_file(int ac, char *file, t_scene *scene)
 
 	init_scene(scene);
 	if (ac < 2)
-		return (error_parser(YEL, MSG_FEW));
+		return (error_parser(YEL, MSG_FEW), 1);
 	else if (ac > 2)
-		return (error_parser(YEL, MSG_TOO));
+		return (error_parser(YEL, MSG_TOO), 1);
 	fd = ft_open_file(file);
 	if (fd == -1)
 		return (1);

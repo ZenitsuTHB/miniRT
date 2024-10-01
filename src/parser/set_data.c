@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:59:55 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/30 12:44:21 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/01 13:50:10 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	put_data_scene(char *id, char *data, t_scene *scene)
 	else if (!ft_strncmp(id, "C", 1))
 		scene->camera = set_camera(data, &error);
 	else if (!ft_strncmp(id, "L", 1))
-		scene->light = set_light(data, &error);
+		add_light(&(scene->light), data, &error);
 	else if (!ft_strncmp(id, "sp", 2))
 		add_sphere(&(scene->spheres), data, &error);
 	else if (!ft_strncmp(id, "pl", 2))
@@ -53,20 +53,15 @@ static int	dup_control(char *id)
 {
 	static int	ambient = 0;
 	static int	camera = 0;
-	static int	light = 0;
 
 	if (!ft_strncmp(id, "A", 1))
 		ambient++;
 	if (!ft_strncmp(id, "C", 1))
 		camera++;
-	if (!ft_strncmp(id, "L", 1))
-		light++;
 	if (ambient > 1)
 		return (error_parser(YEL, MSG_TAMB), 1);
 	if (camera > 1)
 		return (error_parser(YEL, MSG_TCAM), 1);
-	if (light > 1)
-		return (error_parser(YEL, MSG_TLIGHT), 1);
 	return (0);
 }
 

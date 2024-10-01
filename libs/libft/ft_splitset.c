@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_splitset.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 21:28:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/01 14:26:25 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:42:02 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_cnt_word(const char *s, char c)
+static int	check_space(char c, char *set)
+{
+	int	i;
+
+	if (!set || !set[0])
+		return (0);
+	i = 0;
+	while (set[i])
+	{
+		if (c == set[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static int	ft_cnt_word(const char *s, char *set)
 {
 	int		i;
 	int		word;
@@ -23,7 +39,7 @@ static int	ft_cnt_word(const char *s, char c)
 	count = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
+		if (check_space(s[i], set))
 			count = 0;
 		else if (count == 0)
 		{
@@ -44,7 +60,7 @@ static void	ft_free_array(char **res, int i)
 	free(res);
 }
 
-static char	**ft_create(char const *s, char c, char **res)
+static char	**ft_create(char const *s, char *set, char **res)
 {
 	int	i;
 	int	j;
@@ -55,9 +71,9 @@ static char	**ft_create(char const *s, char c, char **res)
 	start = 0;
 	while (s[i])
 	{
-		if (i > 0 && s[i] != c && s[i - 1] == c)
+		if (i > 0 && !check_space(s[i], set) && check_space(s[i - 1] , set))
 			start = i;
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+		if (!check_space(s[i], set) && (check_space(s[i + 1], set) || s[i + 1] == '\0'))
 		{
 			res[j] = ft_substr(s, start, i - start + 1);
 			if (!res[j])
@@ -73,24 +89,23 @@ static char	**ft_create(char const *s, char c, char **res)
 	return (res);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_splitset(char const *s, char *set)
 {
 	char	**result;
 
-	result = malloc(sizeof(char *) * (ft_cnt_word(s, c) + 1));
+	result = malloc(sizeof(char *) * (ft_cnt_word(s, set) + 1));
 	if (!result)
 		return (NULL);
-	result = ft_create(s, c, result);
+	result = ft_create(s, set, result);
 	return (result);
 }
-
 /*
 int main ()
 {
 	char **test;
 	int i = 0;
 
-	test = ft_split("   bonjou,   koman  nou ye   ", ' ');
+	test = ft_splitset("   bonjou,   koman  nou ye   ", " 	\t");
 	while (test[i])
 	{
 		printf("%d _%s_\n", i, test[i]);

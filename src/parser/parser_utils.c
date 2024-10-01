@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:40:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/30 12:44:24 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/01 13:48:22 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 #include <stdlib.h>
 #include "../../include/minirt.h"
 
-int error_parser(char *color, char *msg)
+void error_parser(char *color, char *msg)
 {
 	printf(RED"\n\tError\n");
 	printf("\t%s%s\n\n"NC, color, msg);
-  return (1);
 }
 
 void	free_split(char **split)
