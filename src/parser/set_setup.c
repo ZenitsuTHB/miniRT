@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   set_setup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:30:27 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/23 18:08:52 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:44:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libs/libft/libft.h"
-#include "../../headers/parser.h"
-#include "../../headers/macros.h"
+#include "../../include/minirt.h"
+
 
 t_ambient	*set_ambient(char *str, int *error)
 {

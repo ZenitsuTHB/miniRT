@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 21:16:09 by avolcy            #+#    #+#              #
-#    Updated: 2024/04/24 20:19:18 by avolcy           ###   ########.fr        #
+#    Updated: 2024/09/04 15:39:20 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRC_B = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 OBJ = $(SRC:.c=.o)
 OBJ_B = $(SRC_B:.c=.o)
 
-all : $(NAME) bonus
+all : $(NAME)
 #------------------------------------------------------------------------------
 #___$@ means the target which is in that case below $(NAME)___ \
 ___$< means the 1s dependency of a rule refer to the 1s item of the list of \
@@ -45,25 +45,28 @@ prerequisites or dependencies, below it represents $(OBJ) in %.o...= $(HEADER)\
 ---$^ is an automatic variable that means all the dependencies of a \
 target in a rule it can means all the objects files if were used below🙂
 #------------------------------------------------------------------------------
-$(NAME) : $(OBJ) $(HEADER)
-	$(BUILT_LIB) $@ $^
+$(NAME) : $(OBJ)
+	@printf "Dynamic lib Created\n"
+	@$(BUILT_LIB) $@ $^
 
-bonus : .bonus
-
-.bonus : $(OBJ_B) $(HEADER)
-	$(BUILT_LIB) $@ $^
+bonus : all $(OBJ_B)
+	@printf "bonus Dynamic lib Created\n"
+	@$(BUILT_LIB) $@
 	@touch .bonus
 
-%.o: %.c $(HEADER) 
-	$(CC) $(CFLAGS) -c $^ 
+%.o: %.c $(HEADER) Makefile
+	@clear
+	$(CC) $(CFLAGS) -c $<
+	@printf "libft is Compiling... !\r"
 
 .PHONY : clean fclean re all
 
 clean :
 	@$(RM) $(OBJ) $(OBJ_B) $(TMP)
+	@clear
 
 fclean : clean
-	@$(RM) $(NAME) .bonus
+	@$(RM) $(NAME) .bonus bonus
 
 re : fclean all
 

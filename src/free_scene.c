@@ -6,11 +6,11 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 17:46:40 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/09/28 12:42:15 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/01 13:26:22 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/struct.h"
+#include "../include/struct.h"
 #include <stdlib.h>
 #include <stdio.h>
 
