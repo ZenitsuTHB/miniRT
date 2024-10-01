@@ -14,10 +14,18 @@ LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBS    += $(LIBFT)/libft.a
 SRCSDIR := ./src
 
-SRCS	:= main.c vector_op.c mlx_use.c rendering.c camera.c vector_op1.c vector_op2.c intersect_sphere.c\
-			intersect_plane.c  init_hard_coded.c
+SRCS	:= main.c mlx_use.c  init_hard_coded.c
+
+HIT		:= intersect_plane.c intersect_sphere.c
+
+RENDER  := rendering.c camera.c
+
+VECTOR	:= vector_op.c vector_op1.c vector_op2.c
 
 OBJS	:= $(addprefix $(OBJS_DIR)/, ${SRCS:.c=.o})
+OBJS	+= $(addprefix $(OBJS_DIR)/render/, ${RENDER:.c=.o})
+OBJS	+= $(addprefix $(OBJS_DIR)/vector/, ${VECTOR:.c=.o})
+OBJS	+= $(addprefix $(OBJS_DIR)/intersections/, ${HIT:.c=.o})
 
 all: libmlx libft $(NAME)
 
@@ -52,6 +60,6 @@ fclean: clean
 	@rm -rf $(NAME) $(OBJS_DIR)
 	clear
 
-re: clean all
+re: fclean all
 
 .PHONY: all, clean, fclean, re, libmlx
