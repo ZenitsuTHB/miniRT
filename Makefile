@@ -14,7 +14,10 @@ LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBS    += $(LIBFT)/libft.a
 SRCSDIR := ./src
 
-SRCS	:= main.c mlx_use.c  init_hard_coded.c
+SRCS	:= main.c mlx_use.c  init_hard_coded.c print_scene.c free_scene.c 
+
+PARSER	:= create_setup.c  file.c  parser_utils.c  set_aux.c \
+		  set_data.c  set_objects.c  set_setup.c  set_utils.c
 
 HIT		:= intersect_plane.c intersect_sphere.c
 
@@ -25,6 +28,7 @@ VECTOR	:= vector_op.c vector_op1.c vector_op2.c
 OBJS	:= $(addprefix $(OBJS_DIR)/, ${SRCS:.c=.o})
 OBJS	+= $(addprefix $(OBJS_DIR)/render/, ${RENDER:.c=.o})
 OBJS	+= $(addprefix $(OBJS_DIR)/vector/, ${VECTOR:.c=.o})
+OBJS	+= $(addprefix $(OBJS_DIR)/parser/, ${PARSER:.c=.o})
 OBJS	+= $(addprefix $(OBJS_DIR)/intersections/, ${HIT:.c=.o})
 
 all: libmlx libft $(NAME)
