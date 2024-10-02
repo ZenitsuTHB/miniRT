@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/30 22:50:48 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/02 14:21:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	init_scene(t_scene *scene);
 		INPUT
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
+t_objects *set_objjj(t_scene *scene, int var);
 
 int			init_window(t_mlx *mlx);
 uint32_t	gradient_color(t_rgb color);

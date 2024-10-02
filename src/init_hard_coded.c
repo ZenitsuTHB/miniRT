@@ -13,6 +13,38 @@
 #include "minirt.h"
 #include <../libs/MLX42/include/MLX42/MLX42.h>
 
+t_sphere *init_sphere(t_vec3 center, t_rgb color, double radius)
+{
+  t_sphere *sp;
+
+  sp = malloc(sizeof(t_sphere));
+  if (!sp)
+    return (NULL);
+  printf("var  %lf %lf %lf \n", center.x, center.y, center.z);
+  sp->radius = radius;
+  sp->center = center;
+  sp->color = create_vec3(color.x, color.y, color.z);
+  return (sp);
+}
+
+t_objects *set_objjj(t_scene *scene, int type)
+{
+  t_objects *obj;
+
+
+  printf("hit obj = %p %p\n", scene->hit->object, scene->hit->object->next);
+  obj = scene->hit->object;
+  obj->shape = malloc(sizeof(t_shape));
+  if (type == SP)
+  {
+    obj->type = type;
+    obj->shape->sp = scene->spheres;
+  }
+  obj->next = NULL;
+  printf("hit obj = %p %p\n", scene->hit->object, scene->hit->object->next);
+  return (obj);
+}
+
 int	init_scene(t_scene *scene)
 {
 	ft_bzero(scene, sizeof(t_scene));
@@ -34,6 +66,13 @@ int	init_scene(t_scene *scene)
 	scene->ray = malloc(sizeof(t_ray));
 	if (!scene->ray)
 		return (error_message(RED, MALLOC_ERROR));
+		//INTERSECTIONS
+  scene->hit = malloc(sizeof(t_hit));
+  if (!scene->hit)
+    return (error_message(RED, MALLOC_ERROR));
+  scene->hit->t = INFINITY;
+  scene->hit->point = (t_vec3){0.0, 0.0, 0.0};
+  scene->hit->normal = (t_vec3){0.0, 0.0, 0.0};
    // PLANES
 	scene->planes = malloc(sizeof(t_plane));
 	if (!scene->planes)
@@ -41,33 +80,23 @@ int	init_scene(t_scene *scene)
 	scene->planes->origin = (t_vec3){0.0, 0.0, -10.0};
 	scene->planes->normal = (t_vec3){0.0, 1.0, 0.0};
 	scene->planes->color = create_vec3(0.2, 0.5, 0.3);
-	//SPHERE
-  scene->spheres = malloc(sizeof(t_sphere));
+  //SPHERE
+  scene->spheres = init_sphere((t_vec3){0.0, 0.0, 20.6}, (t_rgb){1.0, 0.0, 0.0}, 5.6);
   if (!scene->spheres)
     return(error_message(RED, MALLOC_ERROR));
-  scene->spheres->radius = 5.6; 	
-  scene->spheres->center = (t_vec3){0.0, 0.0, 20.6};
-  scene->spheres->color = create_vec3(1.0, 0.0, 0.0);
-	//INTERSECTIONS
-  scene->hit = malloc(sizeof(t_hit));
-  if (!scene->hit)
-    return (error_message(RED, MALLOC_ERROR));
-  scene->hit->t = INFINITY;
-  scene->hit->point = (t_vec3){0.0, 0.0, 0.0};
-  scene->hit->normal = (t_vec3){0.0, 0.0, 0.0};
-  //1ST
+  //OBJECT
   scene->hit->object = malloc(sizeof(t_objects));
+  scene->hit->object = set_objjj(scene, SP);
   if (!scene->hit->object)
-  	return(error_message(RED, MALLOC_ERROR));
-  scene->hit->object->obj = scene->spheres;
-  scene->hit->object->type = SP;
-  //2ND
-  scene->hit->object->next = malloc(sizeof(t_objects));
-  if (!scene->hit->object->next)
-  	return(error_message(RED, MALLOC_ERROR));
-  printf("the plane address is %p \n", scene->hit->object->next);
-  scene->hit->object->next->obj = scene->planes;
-  scene->hit->object->next->type = PL;
-  scene->hit->object->next->next = NULL;
+    return(error_message(RED, MALLOC_ERROR));
+  printf("scene->sphere = %p\n", scene->spheres);
+  printf("scene->spherehit = %p\n", scene->hit->object->shape->sp);
+  // scene->hit->object->next = malloc(sizeof(t_objects));
+  // scene->spheres = init_sphere((t_vec3){10.0, 0.0, 20.6}, (t_rgb){0.0, 2.0, 0.0}, 3.6);
+  // if (!scene->spheres)
+  //   return(error_message(RED, MALLOC_ERROR));
+  // scene->hit->object->next = set_objjj(scene, SP);
+  // if (!scene->hit->object)
+  //   return(error_message(RED, MALLOC_ERROR));
   return (0);
 }

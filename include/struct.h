@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/01 17:13:25 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/02 12:31:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,18 @@ typedef struct s_raytracing
 	double    img_pl_width;
   	double    img_pl_height;
 }           t_ray;
+typedef union u_shape
+{
+	t_cylinder			*cy;
+	t_plane				*pl;
+	t_sphere			*sp;
+	t_cone				*cn;
+}						t_shape;
 
 typedef struct s_objects
 {
 	int					type;
-	void				*obj;
+	t_shape				*shape;
 	struct s_objects	*next;
 }           t_objects;
 
@@ -144,13 +151,6 @@ typedef struct s_scene
 	// t_cylinder	*cylinders;
 }				t_scene;
 
-// typedef union u_objects
-// {
-// 	t_cylinder			*cy;
-// 	t_plane				*pl;
-// 	t_sphere			*sp;
-// 	t_cone				*cn;
-// }						t_objects;
 
 // typedef struct s_world
 // {
@@ -163,4 +163,4 @@ typedef struct s_scene
 // }                   t_world;
 // BONUS DATA
 
-#endif // !_STRUCT_H
+#endif
