@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:05:09 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/01 23:37:35 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/02 10:55:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include "../../include/minirt.h"
 #include <stdlib.h>
 
 void	*new_setup(int type)

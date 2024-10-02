@@ -6,14 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/01 23:40:22 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/02 10:58:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
-#include "../../libs/libft/libft.h"
-#include <fcntl.h>
-#include <unistd.h>
+#include "../../include/minirt.h"
 
 static int	delete_newline(char *line)
 {
@@ -26,16 +23,16 @@ static int	delete_newline(char *line)
 		line[len - 1] = '\0';
 	return (1);
 }
-
-static void	init_scene(t_scene *scene)
+int	init_scene(t_scene *scene)
 {
-	scene->ambient = NULL;
-	scene->camera = NULL;
-	scene->light = NULL;
+	//scene->ambient = NULL;
+	//scene->camera = NULL;
+	//scene->light = NULL;
 	scene->spheres = NULL;
 	scene->planes = NULL;
-	scene->cylinders = NULL;
-	scene->cones = NULL;
+	//scene->cylinders = NULL;
+	//scene->cones = NULL;
+	return (0);
 }
 
 static int	read_data(int fd, t_scene *scene)
@@ -52,12 +49,12 @@ static int	read_data(int fd, t_scene *scene)
 				return (free(line), 1);
 		free(line);
 	}
-	if (!scene->ambient)
-		return (error_parser(YEL, MSG_AMB), 1);
+	//if (!scene->ambient)
+	//	return (error_parser(YEL, MSG_AMB), 1);
 	if (!scene->camera)
 		return (error_parser(YEL, MSG_CAM), 1);
-	if (!scene->light)
-		return (error_parser(YEL, MSG_LIGHT), 1);
+	//if (!scene->light)
+	//	return (error_parser(YEL, MSG_LIGHT), 1);
 	return (0);
 }
 

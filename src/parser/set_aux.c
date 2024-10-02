@@ -6,12 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 12:16:52 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/01 23:40:48 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/02 11:01:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
-#include "../../libs/libft/libft.h"
+#include "../../include/minirt.h"
 
 int	set_color(char *str, t_rgb *rgb)
 {

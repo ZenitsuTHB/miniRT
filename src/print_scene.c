@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/01 23:36:40 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/02 10:45:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/struct.h"
+#include "../include/minirt.h"
 #include <stdio.h>
 
 static void	print_planes(t_plane *s)
@@ -25,9 +25,9 @@ static void	print_planes(t_plane *s)
 	while (s)
 	{
 		printf("Plano %d:\n\n", i);
-		printf("Pos x: %lf\n", s->pos.x);
-		printf("Pos y: %lf\n", s->pos.y);
-		printf("Pos z: %lf\n", s->pos.z);
+		printf("Pos x: %lf\n", s->origin.x);
+		printf("Pos y: %lf\n", s->origin.y);
+		printf("Pos z: %lf\n", s->origin.z);
 		printf("Normal x: %lf\n", s->normal.x);
 		printf("Normal y: %lf\n", s->normal.y);
 		printf("Normal z: %lf\n", s->normal.z);
@@ -52,9 +52,9 @@ static void	print_cylinders(t_cylinder *s)
 	while (s)
 	{
 		printf("Cylindro %d:\n\n", i);
-		printf("Pos x: %lf\n", s->pos.x);
-		printf("Pos y: %lf\n", s->pos.y);
-		printf("Pos z: %lf\n", s->pos.z);
+		printf("Pos x: %lf\n", s->origin.x);
+		printf("Pos y: %lf\n", s->origin.y);
+		printf("Pos z: %lf\n", s->origin.z);
 		printf("Normal x: %lf\n", s->normal.x);
 		printf("Normal y: %lf\n", s->normal.y);
 		printf("Normal z: %lf\n", s->normal.z);

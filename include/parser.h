@@ -6,14 +6,15 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:11:18 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/02 00:35:59 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/02 10:43:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "minirt.h"
+#include "struct.h"
+#include "minirt.h"
 
 int			set_data(t_scene *scene, char *str);
 

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/01 23:34:07 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/02 10:52:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ typedef struct s_sphere
 	t_vec3		pos;
 	t_vec3		center;   // 0.0, 0.0, 20.6
 	double 		radius; // 12.6
+	struct s_sphere	*next;
+	struct s_sphere	*prev;
+
 }				t_sphere;
 
 typedef struct s_plane
@@ -95,21 +98,21 @@ typedef struct s_plane
 
 typedef struct s_cylinder
 {
-	t_vec3            pos;
+	t_vec3            origin;
 	t_vec3            normal;// 0.0, 0.0, 1.0
-	double            diameter;// 14.2
+	double            radius;// 14.2
 	t_vec3            center;// 50.0, 0.0, 20.6
 	double            height;// 21.42
 	t_rgb             color;
-	struct s_cylinder *next;
 	struct s_cylinder *prev;
+	struct s_cylinder *next;
 }	t_cylinder;
 
 typedef struct s_cone
 {
 	t_vec3				pos;
 	t_vec3				normal;
-	double				diameter;
+	double				radius;
 	double				height;
 	t_rgb				  color;
 	struct s_cone *next;

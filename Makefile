@@ -9,12 +9,13 @@ INC = ./include/minirt.h
 INC += ./include/macros.h
 INC += ./include/struct.h
 INC += ./include/vector.h
+INC += ./include/parser.h
 HEADERS	:= -Iinclude -I$(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBS    += $(LIBFT)/libft.a
 SRCSDIR := ./src
 
-SRCS	:= main.c mlx_use.c  init_hard_coded.c print_scene.c free_scene.c 
+SRCS	:= main.c mlx_use.c  init_hard_coded.c 
 
 PARSER	:= create_setup.c  file.c  parser_utils.c  set_aux.c \
 		  set_data.c  set_objects.c  set_setup.c  set_utils.c

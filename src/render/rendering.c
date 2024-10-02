@@ -71,14 +71,14 @@ bool hit_objects(t_scene *scene, t_hit *hit, t_rgb *color)
     			return(true);
   			}
 		}
-		else if (obj->type == PL)
-		{
-			if (hit_plane(scene->ray, scene->planes, &hit->t))
-			{
-				*color = scene->planes->color;
-				return (true);
-			}
-		}
+		// else if (obj->type == PL)
+		// {
+		// 	if (hit_plane(scene->ray, scene->planes, &hit->t))
+		// 	{
+		// 		*color = scene->planes->color;
+		// 		return (true);
+		// 	}
+		// }
 		obj = obj->next;
 	}
   return (false);
