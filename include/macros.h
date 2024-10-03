@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:15:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/01 23:30:23 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/03 12:50:19 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,13 @@
 # define WHT "\001\033[0;97m\002"
 # define YEL "\001\033[0;33m\002"
 
-# define SP 1
-# define PL 2
+typedef enum e_type
+{
+	SP = 1,
+	PL,
+	CY,
+	CO
+} t_type;
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846

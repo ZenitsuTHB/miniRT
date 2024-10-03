@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:43:46 by avolcy            #+#    #+#             */
-/*   Updated: 2024/06/11 17:09:41 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/03 14:39:56 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char		*ft_strdup(const char *s1);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);
 char		**ft_split(char const *s, char c);
+char		**ft_splitset(char const *s, char *set);
 char		*ft_strjoin2(char **storage, char *buffer);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);

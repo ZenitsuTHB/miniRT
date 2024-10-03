@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/02 10:58:55 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/03 14:32:49 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,12 @@ static int	delete_newline(char *line)
 		line[len - 1] = '\0';
 	return (1);
 }
-int	init_scene(t_scene *scene)
+static int	init_scene_null(t_scene *scene)
 {
-	//scene->ambient = NULL;
-	//scene->camera = NULL;
-	//scene->light = NULL;
-	scene->spheres = NULL;
-	scene->planes = NULL;
-	//scene->cylinders = NULL;
-	//scene->cones = NULL;
+	scene->light = NULL;
+	scene->camera = NULL;
+	scene->ambient = NULL;
+	scene->obj = NULL;
 	return (0);
 }
 
@@ -76,7 +73,7 @@ int	read_file(int ac, char *file, t_scene *scene)
 {
 	int		fd;
 
-	init_scene(scene);
+	init_scene_null(scene);
 	if (ac < 2)
 		return (error_parser(YEL, MSG_FEW), 1);
 	else if (ac > 2)
