@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:43:46 by avolcy            #+#    #+#             */
-/*   Updated: 2024/06/11 17:09:41 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/04 21:56:26 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ int			ft_lstsize(t_list *lst);
 t_list		*ft_lstlast(t_list *lst);
 t_list		*ft_lstnew(void *content);
 void		*ft_clean_up(char **alloc_mem);
-void		ft_lstadd_back(t_list **lst, t_list *new);
-void		ft_lstadd_front(t_list **lst, t_list *new);
+void		ft_lstadd_back(void *lst, void *new);
+void		ft_lstadd_front(void *lst, void *new);
 void		ft_lstiter(t_list *lst, void (*f)(void *));
 void		ft_lstdelone(t_list *lst, void (*del)(void *));
-void		ft_lstclear(t_list **lst, void (*del)(void *));
+void		lst_for_each(void *list, void (*func)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 #endif
