@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:25:21 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/23 13:02:07 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/04 22:39:41 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,15 @@
 # define VECTOR_H
 
 # include <math.h>
-
-typedef struct s_vector
-{
-	double				x;
-	double				y;
-	double				z;
-
-}						t_vec3;
-
-// typedef struct  s_vector t_vec;
-typedef struct s_vector	t_point;
-typedef struct s_vector	t_rgb;
+# include "struct.h"
 
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓
 	VECTOR FUNCTIONS
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
-double					deg_to_rad(double degree);
 
+double					deg_to_rad(double degree);
 t_vec3					cross_product(const t_vec3 *v1, const t_vec3 *v2);
 t_vec3					unit_vec3(t_vec3 v);
 t_vec3					create_vec3(double x, double y, double z);

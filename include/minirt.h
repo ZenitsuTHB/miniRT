@@ -6,21 +6,21 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/02 14:21:52 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/04 22:45:34 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "../libs/libft/libft.h"
-# include "macros.h"
-# include "struct.h"
-# include "vector.h"
-# include <../libs/MLX42/include/MLX42/MLX42.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "macros.h"
+# include "struct.h"
+# include "vector.h"
+# include "../libs/libft/libft.h"
+# include <../libs/MLX42/include/MLX42/MLX42.h>
 
 int	init_scene(t_scene *scene);
 
@@ -29,7 +29,7 @@ int	init_scene(t_scene *scene);
 		INPUT
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
-t_objects *set_objjj(t_scene *scene, int var);
+t_obj *set_objjj(t_scene *scene, int var);
 
 int			init_window(t_mlx *mlx);
 uint32_t	gradient_color(t_rgb color);
