@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/02 16:34:44 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/03 18:22:58 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ int	render_object(t_scene *scene)
 	bool hit;
 	t_mlx	*mlx;
 	t_rgb	color;
-  
   init_ray(scene->camera, scene->ray);
+  return (0);
 	if (setting_camera(scene->camera))
 		return (error_message(YEL, "Failed to setting up camera."));
   if (init_window(scene->mlx))
