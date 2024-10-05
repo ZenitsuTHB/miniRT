@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/05 11:53:25 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/05 12:08:54 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int argc, char *argv[])
 	mlx_loop(scene.mlx->con);
 	mlx_terminate(scene.mlx->con);
 	*/
+	print_scene(scene);
 	free_scene(&scene);
 	return (EXIT_SUCCESS);
 }

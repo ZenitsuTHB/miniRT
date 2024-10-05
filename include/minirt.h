@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/01 23:31:49 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/05 12:08:46 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,7 @@ void		manage_escape(mlx_key_data_t keydata, void *param);
 
 void   free_scene(t_scene *scene);
 int read_file(int ac, char *file, t_scene *scene);
+
+void	print_scene(t_scene scene);
 
 #endif
