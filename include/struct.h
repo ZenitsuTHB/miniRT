@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/03 14:37:49 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/05 12:04:07 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define STRUCT_H
 
 #include <math.h>
-#include "minirt.h"
 #include <../libs/MLX42/include/MLX42/MLX42.h>
 
 /*
@@ -166,4 +165,4 @@ typedef struct s_scene
 // }                   t_world;
 // BONUS DATA
 
-#endif // !_STRUCT_H
+#endif

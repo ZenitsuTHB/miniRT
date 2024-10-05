@@ -6,79 +6,32 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 17:46:40 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/01 23:35:06 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/05 11:58:22 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/struct.h"
 #include <stdlib.h>
-#include <stdio.h>
 
-void	free_spheres(t_sphere *obj)
+void	free_objects(t_obj *obj)
 {
-	void		*next;
+	void	*next;
 
+	if (!obj)
+		return ;
 	while (obj->prev)
 		obj = obj->prev;
 	while (obj)
 	{
 		next = obj->next;
-		free(obj);
-		obj = next;
-	}
-}
-
-void	free_planes(t_plane *obj)
-{
-	void		*next;
-
-	while (obj->prev)
-		obj = obj->prev;
-	while (obj)
-	{
-		next = obj->next;
-		free(obj);
-		obj = next;
-	}
-}
-
-void	free_cylinders(t_cylinder *obj)
-{
-	void		*next;
-
-	while (obj->prev)
-		obj = obj->prev;
-	while (obj)
-	{
-		next = obj->next;
-		free(obj);
-		obj = next;
-	}
-}
-
-void	free_cones(t_cone *obj)
-{
-	void		*next;
-
-	while (obj->prev)
-		obj = obj->prev;
-	while (obj)
-	{
-		next = obj->next;
-		free(obj);
-		obj = next;
-	}
-}
-
-void	free_lights(t_light *obj)
-{
-	void		*next;
-
-	while (obj->prev)
-		obj = obj->prev;
-	while (obj)
-	{
-		next = obj->next;
+		if (obj->shape.sp)
+			free(obj->shape.sp);
+		if (obj->shape.pl)
+			free(obj->shape.pl);
+		if (obj->shape.cy)
+			free(obj->shape.cy);
+		if (obj->shape.co)
+			free(obj->shape.co);
 		free(obj);
 		obj = next;
 	}
@@ -93,13 +46,6 @@ void	free_scene(t_scene *scene)
 	if (scene->camera)
 		free(scene->camera);
 	if (scene->light)
-		free_lights(scene->light);
-	if (scene->spheres)
-		free_spheres(scene->spheres);
-	if (scene->planes)
-		free_planes(scene->planes);
-	if (scene->cylinders)
-		free_cylinders(scene->cylinders);
-	if (scene->cones)
-		free_cones(scene->cones);
+		free(scene->light);
+	free_objects(scene->obj);
 }
