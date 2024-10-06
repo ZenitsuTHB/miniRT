@@ -32,6 +32,21 @@ typedef struct s_rgb
 	uint32_t	gradient;
 }	t_rgb;
 
+typedef struct s_vector
+{
+	double				x;
+	double				y;
+	double				z;
+}	t_vec3;
+
+typedef struct s_rgb
+{
+	int			red;
+	int			green;
+	int			blue;
+	uint32_t	gradient;
+}	t_rgb;
+
 typedef struct s_mlx
 {
 	int         x;

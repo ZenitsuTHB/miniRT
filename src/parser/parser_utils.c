@@ -6,15 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:40:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/01 13:48:22 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/03 13:39:01 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "../../include/minirt.h"
 
-void error_parser(char *color, char *msg)
+void	error_parser(char *color, char *msg)
 {
 	printf(RED"\n\tError\n");
 	printf("\t%s%s\n\n"NC, color, msg);

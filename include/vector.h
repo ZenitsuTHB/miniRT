@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:25:21 by avolcy            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/10/04 22:39:41 by avolcy           ###   ########.fr       */
+=======
+/*   Updated: 2024/10/05 12:04:14 by adrmarqu         ###   ########.fr       */
+>>>>>>> parser
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +19,12 @@
 
 # include <math.h>
 # include "struct.h"
+<<<<<<< HEAD
+=======
+
+// typedef struct  s_vector t_vec;
+typedef struct s_vector	t_point;
+>>>>>>> parser
 
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓

@@ -43,12 +43,20 @@ bool hit_plane(t_ray *ray, t_plane *plane, double *t);
 
 
 int			error_message(char *color, char *msg);
-int			check_args(int argc, char *argv);
+int			read_file(int ac, char *file, t_scene *scene);
+void		draw_scene(t_scene *scene);
 
 void		manage_escape(mlx_key_data_t keydata, void *param);
+
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓
+    PARSER
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
+
+void   free_scene(t_scene *scene);
+int read_file(int ac, char *file, t_scene *scene);
+
+void	print_scene(t_scene scene);
 
 #endif

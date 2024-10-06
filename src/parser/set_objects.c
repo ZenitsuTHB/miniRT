@@ -6,112 +6,64 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:34:09 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/01 14:45:20 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/05 12:22:16 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 
-void	add_sphere(t_sphere **sphere, char *str, int *error)
+static t_obj	*get_new_obj(t_obj *prev, int id)
 {
-	t_sphere	*obj;
-	char		**split;
-	char		*err;
+	t_obj	*obj;
 
-	obj = new_sphere(*sphere);
+	obj = malloc(sizeof(t_obj));
 	if (!obj)
-		return ;
-	split = ft_splitset(str, " \t");
-	if (!split)
-		return ;
-	if (set_pos(split[1], &obj->pos))
-		return (free_split(split));
-	obj->radius = ft_strtod(split[2], &err) / 2;
-	if (*err)
-		return (free_split(split));
-	if (set_color(split[3], &obj->color))
-		return (free_split(split));
-	free_split(split);
-	*error = 0;
-	*sphere = obj;
+		return (error_parser(YEL, MSG_MEM), NULL);
+	obj->id = id;
+	obj->next = NULL;
+	if (!prev)
+		obj->prev = NULL;
+	else
+	{
+		obj->prev = prev;
+		prev->next = obj;
+	}
+	return (obj);
 }
 
-void	add_plane(t_plane **plane, char *str, int *error)
+static int	add_object(t_obj **obj, int id, char *data)
 {
-	t_plane		*obj;
-	char		**split;
+	int		error;
+	t_obj	*new;
 
-	obj = new_plane(*plane);
-	if (!obj)
-		return ;
-	split = ft_splitset(str, " \t");
-	if (!split)
-		return ;
-	if (set_pos(split[1], &obj->pos))
-		return (free_split(split));
-	if (set_normal(split[2], &obj->normal))
-		return (free_split(split));
-	if (set_color(split[3], &obj->color))
-		return (free_split(split));
-	free_split(split);
-	*error = 0;
-	*plane = obj;
+	error = 1;
+	new = get_new_obj(*obj, id);
+	if (!new)
+		return (1);
+	new->shape.sp = get_sphere(id, data, &error);
+	new->shape.pl = get_plane(id, data, &error);
+	new->shape.cy = get_cylinder(id, data, &error);
+	new->shape.co = get_cone(id, data, &error);
+	*obj = new;
+	return (error);
 }
 
-void	add_cylinder(t_cylinder **cyl, char *str, int *error)
+void	set_object(t_scene *scene, char *id, char *data, int *error)
 {
-	t_cylinder	*obj;
-	char		**split;
-	char		*err;
+	int	status;
 
-	obj = new_cylinder(*cyl);
-	if (!obj)
+	if (!ft_strncmp(id, "sp", 3))
+		status = add_object(&(scene->obj), SP, data);
+	else if (!ft_strncmp(id, "pl", 3))
+		status = add_object(&(scene->obj), PL, data);
+	else if (!ft_strncmp(id, "cy", 3))
+		status = add_object(&(scene->obj), CY, data);
+	else if (!ft_strncmp(id, "co", 3))
+		status = add_object(&(scene->obj), CO, data);
+	else
+	{
+		printf(RED"\n\tError\n" YEL "\t%s%s\n\n" NC, MSG_OBJ, id);
 		return ;
-	split = ft_splitset(str, " \t");
-	if (!split)
-		return ;
-	if (set_pos(split[1], &obj->pos))
-		return (free_split(split));
-	if (set_normal(split[2], &obj->normal))
-		return (free_split(split));
-	obj->radius = ft_strtod(split[3], &err) / 2;
-	if (*err)
-		return (free_split(split));
-	obj->height = ft_strtod(split[4], &err);
-	if (*err)
-		return (free_split(split));
-	if (set_color(split[5], &obj->color))
-		return (free_split(split));
-	free_split(split);
-	*error = 0;
-	*cyl = obj;
-}
-
-void	add_cone(t_cone **cone, char *str, int *error)
-{
-	t_cone		*obj;
-	char		**split;
-	char		*err;
-
-	obj = new_cone(*cone);
-	if (!obj)
-		return ;
-	split = ft_splitset(str, " \t");
-	if (!split)
-		return ;
-	if (set_pos(split[1], &obj->pos))
-		return (free_split(split));
-	if (set_normal(split[2], &obj->normal))
-		return (free_split(split));
-	obj->radius = ft_strtod(split[3], &err) / 2;
-	if (*err)
-		return (free_split(split));
-	obj->height = ft_strtod(split[4], &err);
-	if (*err)
-		return (free_split(split));
-	if (set_color(split[5], &obj->color))
-		return (free_split(split));
-	free_split(split);
-	*error = 0;
-	*cone = obj;
+	}
+	*error = status;
 }

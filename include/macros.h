@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:15:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/30 22:23:10 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/03 12:50:19 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,23 @@
 # define WHT "\001\033[0;97m\002"
 # define YEL "\001\033[0;33m\002"
 
-# define SP 1
-# define PL 2
+typedef enum e_type
+{
+	SP = 1,
+	PL,
+	CY,
+	CO
+} t_type;
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define WIDTH 1000
+# define WIDTH 1400
 # define HEIGHT 1000
-# define IMG_W 1000 // WIDTH
+# define IMG_W 1000 //WIDTH
 # define IMG_H 1000 // HEIGHT
-# define ERROR_ARG "Bad number of arguments detected !"
-# define ERROR_EXTENSION "Bad file extension !"
-# define ERROR_WIND "Can't initialize Window !"
-# define MALLOC_ERROR "Allocation Failed !!!"
-# define RENDER_ERROR "Failed to Render_Image"
+
 # define MSG_FEW "Too few arguments!"
 # define MSG_TOO "Too many arguments!"
 # define MSG_EXT "Bad file extension!"
@@ -55,5 +56,10 @@
 # define MSG_TLIGHT "You have more than one light!"
 # define MSG_NUM "Wrong number of elements in an object!"
 # define MSG_DATA "Wrong data in the element!"
+# define ERROR_WIND "Can't initialize Window !"
+# define ERROR_ARG "Bad number of arguments detected !"
+# define ERROR_EXTENSION "Bad file extension !"
+#define MALLOC_ERROR "Allocation Failed !!!"
+#define RENDER_ERROR "Failed to Render_Image"
 
 #endif

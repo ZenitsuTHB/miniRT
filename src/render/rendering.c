@@ -6,7 +6,11 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/10/04 23:13:56 by avolcy           ###   ########.fr       */
+=======
+/*   Updated: 2024/10/01 23:43:16 by marvin           ###   ########.fr       */
+>>>>>>> parser
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +58,7 @@
 //   mlx_put_pixel(img, x, y, final_color);
 // }
 
+<<<<<<< HEAD
 // bool hit_objects(t_scene *scene, t_hit *hit, t_rgb *color)
 // {
 // 	t_objects *obj;
@@ -83,6 +88,37 @@
 // 	}
 //   return (false);
 // }
+=======
+bool hit_objects(t_scene *scene, t_hit *hit, t_rgb *color)
+{
+	t_objects *obj;
+	t_sphere	*sp;
+	
+	obj = hit->object;
+	sp = scene->spheres;
+	while (obj)
+	{
+		if(obj->type == SP)
+		{
+			if(hit_sphere(scene->ray, sp, &hit->t))
+			{
+				*color = sp->color;
+    			return(true);
+  			}
+		}
+		// else if (obj->type == PL)
+		// {
+		// 	if (hit_plane(scene->ray, scene->planes, &hit->t))
+		// 	{
+		// 		*color = scene->planes->color;
+		// 		return (true);
+		// 	}
+		// }
+		obj = obj->next;
+	}
+  return (false);
+}
+>>>>>>> parser
 
 // void  init_ray(t_camera *camera, t_ray *ray)
 // {
