@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:15:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/03 12:50:19 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/07 19:56:38 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ typedef enum e_type
 # endif
 
 # define WIDTH 1400
-# define HEIGHT 1000
-# define IMG_W 1000 //WIDTH
-# define IMG_H 1000 // HEIGHT
+# define HEIGHT 1600
+# define IMG_W 1400 //WIDTH
+# define IMG_H 1600 // HEIGHT
 
 # define MSG_FEW "Too few arguments!"
 # define MSG_TOO "Too many arguments!"

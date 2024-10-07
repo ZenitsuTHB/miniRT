@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/01 23:43:16 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/07 20:00:46 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	render_object(t_scene *scene)
 		mlx->y = 0;
 		while (mlx->y < HEIGHT)
 		{
-      mlx_put_pixel(mlx->img, mlx->x, mlx->y, 0x0);
+      		mlx_put_pixel(mlx->img, mlx->x, mlx->y, 0xFFff);
 			mlx->y++;
 		}
 		mlx->x++;
