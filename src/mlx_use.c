@@ -10,8 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/struct.h"
 #include "../include/minirt.h"
 #include <../libs/MLX42/include/MLX42/MLX42.h>
+
+int	init_mlx(t_scene *scene)
+{
+	ft_bzero(scene, sizeof(t_scene));
+	scene->mlx = malloc(sizeof(t_mlx));
+	if (!scene->mlx)
+		return (error_message(RED, MALLOC_ERROR));
+  return (0);
+}
 
 int	init_window(t_mlx *mlx)
 {
@@ -27,8 +37,11 @@ int	init_window(t_mlx *mlx)
 void	manage_escape(mlx_key_data_t keydata, void *param)
 {
 	t_mlx	*mlx;
+  t_scene *scene;
 
-	mlx = (t_mlx *)param;
+  scene = (t_scene *)param;
+
+	mlx = scene->mlx;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
 		printf("Escape key pressed. Exiting...\n");

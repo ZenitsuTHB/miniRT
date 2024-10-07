@@ -15,7 +15,7 @@ LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBS    += $(LIBFT)/libft.a
 SRCSDIR := ./src
 
-SRCS	:= main.c free_scene.c print_scene.c mlx_use.c  init_hard_coded.c 
+SRCS	:= main.c free_scene.c print_scene.c mlx_use.c
 
 PARSER	:= file.c parser_utils.c set_data.c set_setup.c \
 		   get_objects.c set_aux.c set_objects.c set_utils.c

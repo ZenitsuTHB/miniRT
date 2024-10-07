@@ -98,6 +98,7 @@ int	render_object(t_scene *scene)
 	//  init_ray(scene->camera, scene->ray);
 	// if (setting_camera(scene->camera))
 	// 	return (error_message(YEL, "Failed to setting up camera."));
+  printf("this is mlx %p\n", scene->mlx);
   if (init_window(scene->mlx))
 		return (error_message(YEL, ERROR_WIND));
 	mlx = scene->mlx;
@@ -107,7 +108,7 @@ int	render_object(t_scene *scene)
 		mlx->y = 0;
 		while (mlx->y < HEIGHT)
 		{
-      mlx_put_pixel(mlx->img, mlx->x, mlx->y, 0xFFff);
+      mlx_put_pixel(mlx->img, mlx->x, mlx->y, 0x0);
 			mlx->y++;
 		}
 		mlx->x++;

@@ -23,7 +23,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-int	init_scene(t_scene *scene);
+int	init_mlx(t_scene *scene);
 
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓

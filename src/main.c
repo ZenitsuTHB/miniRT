@@ -22,22 +22,21 @@ int error_message(char *color, char *msg)
 
 int	main(int argc, char *argv[])
 {
-  (void)argc;
-  (void)argv;
 	t_scene scene;
 
-	// if (read_file(argc, argv[1], &scene))
-	// 	return (EXIT_FAILURE);
+	if (read_file(argc, argv[1], &scene))
+		return (EXIT_FAILURE);
 		
 		//return (free_scene(&scene), EXIT_FAILURE);
 	
 	
+	print_scene(scene);
+  init_mlx(&scene);
 	if (render_object(&scene))
 		return (error_message(YEL, RENDER_ERROR));
-	mlx_key_hook(scene.mlx->con, &manage_escape, scene.mlx);
+	mlx_key_hook(scene.mlx->con, &manage_escape, &scene);
+	free_scene(&scene);
 	mlx_loop(scene.mlx->con);
 	mlx_terminate(scene.mlx->con);
-	// print_scene(scene);
-	// free_scene(&scene);
 	return (EXIT_SUCCESS);
 }
