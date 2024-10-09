@@ -6,7 +6,7 @@
 /*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:01:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/13 20:21:52 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/09 00:51:38 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	init_mlx(t_scene *scene)
 
 int	init_window(t_mlx *mlx)
 {
-	mlx->con = mlx_init(HEIGHT, WIDTH, "miniRT", false);
+	mlx->con = mlx_init(WIDTH, HEIGHT, "miniRT", false);
 	if (mlx->con == NULL)
 		return (1);
 	mlx->img = mlx_new_image(mlx->con, WIDTH, HEIGHT);
