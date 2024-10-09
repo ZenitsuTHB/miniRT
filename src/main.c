@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/05 12:08:54 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/09 09:59:29 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int error_message(char *color, char *msg)
 	return (1);
 }
 
+
 int	main(int argc, char *argv[])
 {
 	t_scene scene;
@@ -30,8 +31,8 @@ int	main(int argc, char *argv[])
 		//return (free_scene(&scene), EXIT_FAILURE);
 	
 	
+  	init_mlx(&scene);
 	print_scene(scene);
-  init_mlx(&scene);
 	if (render_object(&scene))
 		return (error_message(YEL, RENDER_ERROR));
 	mlx_key_hook(scene.mlx->con, &manage_escape, &scene);

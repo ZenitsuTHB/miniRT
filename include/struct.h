@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/05 12:04:07 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:47:27 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_ambient
 
 typedef struct s_camera
 {
-	t_vec3		pos;
+	t_vec3		origin;
 	t_vec3		normal;
 	int			fov;
 	// Render
@@ -124,22 +124,13 @@ typedef struct s_obj
 	struct s_obj	*prev;
 }	t_obj;
 
-typedef struct s_raytracing
+typedef struct s_ray
 {
-	double		ratio;
-	t_vec3		origin;
-	t_vec3		direction;
-	double    img_pl_width;
-  	double    img_pl_height;
-}           t_ray;
-
-typedef struct s_hit
-{
-	double t;      // Distance from the ray's origin to the intersection point
-	t_vec3 point;  // Intersection point
+	double distance;
+	t_vec3 hit_point;
 	t_vec3 normal; // Normal vector at the intersection point
-	t_obj *object;//Pointer to the intersected object
-}				t_hit;
+	t_obj *object;
+}				t_ray;
 
 typedef struct s_scene
 {
@@ -151,7 +142,6 @@ typedef struct s_scene
 	t_obj		*obj;
 	// Render
 	t_ray		*ray;
-	t_hit		*hit;
 }				t_scene;
 
 // typedef struct s_world

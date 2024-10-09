@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_setup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:30:27 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/03 13:27:31 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:49:14 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void set_camera(t_scene *scene, char *data, int *error)
 		return (error_parser(YEL, MSG_MEM));
 	if (ft_splitlen(split) != 4)
 		return (free_split(split), error_parser(YEL, MSG_NUM));
-	if (set_pos(split[1], &cam->pos))
+	if (set_pos(split[1], &cam->origin))
 		return (free_split(split));
 	if (set_normal(split[2], &cam->normal))
 		return (free_split(split));

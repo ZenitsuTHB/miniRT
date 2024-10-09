@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:15:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/07 19:56:38 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/09 10:00:38 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ typedef enum e_type
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define WIDTH 1400
-# define HEIGHT 1600
-# define IMG_W 1400 //WIDTH
-# define IMG_H 1600 // HEIGHT
+# define WIDTH 1500
+# define HEIGHT 1200
+# define IMG_W 1500 //WIDTH
+# define IMG_H 1200 // HEIGHT
 
 # define MSG_FEW "Too few arguments!"
 # define MSG_TOO "Too many arguments!"

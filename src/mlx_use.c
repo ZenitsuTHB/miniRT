@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_use.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:01:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/09 00:51:38 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/09 09:35:51 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 int	init_mlx(t_scene *scene)
 {
-	ft_bzero(scene, sizeof(t_scene));
 	scene->mlx = malloc(sizeof(t_mlx));
 	if (!scene->mlx)
 		return (error_message(RED, MALLOC_ERROR));

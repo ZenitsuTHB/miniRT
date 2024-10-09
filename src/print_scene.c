@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   print_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/05 12:22:44 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:47:52 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
 #include <stdio.h>
 
-static void	print_planes(t_plane *s)
+/* static void	print_planes(t_plane *s)
 {
 	static int	i = 1;
 
@@ -76,7 +76,7 @@ static void	print_cones(t_cone *s)
 	printf("\n");
 	i++;
 }
-
+ */
 static void	print_spheres(t_sphere *s)
 {
 	static int	i = 1;
@@ -99,27 +99,27 @@ void	print_scene(t_scene scene)
 {
 	t_obj	*obj;
 
-	printf("Ambient(A): \n\n");
+	/* printf("Ambient(A): \n\n");
 	printf("Ratio: %lf\n", scene.ambient->bright);
 	printf("Color red: %d\n", scene.ambient->color.red);
 	printf("Color blue: %d\n", scene.ambient->color.blue);
-	printf("Color green: %d\n\n", scene.ambient->color.green);
+	printf("Color green: %d\n\n", scene.ambient->color.green); */
 	printf("Camera(C): \n\n");
-	printf("Pos x: %lf\n", scene.camera->pos.x);
-	printf("Pos y: %lf\n", scene.camera->pos.y);
-	printf("Pos z: %lf\n", scene.camera->pos.z);
+	printf("Pos x: %lf\n", scene.camera->origin.x);
+	printf("Pos y: %lf\n", scene.camera->origin.y);
+	printf("Pos z: %lf\n", scene.camera->origin.z);
 	printf("Normal x: %lf\n", scene.camera->normal.x);
 	printf("Normal y: %lf\n", scene.camera->normal.y);
 	printf("Normal z: %lf\n", scene.camera->normal.z);
 	printf("Fov: %d\n\n", scene.camera->fov);
-	printf("Light(L): \n\n");
+	/* printf("Light(L): \n\n");
 	printf("Pos x: %lf\n", scene.light->pos.x);
 	printf("Pos y: %lf\n", scene.light->pos.y);
 	printf("Pos z: %lf\n", scene.light->pos.z);
 	printf("Bright: %lf\n", scene.light->bright);
 	printf("Color red: %d\n", scene.light->color.red);
 	printf("Color blue: %d\n", scene.light->color.blue);
-	printf("Color green: %d\n\n", scene.light->color.green);
+	printf("Color green: %d\n\n", scene.light->color.green); */
 	obj = scene.obj;
 	if (!obj)
 		return ;
@@ -129,12 +129,12 @@ void	print_scene(t_scene scene)
 	{
 		if (obj->shape.sp)
 			print_spheres(obj->shape.sp);
-		else if (obj->shape.pl)
+		/* else if (obj->shape.pl)
 			print_planes(obj->shape.pl);
 		else if (obj->shape.cy)
 			print_cylinders(obj->shape.cy);
 		else if (obj->shape.co)
-			print_cones(obj->shape.co);
+			print_cones(obj->shape.co); */
 		obj = obj->next;
 	}
 }
