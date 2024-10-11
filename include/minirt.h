@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/05 12:08:46 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/11 22:25:59 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ uint32_t	gradient_color(t_rgb color);
 
 // RENDER
 int			render_object(t_scene *scene);
-int			setting_camera(t_camera *camera);
+int			setting_up_camera(t_camera *camera);
 void		generate_ray(t_camera *camera, t_ray *ray, int i, int j);
 bool	hit_sphere(t_ray *ray, t_sphere *sp, double *t);
 bool hit_plane(t_ray *ray, t_plane *plane, double *t);
