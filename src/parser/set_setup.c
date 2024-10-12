@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:30:27 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/12 02:29:56 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/12 23:19:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,20 @@ void	set_ambient(t_scene *scene, char *data, int *error)
 	*error = 0;
 }
 
-void set_camera(t_scene *scene, char *data, int *error)
+static void	init_other_variable(t_camera **cam)
+{
+	(*cam)->focal_len = 1.0;
+	(*cam)->ratio = (double)WIDTH / (double)HEIGHT;
+	(*cam)->vp_width = 0.0;
+	(*cam)->vp_height = 0.0;
+	(*cam)->up = (t_vec3){0.0, 0.0, 0.0};
+	(*cam)->right = (t_vec3){0.0, 0.0, 0.0};
+	(*cam)->neg_dir = (t_vec3){0.0, 0.0, 0.0};
+	(*cam)->vertical = (t_vec3){0.0, 0.0, 0.0};
+	(*cam)->horizontal = (t_vec3){0.0, 0.0, 0.0};
+	(*cam)->l_l_corner = (t_vec3){0.0, 0.0, 0.0};
+}
+void	set_camera(t_scene *scene, char *data, int *error)
 {
 	t_camera	*cam;
 	char		**split;
@@ -59,6 +72,7 @@ void set_camera(t_scene *scene, char *data, int *error)
 	if (err || cam->fov < 0 || cam->fov > 180)
 		return (free_split(split), error_parser(YEL, MSG_DATA));
 	free_split(split);
+	init_other_variable(&cam);
 	scene->camera = cam;
 	*error = 0;
 }
