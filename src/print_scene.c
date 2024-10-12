@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/09 18:47:52 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/12 02:28:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,9 @@ void	print_scene(t_scene scene)
 	printf("Pos x: %lf\n", scene.camera->origin.x);
 	printf("Pos y: %lf\n", scene.camera->origin.y);
 	printf("Pos z: %lf\n", scene.camera->origin.z);
-	printf("Normal x: %lf\n", scene.camera->normal.x);
-	printf("Normal y: %lf\n", scene.camera->normal.y);
-	printf("Normal z: %lf\n", scene.camera->normal.z);
+	printf("cam_dir x: %lf\n", scene.camera->cam_dir.x);
+	printf("cam_dir y: %lf\n", scene.camera->cam_dir.y);
+	printf("cam_dir z: %lf\n", scene.camera->cam_dir.z);
 	printf("Fov: %d\n\n", scene.camera->fov);
 	/* printf("Light(L): \n\n");
 	printf("Pos x: %lf\n", scene.light->pos.x);

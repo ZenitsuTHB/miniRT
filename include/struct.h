@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/11 22:34:25 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/12 02:31:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,19 @@ typedef struct s_ambient
 
 typedef struct s_camera
 {
-	t_vec3		origin;
-	t_vec3		normal;
 	int			fov;
-	// Render
+	t_vec3		origin;
+	t_vec3		cam_dir;
+	double		ratio;
 	double		focal_len;
 	double		vp_width;
 	double		vp_height;
-	double		ratio;
-	t_vec3		horizontal;
-	t_vec3		vertical;
 	t_vec3		up;
-	t_vec3		l_l_corner;
 	t_vec3		right;
 	t_vec3		neg_dir;
-	t_vec3		cam_dir;
+	t_vec3		vertical;
+	t_vec3		horizontal;
+	t_vec3		l_l_corner;
 }				t_camera;
 
 typedef struct s_light

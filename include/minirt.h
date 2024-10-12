@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/11 22:25:59 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/12 13:07:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int			setting_up_camera(t_camera *camera);
 void		generate_ray(t_camera *camera, t_ray *ray, int i, int j);
 bool	hit_sphere(t_ray *ray, t_sphere *sp, double *t);
 bool hit_plane(t_ray *ray, t_plane *plane, double *t);
+t_vec3	get_pixel_direction(t_camera *cam, int pixel_x, int pixel_y);
+
 
 
 int			error_message(char *color, char *msg);

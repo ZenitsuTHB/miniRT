@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:15:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/09 10:00:38 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/12 12:55:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ typedef enum e_type
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
+
+# define x_coord 0
+# define y_coord 1
 
 # define WIDTH 1500
 # define HEIGHT 1200
