@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/12 02:28:39 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/14 23:13:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ static void	print_spheres(t_sphere *s)
 	if (!s)
 		return ;
 	printf("Esfera %d:\n\n", i);
-	printf("Pos x: %lf\n", s->pos.x);
-	printf("Pos y: %lf\n", s->pos.y);
-	printf("Pos z: %lf\n", s->pos.z);
+	printf("Pos x: %lf\n", s->center.x);
+	printf("Pos y: %lf\n", s->center.y);
+	printf("Pos z: %lf\n", s->center.z);
 	printf("Radious: %lf\n", s->radius);
 	printf("Color red: %d\n", s->color.red);
 	printf("Color green: %d\n", s->color.green);

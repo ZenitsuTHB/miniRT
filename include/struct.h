@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/12 02:31:17 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/14 23:12:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_light
 
 typedef struct s_sphere
 {
-	t_vec3		pos;
+	t_vec3		center;
 	double 		radius;
 	t_rgb		color;
 }				t_sphere;
@@ -125,10 +125,12 @@ typedef struct s_obj
 
 typedef struct s_ray
 {
-	double distance;
-	t_vec3 hit_point;
-	t_vec3 normal; // Normal vector at the intersection point
-	t_obj *object;
+	bool		hit;
+	double		distance;
+	t_vec3		normal;
+	t_vec3		hit_point;
+	t_obj		*object;
+	uint32_t	color;
 }				t_ray;
 
 typedef struct s_scene
@@ -142,6 +144,16 @@ typedef struct s_scene
 	// Render
 	t_ray		*ray;
 }				t_scene;
+
+typedef struct s_operation
+{
+  t_vec3		OC;
+  double		A;
+  double		B;
+  double		C;
+  double		t[2];
+  double		delta;
+}       t_operation;
 
 // typedef struct s_world
 // {

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/13 00:44:47 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/15 00:19:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void test_get_pixel_direction(t_camera *cam, int img_w, int img_h) {
     // Test center pixel
     printf("Ray direction for center pixel: \n");
     t_vec3 center_ray = get_pixel_direction(cam, img_w / 2, img_h / 2);
-    printf("Center Ray: (%f, %f, %f)\n", center_ray.x, center_ray.y, center_ray.z);
+    printf("Center Ray1: (%f, %f, %f)\n", center_ray.x, center_ray.y, center_ray.z);
 
    // Test top-left pixel
     printf("Ray direction for top-left pixel:\n");
@@ -45,36 +45,48 @@ void test_get_pixel_direction(t_camera *cam, int img_w, int img_h) {
     printf("Bottom-right Ray: (%f, %f, %f)\n", bottom_right_ray.x, bottom_right_ray.y, bottom_right_ray.z);
 }
 
-t_vec3	get_pixel_direction(t_camera *cam, int pixel_x, int pixel_y)
+t_ray	hit_which_object(t_vec3 direction, t_vec3 origin, t_obj *obj)
 {
-	t_vec3	ray_dir;
-	t_vec3	x_scaled;
-	t_vec3	y_scaled;
-	t_vec3	added_scales;
-	double	normalized[2];
+	t_ray ray;
 
-	normalized[x_coord] = (double)pixel_x / (IMG_W - 1);
-	normalized[y_coord] = (double)pixel_y / (IMG_H - 1);
-	x_scaled = scalar_mult(cam->horizontal, normalized[x_coord]);
-	y_scaled = scalar_mult(cam->vertical, normalized[y_coord]);
-	added_scales = add_vec3(x_scaled, y_scaled);
-	ray_dir = substract_vec3(add_vec3(cam->l_l_corner, added_scales), cam->origin);	
-	return(unit_vec3(ray_dir));
-} 
+	if (obj->id == SP)
+		ray = hit_sphere(direction, origin, obj->shape.sp);
+	return (ray);
+}
+
+t_ray	intersect_objects(t_vec3 pxel_dir, t_vec3 cam_ori, t_obj *obj)
+{
+	t_ray		ray;
+	t_ray		tmp_ray;
+	//t_obj		*obj_head;
+
+	//obj_head == obj;
+	tmp_ray.hit = false;
+	ray.distance = INFINITY;
+	while (obj)
+	{
+		tmp_ray = hit_which_object(pxel_dir, cam_ori, obj);
+		tmp_ray.object = obj;
+		obj = obj->next;
+		if (tmp_ray.hit == false)
+			continue;
+		tmp_ray.distance = euclidean_distance(cam_ori, tmp_ray.hit_point);
+		if (tmp_ray.distance < ray.distance)
+			ray = tmp_ray;
+	}
+	if (tmp_ray.hit == false)
+		return(ray);
+	ray.color = 0xFFFFFF;
+	return (ray);
+}
 
 int	render_object(t_scene *scene)
 {
 	t_mlx		*mlx;
 	t_camera	*cam;
 	t_vec3		px_direction;
-	/*t_ray		*ray;
+	t_ray		ray;
 
-	ray = malloc(sizeof(t_ray));
-	if (!ray)
-		return(error_message(YEL, MALLOC_ERROR));
-	ft_bzero(ray, sizeof(t_ray));
-	printf("ray field [%lf] [%lf]", ray->distance, ray->normal.x);
-	*/
 	cam = scene->camera;
 	setting_up_camera(cam);
 	if (init_window(scene->mlx))
@@ -87,8 +99,8 @@ int	render_object(t_scene *scene)
 		while (mlx->y < HEIGHT)
 		{
 			px_direction = get_pixel_direction(cam, mlx->x, mlx->y);
-			mlx_put_pixel(mlx->img, mlx->x, mlx->y, 0x0);
-			(void)px_direction;
+			ray = intersect_objects(px_direction, cam->origin, scene->obj);
+			mlx_put_pixel(mlx->img, mlx->x, mlx->y, ray.color);
 			mlx->y++;
 		}
 		mlx->x++;

@@ -1,41 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersections.c                                    :+:      :+:    :+:   */
+/*   intersect_sphere.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/30 15:22:41 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/14 23:36:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
 #include <../libs/MLX42/include/MLX42/MLX42.h>
 
-bool	hit_sphere(t_ray *ray, t_sphere *sp, double *t)
+double  calculate_quadratic_root(t_operation op)
 {
-	t_vec3  oc;
-	double  res[2];
-	double  coef[3];
-  double  delta;
+  double  sqrted_delta;
+  
+  if (op.delta == 0)
+    return (-op.B) / (2.0 * op.A);
+  sqrted_delta = sqrt(op.delta);
+  op.t[0] = (-op.B - sqrted_delta) / (2.0 * op.A);
+  op.t[1] = (-op.B + sqrted_delta) / (2.0 * op.A);
+  if (op.t[0] >= 0 && op.t[0] < op.t[1])
+    return (op.t[0]);
+  else if (op.t[1] >= 0)
+    return (op.t[1]);
+  return (-1.0);
+}
 
-	oc = substract_vec3(ray->origin, sp->center);
-	coef[0] = dot_product(&ray->direction, &ray->direction);//a
-	coef[1] = 2.0 * dot_product(&oc, &ray->direction);//b
-	coef[2] = dot_product(&oc, &oc) - (sp->radius * sp->radius);//c
-  delta = coef[1] * coef[1] - 4 * coef[0] * coef[2];
-  if (delta <0)
-    return(false);
-  res[0] = (-coef[1] - sqrt(delta)) / (2.0 * coef[0]);
-  res[1] = (-coef[1] + sqrt(delta)) / (2.0 * coef[0]);
-  if (res[0] > 0 || res[1] > 0)
-  {
-    if (res[0] && res[0] < *t)
-      *t = res[0];
-    else if (res[1] && res[1] < *t)
-      *t = res[1];
-    return (true);
-  }
-  return (false); 
+t_ray hit_sphere(t_vec3 direction, t_vec3 origin, t_sphere *sp)
+{
+  t_ray ray;
+  t_operation op;
+
+  ray.hit = false;
+	op.OC = substract_vec3(origin, sp->center);
+	op.A = dot_product(&direction, &direction);
+	op.B = 2.0 * dot_product(&op.OC, &direction);
+	op.C = dot_product(&op.OC, &op.OC) - (sp->radius * sp->radius);
+  op.delta = op.B * op.B - (4 * op.A * op.C);
+  if (op.delta < 0)
+    return(ray);
+  ray.distance = calculate_quadratic_root(op);
+  if (ray.distance < 0)
+    return (ray);
+  ray.hit = true;
+  ray.hit_point =  add_vec3(origin, scalar_mult(direction, ray.distance));
+  return (ray); 
 }

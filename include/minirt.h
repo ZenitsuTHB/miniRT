@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/12 13:07:05 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/14 23:01:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ uint32_t	gradient_color(t_rgb color);
 int			render_object(t_scene *scene);
 int			setting_up_camera(t_camera *camera);
 void		generate_ray(t_camera *camera, t_ray *ray, int i, int j);
-bool	hit_sphere(t_ray *ray, t_sphere *sp, double *t);
-bool hit_plane(t_ray *ray, t_plane *plane, double *t);
-t_vec3	get_pixel_direction(t_camera *cam, int pixel_x, int pixel_y);
+t_ray       hit_sphere(t_vec3 direction, t_vec3 , t_sphere *);
+bool        hit_plane(t_ray *ray, t_plane *plane, double *t);
+t_vec3      get_pixel_direction(t_camera *cam, int pixel_x, int pixel_y);
 
 
 
