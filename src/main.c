@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/09 09:59:29 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/15 16:09:22 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 		
 		//return (free_scene(&scene), EXIT_FAILURE);
-	
-	
-  	init_mlx(&scene);
-	print_scene(scene);
+	init_mlx(&scene);
+	//print_scene(scene);
 	if (render_object(&scene))
 		return (error_message(YEL, RENDER_ERROR));
 	mlx_key_hook(scene.mlx->con, &manage_escape, &scene);
-	free_scene(&scene);
+	//free_scene(&scene);
 	mlx_loop(scene.mlx->con);
 	mlx_terminate(scene.mlx->con);
 	return (EXIT_SUCCESS);

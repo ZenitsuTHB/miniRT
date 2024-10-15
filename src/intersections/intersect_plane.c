@@ -13,17 +13,22 @@
 #include "../include/minirt.h"
 #include <../libs/MLX42/include/MLX42/MLX42.h>
 
-bool hit_plane(t_ray *ray, t_plane *plane, double *t)
+t_ray   hit_plane(t_vec3 direction, t_vec3 origin, t_plane *pl)
 {
-    double denom;
+    t_ray   ray;
+    double  denom;
     
-    denom = dot_product(&plane->normal, &ray->direction);
+    ray.hit = false;
+    denom = dot_product(&pl->normal, &direction);
     if (fabs(denom) > 1e-6)// If denom is not close to 0 (ray not parallel to plane)
     { 
-        t_vec3 p0l0 = substract_vec3(plane->normal, ray->origin);
-        *t = dot_product(&p0l0, &plane->normal) / denom;
-        if (*t >= 0)
-            return(true);// Intersection is in front of the ray's origin
+        t_vec3 p0l0 = substract_vec3(pl->normal, origin);
+        ray.distance = dot_product(&p0l0, &pl->normal) / denom;
+        if (ray.distance >= 0)
+        {
+            ray.hit = true;
+            return (ray);// Intersection is in front of the ray's origin
+        }
     }
-    return (false);  // Ray is parallel to the plane
+    return (ray);  // Ray is parallel to the plane
 }

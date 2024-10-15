@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/14 23:13:52 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/15 13:17:32 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	print_scene(t_scene scene)
 		obj = obj->prev;
 	while (obj)
 	{
-		if (obj->shape.sp)
+		if (obj->id == SP)
 			print_spheres(obj->shape.sp);
 		/* else if (obj->shape.pl)
 			print_planes(obj->shape.pl);

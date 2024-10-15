@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/15 00:30:17 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/15 21:31:10 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,18 @@
 t_vec3	get_pixel_direction(t_camera *cam, int pixel_x, int pixel_y)
 {
 	t_vec3	ray_dir;
-	t_vec3	x_scaled;
-	t_vec3	y_scaled;
+	t_vec3	scaled[2];
 	t_vec3	added_scales;
+	t_vec3	px_point;
 	double	normalized[2];
 
-	normalized[x_coord] = (double)pixel_x / (IMG_W - 1);
-	normalized[y_coord] = (double)pixel_y / (IMG_H - 1);
-	x_scaled = scalar_mult(cam->horizontal, normalized[x_coord]);
-	y_scaled = scalar_mult(cam->vertical, normalized[y_coord]);
-	added_scales = add_vec3(x_scaled, y_scaled);
-	ray_dir = substract_vec3(add_vec3(cam->l_l_corner, added_scales), cam->origin);	
+	normalized[x_coord] = ((double)pixel_x / (IMG_W - 1));
+	normalized[y_coord] = ((double)pixel_y / (IMG_H - 1));
+	scaled[x_coord] = scalar_mult(cam->horizontal, normalized[x_coord]);
+	scaled[y_coord] = scalar_mult(cam->vertical, normalized[y_coord]);
+	added_scales = add_vec3(scaled[x_coord], scaled[y_coord]);
+	px_point = add_vec3(cam->l_l_corner, added_scales);
+	ray_dir = substract_vec3(px_point, cam->origin);	
 	return(unit_vec3(ray_dir));
 }
 

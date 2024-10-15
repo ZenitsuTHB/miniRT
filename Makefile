@@ -21,7 +21,7 @@ PARSER	:= file.c parser_utils.c set_data.c set_setup.c \
 		   get_objects.c set_aux.c set_objects.c set_utils.c
 
 
-HIT		:= intersect_sphere.c #intersect_plane.c 
+HIT		:= intersect_sphere.c intersect_plane.c 
 
 RENDER  := rendering.c camera.c
 

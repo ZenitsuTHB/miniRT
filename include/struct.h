@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/14 23:12:42 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/15 16:06:31 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct s_cone
 	t_rgb				color;
 }	t_cone;
 
-typedef struct s_shape
+typedef union u_shape
 {
 	t_sphere	*sp;
 	t_plane		*pl;
