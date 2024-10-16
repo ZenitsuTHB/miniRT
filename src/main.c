@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/15 16:09:22 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/15 23:58:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	main(int argc, char *argv[])
 	if (render_object(&scene))
 		return (error_message(YEL, RENDER_ERROR));
 	mlx_key_hook(scene.mlx->con, &manage_escape, &scene);
-	//free_scene(&scene);
 	mlx_loop(scene.mlx->con);
 	mlx_terminate(scene.mlx->con);
+	exit(0);
 	return (EXIT_SUCCESS);
 }
