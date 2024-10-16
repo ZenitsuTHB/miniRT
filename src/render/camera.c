@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/16 11:06:57 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/16 15:53:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ t_vec3	get_pixel_direction(t_camera *cam, int pixel_x, int pixel_y)
 	scaled[y_coord] = scalar_mult(cam->vertical, normalized[y_coord]);
 	added_scales = add_vec3(scaled[x_coord], scaled[y_coord]);
 	px_point = add_vec3(cam->l_l_corner, added_scales);
-	ray_dir = substract_vec3(px_point, cam->origin);	
+	ray_dir = substract_vec3(px_point, cam->origin);
+	//printf("this is the z of ray dir %lf\n", ray_dir.z);
+	ray_dir.z = 1.0;
 	return(unit_vec3(ray_dir));
 }
 
