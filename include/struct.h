@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/17 14:03:17 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/17 15:50:30 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct s_obj
 	t_shape			shape;
 	struct s_obj	*next;
 	struct s_obj	*prev;
+	t_rgb			color;
 }	t_obj;
 
 typedef struct s_ray

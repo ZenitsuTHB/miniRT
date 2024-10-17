@@ -16,19 +16,21 @@
 t_ray   hit_plane(t_vec3 direction, t_vec3 origin, t_plane *pl)
 {
     t_ray   ray;
+    t_vec3  p0l0;
     double  denom;
     
     ray.hit = false;
     denom = dot_product(&pl->normal, &direction);
-    if (fabs(denom) > 1e-6)// If denom is not close to 0 (ray not parallel to plane)
+    if (fabs(denom) > 1e-6)
     { 
-        t_vec3 p0l0 = substract_vec3(pl->normal, origin);
+        p0l0 = substract_vec3(pl->normal, origin);
         ray.distance = dot_product(&p0l0, &pl->normal) / denom;
         if (ray.distance >= 0)
         {
             ray.hit = true;
-            return (ray);// Intersection is in front of the ray's origin
+            return (ray);
         }
     }
-    return (ray);  // Ray is parallel to the plane
+    ray.normal = pl->normal;
+    return (ray);
 }

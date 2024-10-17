@@ -6,13 +6,10 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/10/17 14:06:32 by adrmarqu         ###   ########.fr       */
-=======
-/*   Updated: 2024/10/17 12:53:25 by avolcy           ###   ########.fr       */
->>>>>>> refs/remotes/origin/newrender
+/*   Updated: 2024/10/17 15:50:10 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minirt.h"
 #include <../libs/MLX42/include/MLX42/MLX42.h>
@@ -26,8 +23,8 @@ void	hit_which_object(t_vec3 direction, t_vec3 origin, t_obj *obj, t_ray *ray)
 	//reset.hit = false;
 	if (obj->id == SP)
 		*ray = hit_sphere(direction, origin, obj->shape.sp);
-	//else if (obj->id == PL)
-	//	*ray = hit_plane(direction, origin, obj->shape.pl);
+	else if (obj->id == PL)
+		*ray = hit_plane(direction, origin, obj->shape.pl);
 	//else
 	//*ray = reset;
 }
@@ -55,7 +52,7 @@ t_ray	intersect_objects(t_vec3 pxel_dir, t_vec3 cam_ori, t_obj *obj, t_ambient *
 	//printf("checking ray\n");
 	while (obj)
 	{
-		ft_bzero(&tmp_ray, sizeof(t_ray));
+		//ft_bzero(&tmp_ray, sizeof(t_ray));
 		hit_which_object(pxel_dir, cam_ori, obj, &tmp_ray);
 		tmp_ray.object = obj;
 		obj = obj->next;
