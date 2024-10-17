@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/15 15:45:41 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/17 16:15:52 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ static int	read_data(int fd, t_scene *scene)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (delete_newline(line))
-			if (set_data(scene, line))
-				return (free(line), 1);
+		if (*line != '#')
+		{
+			if (delete_newline(line))
+				if (set_data(scene, line))
+					return (free(line), 1);
+		}
 		free(line);
 	}
 	obj = scene->obj;

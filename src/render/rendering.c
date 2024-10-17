@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/17 15:50:10 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/17 18:44:55 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ uint32_t	get_ambient_color(uint32_t obj_color, uint32_t amb_color, double bright
 	return (obj_color * (amb_color * bright));
 }
 
-t_ray	intersect_objects(t_vec3 pxel_dir, t_vec3 cam_ori, t_obj *obj, t_ambient *a)
+t_ray	intersect_objects(t_vec3 pxel_dir, t_vec3 cam_ori, t_obj *obj)
 {
 	t_ray		ray;
 	t_ray		tmp_ray;
@@ -52,7 +52,7 @@ t_ray	intersect_objects(t_vec3 pxel_dir, t_vec3 cam_ori, t_obj *obj, t_ambient *
 	//printf("checking ray\n");
 	while (obj)
 	{
-		//ft_bzero(&tmp_ray, sizeof(t_ray));
+		ft_bzero(&tmp_ray, sizeof(t_ray));
 		hit_which_object(pxel_dir, cam_ori, obj, &tmp_ray);
 		tmp_ray.object = obj;
 		obj = obj->next;
@@ -65,13 +65,13 @@ t_ray	intersect_objects(t_vec3 pxel_dir, t_vec3 cam_ori, t_obj *obj, t_ambient *
 	if (ray.hit == false)
 		return(ray);
 	if (ray.object->id == SP)
-		ray.color = get_ambient_color(ray.object->shape.sp->color.gradient, a->color.gradient, a->bright);
-		//ray.color = ray.object->shape.sp->color.gradient;//get_object_color(ray);
+		//ray.color = get_ambient_color(ray.object->shape.sp->color.gradient, a->color.gradient, a->bright);
+		ray.color = ray.object->shape.sp->color.gradient;//get_object_color(ray);
 	else if (ray.object->id == PL)
-		ray.color = get_ambient_color(ray.object->shape.pl->color.gradient, a->color.gradient, a->bright);
-		//ray.color = ray.object->shape.pl->color.gradient;//get_object_color(ray);
+		//ray.color = get_ambient_color(ray.object->shape.pl->color.gradient, a->color.gradient, a->bright);
+		ray.color = ray.object->shape.pl->color.gradient;//get_object_color(ray);
 	else
-		ray.color = 0xffFFffFF;
+		ray.color = 0xFF;
 	return (ray);
 }
 
@@ -94,7 +94,7 @@ int	render_object(t_scene *scene)
 		while (mlx->y < HEIGHT)
 		{
 			px_direction = get_pixel_direction(cam, mlx->x, mlx->y);
-			ray = intersect_objects(px_direction, cam->origin, scene->obj, scene->ambient);
+			ray = intersect_objects(px_direction, cam->origin, scene->obj);
 			if (!ray.hit)
 				ray.color = 0xFF;
 			mlx_put_pixel(mlx->img, mlx->x, mlx->y, ray.color);
@@ -102,6 +102,7 @@ int	render_object(t_scene *scene)
 		}
 		mlx->x++;
 	}
+	printf("acabado\n");
 	mlx_image_to_window(mlx->con, mlx->img, 0, 0);
 	return (0);
 }

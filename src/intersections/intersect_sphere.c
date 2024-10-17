@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/17 13:25:59 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/17 18:47:13 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_ray hit_sphere(t_vec3 direction, t_vec3 origin, t_sphere *sp)
 	op.B = 2.0 * dot_product(&op.OC, &direction);
 	op.C = dot_product(&op.OC, &op.OC) - (sp->radius * sp->radius);
   op.delta = op.B * op.B - (4 * op.A * op.C);
-  if (op.delta < 0)
+  if (op.delta <= 0)
     return(ray);
   ray.distance = calculate_quadratic_root(op);
   if (ray.distance < 0)
