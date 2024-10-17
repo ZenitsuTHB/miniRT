@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/17 12:00:59 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/17 12:24:57 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ void	print_scene(t_scene scene)
 	printf("Ambient(A): \n\n");
 	printf("Ratio: %lf\n", scene.ambient->bright);
 	printf("Color red: %d\n", scene.ambient->color.red);
-	printf("Color blue: %d\n", scene.ambient->color.blue);
-	printf("Color green: %d\n\n", scene.ambient->color.green);
+	printf("Color green: %d\n", scene.ambient->color.green);
+	printf("Color blue: %d\n\n", scene.ambient->color.blue);
 	printf("Camera(C): \n\n");
 	printf("Pos x: %lf\n", scene.camera->pos.x);
 	printf("Pos y: %lf\n", scene.camera->pos.y);
@@ -118,8 +118,8 @@ void	print_scene(t_scene scene)
 	printf("Pos z: %lf\n", scene.light->pos.z);
 	printf("Bright: %lf\n", scene.light->bright);
 	printf("Color red: %d\n", scene.light->color.red);
-	printf("Color blue: %d\n", scene.light->color.blue);
-	printf("Color green: %d\n\n", scene.light->color.green);
+	printf("Color green: %d\n", scene.light->color.green);
+	printf("Color blue: %d\n\n", scene.light->color.blue);
 	obj = scene.obj;
 	if (!obj)
 		return ;

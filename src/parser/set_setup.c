@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:30:27 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/03 13:27:31 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/17 12:22:38 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	set_light(t_scene *scene, char *data, int *error)
 	t_light	*light;
 	char	**split;
 	char	*err;
+	int		len;
 
 	light = malloc(sizeof(t_light));
 	if (!light)
@@ -75,14 +76,17 @@ void	set_light(t_scene *scene, char *data, int *error)
 	split = ft_splitset(data, " \t");
 	if (!split)
 		return (error_parser(YEL, MSG_MEM));
-	if (ft_splitlen(split) != 4)
+	len = ft_splitlen(split);
+	if (len < 3 || len > 4)
 		return (free_split(split), error_parser(YEL, MSG_NUM));
 	if (set_pos(split[1], &(light->pos)))
 		return (free_split(split));
 	light->bright = ft_strtod(split[2], &err);
 	if (*err || light->bright < 0.0 || light->bright > 1.0)
 		return (free_split(split), error_parser(YEL, MSG_DATA));
-	if (set_color(split[3], &(light->color)))
+	if (len == 3 && set_color("255,255,255", &(light->color)))
+		return (free_split(split));
+	else if (len == 4 && set_color(split[3], &(light->color)))
 		return (free_split(split));
 	free_split(split);
 	scene->light = light;
