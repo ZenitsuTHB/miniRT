@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/03 14:32:49 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/17 12:00:01 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int	init_scene_null(t_scene *scene)
 static int	read_data(int fd, t_scene *scene)
 {
 	char	*line;
+	t_obj	*obj;
 
 	while (1)
 	{
@@ -46,12 +47,16 @@ static int	read_data(int fd, t_scene *scene)
 				return (free(line), 1);
 		free(line);
 	}
-	//if (!scene->ambient)
-	//	return (error_parser(YEL, MSG_AMB), 1);
+	if (!scene->ambient)
+		return (error_parser(YEL, MSG_AMB), 1);
 	if (!scene->camera)
 		return (error_parser(YEL, MSG_CAM), 1);
-	//if (!scene->light)
-	//	return (error_parser(YEL, MSG_LIGHT), 1);
+	if (!scene->light)
+		return (error_parser(YEL, MSG_LIGHT), 1);
+	obj = scene->obj;
+	while (obj->prev)
+		obj = obj->prev;
+	scene->obj = obj;
 	return (0);
 }
 
