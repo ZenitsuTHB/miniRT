@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/15 16:06:31 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/17 14:03:17 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_mlx
 
 typedef struct s_ambient
 {
-	double      bright;
+	double		bright;
 	t_rgb       color;
 }             t_ambient;
 

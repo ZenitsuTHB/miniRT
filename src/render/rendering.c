@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/16 00:56:44 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/17 14:06:32 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,12 @@ void	hit_which_object(t_vec3 direction, t_vec3 origin, t_obj *obj, t_ray *ray)
 	
 }*/
 
-t_ray	intersect_objects(t_vec3 pxel_dir, t_vec3 cam_ori, t_obj *obj)
+uint32_t	get_ambient_color(uint32_t obj_color, uint32_t amb_color, double bright)
+{
+	return (obj_color * (amb_color * bright));
+}
+
+t_ray	intersect_objects(t_vec3 pxel_dir, t_vec3 cam_ori, t_obj *obj, t_ambient *a)
 {
 	t_ray		ray;
 	t_ray		tmp_ray;
@@ -60,9 +65,11 @@ t_ray	intersect_objects(t_vec3 pxel_dir, t_vec3 cam_ori, t_obj *obj)
 	if (ray.hit == false)
 		return(ray);
 	if (ray.object->id == SP)
-		ray.color = ray.object->shape.sp->color.gradient;//get_object_color(ray);
+		ray.color = get_ambient_color(ray.object->shape.sp->color.gradient, a->color.gradient, a->bright);
+		//ray.color = ray.object->shape.sp->color.gradient;//get_object_color(ray);
 	else if (ray.object->id == PL)
-		ray.color = ray.object->shape.pl->color.gradient;//get_object_color(ray);
+		ray.color = get_ambient_color(ray.object->shape.pl->color.gradient, a->color.gradient, a->bright);
+		//ray.color = ray.object->shape.pl->color.gradient;//get_object_color(ray);
 	else
 		ray.color = 0xffFFffFF;
 	return (ray);
@@ -87,7 +94,7 @@ int	render_object(t_scene *scene)
 		while (mlx->y < HEIGHT)
 		{
 			px_direction = get_pixel_direction(cam, mlx->x, mlx->y);
-			ray = intersect_objects(px_direction, cam->origin, scene->obj);
+			ray = intersect_objects(px_direction, cam->origin, scene->obj, scene->ambient);
 			if (!ray.hit)
 				ray.color = 0xFF;
 			mlx_put_pixel(mlx->img, mlx->x, mlx->y, ray.color);
