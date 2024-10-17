@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/10/17 14:06:32 by adrmarqu         ###   ########.fr       */
+=======
+/*   Updated: 2024/10/17 12:53:25 by avolcy           ###   ########.fr       */
+>>>>>>> refs/remotes/origin/newrender
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +55,6 @@ t_ray	intersect_objects(t_vec3 pxel_dir, t_vec3 cam_ori, t_obj *obj, t_ambient *
 	//printf("checking ray\n");
 	while (obj)
 	{
-		//printf("Im in obj: %d\n", obj->id);
 		ft_bzero(&tmp_ray, sizeof(t_ray));
 		hit_which_object(pxel_dir, cam_ori, obj, &tmp_ray);
 		tmp_ray.object = obj;
