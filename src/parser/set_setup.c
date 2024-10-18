@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_setup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:30:27 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/15 20:50:09 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/18 02:54:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	set_ambient(t_scene *scene, char *data, int *error)
 		return (error_parser(YEL, MSG_MEM));
 	if (ft_splitlen(split) != 3)
 		return (free_split(split), error_parser(YEL, MSG_NUM));
-	amb->bright = ft_strtod(split[1], &err);
-	if (*err || amb->bright < 0.0 || amb->bright > 1.0)
+	amb->property = ft_strtod(split[1], &err);
+	if (*err || amb->property < 0.0 || amb->property > 1.0)
 		return (free_split(split), error_parser(YEL, MSG_DATA));
 	if (set_color(split[2], &(amb->color)))
 		return (free_split(split));

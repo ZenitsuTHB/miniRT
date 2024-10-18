@@ -20,10 +20,9 @@ SRCS	:= main.c free_scene.c print_scene.c mlx_use.c
 PARSER	:= file.c parser_utils.c set_data.c set_setup.c \
 		   get_objects.c set_aux.c set_objects.c set_utils.c
 
-
 HIT		:= intersect_sphere.c intersect_plane.c 
 
-RENDER  := rendering.c camera.c
+RENDER  := rendering.c camera.c phong_light.c
 
 VECTOR	:= vector_op.c vector_op1.c vector_op2.c
 

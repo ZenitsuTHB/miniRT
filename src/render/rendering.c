@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/17 18:44:55 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/18 02:02:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,8 @@ void	hit_which_object(t_vec3 direction, t_vec3 origin, t_obj *obj, t_ray *ray)
 	//else
 	//*ray = reset;
 }
-/*uint32_t	get_object_color(t_ray)
-{
-	
-	
-}*/
 
-uint32_t	get_ambient_color(uint32_t obj_color, uint32_t amb_color, double bright)
-{
-	return (obj_color * (amb_color * bright));
-}
-
-t_ray	intersect_objects(t_vec3 pxel_dir, t_vec3 cam_ori, t_obj *obj)
+t_ray	intersect_obj(t_vec3 pxel_dir, t_vec3 ori, t_obj *obj, t_scene *scene)
 {
 	t_ray		ray;
 	t_ray		tmp_ray;
@@ -49,29 +39,21 @@ t_ray	intersect_objects(t_vec3 pxel_dir, t_vec3 cam_ori, t_obj *obj)
 	tmp_ray.hit = false;
 	ray.hit = false;
 	ray.distance = INFINITY;
-	//printf("checking ray\n");
 	while (obj)
 	{
 		ft_bzero(&tmp_ray, sizeof(t_ray));
-		hit_which_object(pxel_dir, cam_ori, obj, &tmp_ray);
+		hit_which_object(pxel_dir, ori, obj, &tmp_ray);
 		tmp_ray.object = obj;
 		obj = obj->next;
 		if (tmp_ray.hit == false)
 			continue;
-		tmp_ray.distance = euclidean_distance(cam_ori, tmp_ray.hit_point);
+		tmp_ray.distance = euclidean_distance(ori, tmp_ray.hit_point);
 		if (tmp_ray.distance < ray.distance)
 			ray = tmp_ray;
 	}
 	if (ray.hit == false)
 		return(ray);
-	if (ray.object->id == SP)
-		//ray.color = get_ambient_color(ray.object->shape.sp->color.gradient, a->color.gradient, a->bright);
-		ray.color = ray.object->shape.sp->color.gradient;//get_object_color(ray);
-	else if (ray.object->id == PL)
-		//ray.color = get_ambient_color(ray.object->shape.pl->color.gradient, a->color.gradient, a->bright);
-		ray.color = ray.object->shape.pl->color.gradient;//get_object_color(ray);
-	else
-		ray.color = 0xFF;
+	ray.color = get_phong_effect(pxel_dir, ray, scene);
 	return (ray);
 }
 
@@ -94,7 +76,7 @@ int	render_object(t_scene *scene)
 		while (mlx->y < HEIGHT)
 		{
 			px_direction = get_pixel_direction(cam, mlx->x, mlx->y);
-			ray = intersect_objects(px_direction, cam->origin, scene->obj);
+			ray = intersect_obj(px_direction, cam->origin, scene->obj, scene);
 			if (!ray.hit)
 				ray.color = 0xFF;
 			mlx_put_pixel(mlx->img, mlx->x, mlx->y, ray.color);

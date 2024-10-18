@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/15 16:57:36 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/18 02:06:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void		generate_ray(t_camera *camera, t_ray *ray, int i, int j);
 t_ray       hit_sphere(t_vec3 direction, t_vec3 , t_sphere *);
 t_ray       hit_plane(t_vec3 direction, t_vec3 origin, t_plane *pl);
 t_vec3      get_pixel_direction(t_camera *cam, int pixel_x, int pixel_y);
+uint32_t    get_phong_effect(t_vec3 dir, t_ray ray, t_scene *scene);
+
 
 
 
@@ -52,7 +54,7 @@ void		manage_escape(mlx_key_data_t keydata, void *param);
 
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓
-    PARSER
+        PARSER
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
 

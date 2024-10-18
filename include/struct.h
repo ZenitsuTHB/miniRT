@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/17 15:50:30 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/18 02:47:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_mlx
 
 typedef struct s_ambient
 {
-	double		bright;
+	double		property;
 	t_rgb       color;
 }             t_ambient;
 

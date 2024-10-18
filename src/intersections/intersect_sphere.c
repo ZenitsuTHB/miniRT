@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_sphere.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/17 18:47:13 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/18 02:16:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ t_ray hit_sphere(t_vec3 direction, t_vec3 origin, t_sphere *sp)
     return (ray);
   ray.hit = true;
   ray.hit_point =  add_vec3(origin, scalar_mult(direction, ray.distance));
-  ray.normal = substract_vec3(direction, sp->center);
+  ray.normal = unit_vec3(substract_vec3(direction, sp->center));
   return (ray); 
 }
