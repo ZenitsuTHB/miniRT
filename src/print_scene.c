@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/15 13:17:32 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/18 12:20:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,11 @@ void	print_scene(t_scene scene)
 {
 	t_obj	*obj;
 
-	/* printf("Ambient(A): \n\n");
+	printf("Ambient(A): \n\n");
 	printf("Ratio: %lf\n", scene.ambient->bright);
 	printf("Color red: %d\n", scene.ambient->color.red);
 	printf("Color blue: %d\n", scene.ambient->color.blue);
-	printf("Color green: %d\n\n", scene.ambient->color.green); */
+	printf("Color green: %d\n\n", scene.ambient->color.green); 
 	printf("Camera(C): \n\n");
 	printf("Pos x: %lf\n", scene.camera->origin.x);
 	printf("Pos y: %lf\n", scene.camera->origin.y);

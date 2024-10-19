@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/18 00:05:28 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/18 11:54:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char *argv[])
 		
 		//return (free_scene(&scene), EXIT_FAILURE);
 	init_mlx(&scene);
-	//print_scene(scene);
+	print_scene(scene);
 	if (render_object(&scene))
 		return (error_message(YEL, RENDER_ERROR));
 	mlx_key_hook(scene.mlx->con, &manage_escape, &scene);
