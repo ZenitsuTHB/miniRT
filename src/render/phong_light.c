@@ -42,14 +42,14 @@ t_rgb add_colors(t_rgb c1, t_rgb c2)
     };
 }
 
-uint32_t    get_ambient_color(t_rgb base, t_scene *sc)
+t_rgb    get_ambient_color(t_rgb base, t_scene *sc)
 {
     t_rgb       color;
-    uint32_t    ambient;
+    t_rgb       ambient;
 
-    color = scalar_mult_color(base, sc->ambient->bright);
-    ambient = gradient_color(color);
-    return(ambient);
+    ambient = dot_product(base, sc->light->color);
+    color = scalar_mult_color(ambient, sc->ambient->bright);
+    return(color);
 }
 /*/ Calculate the light direction (from hit point to light)
 light_dir = unit_vec3(substract_vec3(light->position, ray->hit_point));
@@ -60,29 +60,41 @@ diffuse = fmax(0.0, dot_product(&light_dir, &ray->normal));  // ray->normal is t
 // Specular shading: reflection of light about the normal
 reflect_dir = reflect_vec(light_dir, ray->normal);  // Reflect the light vector around the normal
 specular = pow(fmax(0.0, dot_product(&reflect_dir, &view_dir)), shininess);
+*/
+t_rgb    get_difuse_color(t_vec3 normal, t_vec3 hit_point, t_light *light)
+{
+    t_rgb   diffuse;
+    t_vec3  lite_dir_v;
+    double  dotLN;
+
+    lite_dir_v =  unit_vec3(substract_vec3(light->pos, hit_point));
+    dotLN = max(0, dot_product(&lite_dir_v, &normal));
+    diffuse = 
+    return (diffuse);
+}
 
 uint32_t    get_full_color(t_vec3 dir , t_ray ray, t_scene *sc)
 {
     t_rgb amb;
     t_rgb full;
     t_rgb diffuse;
-    t_rgb tmp_color;
+    t_rgb basecolor;
 	
-    tmp_color = ray.object->shape.sp->color;
-    amb = ;// get_ambient_color(base, sc);
-    diffuse = get_diffuse_color(ray.normal, );
-    full = add_vec3(diffuse, amb); 
+    basecolor = ray.object->shape.sp->color;
+    amb =  get_ambient_color(basecolor, sc);
+    diffuse = get_diffuse_color(ray.normal, ray.hit_point, sc->light);
+    full = dot_product(basecolor, add_vec3(diffuse, amb)); 
     return (gradient_color(full));
 }
-*/
+
 uint32_t get_phong_effect(t_vec3 dir, t_ray ray, t_scene *scene)
 {
     uint32_t    finished;
     t_rgb       tmp_color;
-	(void)dir;
+
     tmp_color = ray.object->shape.sp->color;
     if (ray.object->id == SP)
-		finished = get_ambient_color(tmp_color, scene);//get_full_color(dir, ray, scene);
+		finished = get_full_color(dir, ray, scene);
 	else if (ray.object->id == PL)
 		finished = ray.object->shape.pl->color.gradient;
 	else

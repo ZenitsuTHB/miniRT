@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/18 12:20:59 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/20 15:58:41 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,14 @@ void	print_scene(t_scene scene)
 	printf("cam_dir y: %lf\n", scene.camera->cam_dir.y);
 	printf("cam_dir z: %lf\n", scene.camera->cam_dir.z);
 	printf("Fov: %d\n\n", scene.camera->fov);
-	/* printf("Light(L): \n\n");
+	 printf("Light(L): \n\n");
 	printf("Pos x: %lf\n", scene.light->pos.x);
 	printf("Pos y: %lf\n", scene.light->pos.y);
 	printf("Pos z: %lf\n", scene.light->pos.z);
 	printf("Bright: %lf\n", scene.light->bright);
 	printf("Color red: %d\n", scene.light->color.red);
 	printf("Color blue: %d\n", scene.light->color.blue);
-	printf("Color green: %d\n\n", scene.light->color.green); */
+	printf("Color green: %d\n\n", scene.light->color.green); 
 	obj = scene.obj;
 	if (!obj)
 		return ;

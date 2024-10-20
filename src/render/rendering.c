@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/18 20:08:16 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/20 14:24:03 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	hit_which_object(t_vec3 direction, t_vec3 origin, t_obj *obj, t_ray *ray)
 	//reset.hit = false;
 	if (obj->id == SP)
 		*ray = hit_sphere(direction, origin, obj->shape.sp);
-	//else if (obj->id == PL)
-	//	*ray = hit_plane(direction, origin, obj->shape.pl);
+	else if (obj->id == PL)
+		*ray = hit_plane(direction, origin, obj->shape.pl);
 	//else
 	//*ray = reset;
 }
