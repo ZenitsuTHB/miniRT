@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_aux.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 12:16:52 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/03 13:32:33 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:41:45 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
-
-static uint32_t	get_gradient(t_rgb *rgb)
-{
-	return (rgb->red << 24 | rgb->green << 16 | rgb->blue << 8 | 255);
-}
 
 int	set_color(char *str, t_rgb *rgb)
 {
@@ -28,16 +23,15 @@ int	set_color(char *str, t_rgb *rgb)
 	if (ft_splitlen(split) != 3)
 		return (free_split(split), error_parser(YEL, MSG_NUM), 1);
 	error = 0;
-	rgb->red = ft_atoi_error(split[0], &error);
-	if (error || rgb->red < 0 || rgb->red > 255)
+	rgb->x = ft_atoi_error(split[0], &error);
+	if (error || rgb->x < 0 || rgb->x > 255)
 		return (free_split(split), error_parser(YEL, MSG_DATA), 1);
-	rgb->green = ft_atoi_error(split[1], &error);
-	if (error || rgb->green < 0 || rgb->green > 255)
+	rgb->y = ft_atoi_error(split[1], &error);
+	if (error || rgb->y < 0 || rgb->y > 255)
 		return (free_split(split), error_parser(YEL, MSG_DATA), 1);
-	rgb->blue = ft_atoi_error(split[2], &error);
-	if (error || rgb->blue < 0 || rgb->blue > 255)
+	rgb->z = ft_atoi_error(split[2], &error);
+	if (error || rgb->z < 0 || rgb->z > 255)
 		return (free_split(split), error_parser(YEL, MSG_DATA), 1);
-	rgb->gradient = get_gradient(rgb);
 	free_split(split);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/20 15:58:41 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/21 11:17:32 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ static void	print_spheres(t_sphere *s)
 	printf("Pos y: %lf\n", s->center.y);
 	printf("Pos z: %lf\n", s->center.z);
 	printf("Radious: %lf\n", s->radius);
-	printf("Color red: %d\n", s->color.red);
-	printf("Color green: %d\n", s->color.green);
-	printf("Color blue: %d\n", s->color.blue);
+	printf("Color red: %lf\n", s->color.x);
+	printf("Color green: %lf\n", s->color.y);
+	printf("Color blue: %lf\n", s->color.z);
 	printf("\n");
 	i++;
 }
@@ -101,9 +101,9 @@ void	print_scene(t_scene scene)
 
 	printf("Ambient(A): \n\n");
 	printf("Ratio: %lf\n", scene.ambient->bright);
-	printf("Color red: %d\n", scene.ambient->color.red);
-	printf("Color blue: %d\n", scene.ambient->color.blue);
-	printf("Color green: %d\n\n", scene.ambient->color.green); 
+	printf("Color red: %lf\n", scene.ambient->color.x);
+	printf("Color blue: %lf\n", scene.ambient->color.y);
+	printf("Color green: %lf\n\n", scene.ambient->color.z); 
 	printf("Camera(C): \n\n");
 	printf("Pos x: %lf\n", scene.camera->origin.x);
 	printf("Pos y: %lf\n", scene.camera->origin.y);
@@ -117,9 +117,9 @@ void	print_scene(t_scene scene)
 	printf("Pos y: %lf\n", scene.light->pos.y);
 	printf("Pos z: %lf\n", scene.light->pos.z);
 	printf("Bright: %lf\n", scene.light->bright);
-	printf("Color red: %d\n", scene.light->color.red);
-	printf("Color blue: %d\n", scene.light->color.blue);
-	printf("Color green: %d\n\n", scene.light->color.green); 
+	printf("Color red: %lf\n", scene.light->color.x);
+	printf("Color blue: %lf\n", scene.light->color.y);
+	printf("Color green: %lf\n\n", scene.light->color.z); 
 	obj = scene.obj;
 	if (!obj)
 		return ;

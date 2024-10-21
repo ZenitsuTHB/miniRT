@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/18 12:21:32 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/21 11:12:32 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,7 @@ typedef struct s_vector
 	double				z;
 }	t_vec3;
 
-typedef struct s_rgb
-{
-	int			red;
-	int			green;
-	int			blue;
-	uint32_t	gradient;
-}	t_rgb;
+typedef struct s_vector t_rgb;
 
 typedef struct s_mlx
 {
