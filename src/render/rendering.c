@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/21 12:46:55 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:38:13 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	hit_which_object(t_vec3 direction, t_vec3 origin, t_obj *obj, t_ray *ray)
 	//t_ray	reset;
 
 	//reset.hit = false;
-	//if (obj->id == SP)
-	//	*ray = hit_sphere(direction, origin, obj->shape.sp);
+	if (obj->id == SP)
+		*ray = hit_sphere(direction, origin, obj->shape.sp);
 	//else if (obj->id == PL)
 	//	*ray = hit_plane(direction, origin, obj->shape.pl);
 	if (obj->id == CY)
@@ -46,8 +46,6 @@ t_ray	intersect_obj(t_vec3 pxel_dir, t_vec3 ori, t_obj *obj, t_scene *scene)
 		ft_bzero(&tmp_ray, sizeof(t_ray));
 		hit_which_object(pxel_dir, ori, obj, &tmp_ray);
 		tmp_ray.object = obj;
-		if (tmp_ray.hit)
-			printf("Hit object at distance: %.2f\n", tmp_ray.distance);
 		obj = obj->next;
 		if (tmp_ray.hit == false)
 			continue;
@@ -56,10 +54,7 @@ t_ray	intersect_obj(t_vec3 pxel_dir, t_vec3 ori, t_obj *obj, t_scene *scene)
 			ray = tmp_ray;
 	}
 	if (ray.hit == false)
-	{
-		ray.color = 0x000000;
 		return(ray);
-	}
 	ray.color = get_phong_effect(pxel_dir, ray, scene);
 	return (ray);
 }
@@ -85,7 +80,7 @@ int	render_object(t_scene *scene)
 			px_direction = get_pixel_direction(cam, mlx->x, mlx->y);
 			ray = intersect_obj(px_direction, cam->origin, scene->obj, scene);
 			if (!ray.hit)
-				ray.color = 0x00;
+				ray.color = 0xFF;
 			mlx_put_pixel(mlx->img, mlx->x, mlx->y, ray.color);
 			mlx->y++;
 		}

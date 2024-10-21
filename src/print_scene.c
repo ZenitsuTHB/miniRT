@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/21 12:27:19 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:22:17 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ void	print_scene(t_scene scene)
 		obj = obj->prev;
 	while (obj)
 	{
-		//if (obj->id == SP)
-		//	print_spheres(obj->shape.sp);
+		if (obj->id == SP)
+			print_spheres(obj->shape.sp);
 		//if (obj->id == PL)
 		//	print_planes(obj->shape.pl);
 		if (obj->id == CY)
