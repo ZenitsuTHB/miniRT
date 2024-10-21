@@ -6,14 +6,14 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/18 12:20:59 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/21 12:27:19 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
 #include <stdio.h>
 
-/* static void	print_planes(t_plane *s)
+void	print_planes(t_plane *s)
 {
 	static int	i = 1;
 
@@ -33,7 +33,7 @@
 	i++;
 }
 
-static void	print_cylinders(t_cylinder *s)
+void	print_cylinders(t_cylinder *s)
 {
 	static int	i = 1;
 
@@ -55,7 +55,7 @@ static void	print_cylinders(t_cylinder *s)
 	i++;
 }
 
-static void	print_cones(t_cone *s)
+void	print_cones(t_cone *s)
 {
 	static int	i = 1;
 
@@ -76,8 +76,8 @@ static void	print_cones(t_cone *s)
 	printf("\n");
 	i++;
 }
- */
-static void	print_spheres(t_sphere *s)
+ 
+void	print_spheres(t_sphere *s)
 {
 	static int	i = 1;
 
@@ -127,14 +127,14 @@ void	print_scene(t_scene scene)
 		obj = obj->prev;
 	while (obj)
 	{
-		if (obj->id == SP)
-			print_spheres(obj->shape.sp);
-		/* else if (obj->shape.pl)
-			print_planes(obj->shape.pl);
-		else if (obj->shape.cy)
+		//if (obj->id == SP)
+		//	print_spheres(obj->shape.sp);
+		//if (obj->id == PL)
+		//	print_planes(obj->shape.pl);
+		if (obj->id == CY)
 			print_cylinders(obj->shape.cy);
-		else if (obj->shape.co)
-			print_cones(obj->shape.co); */
+		//if (obj->id == CO)
+		//	print_cones(obj->shape.co); 
 		obj = obj->next;
 	}
 }
