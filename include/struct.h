@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/18 12:21:32 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/22 14:23:35 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct s_ray
 {
 	bool		hit;
 	double		distance;
+	t_vec3		origin;
 	t_vec3		normal;
 	t_vec3		hit_point;
 	t_obj		*object;
