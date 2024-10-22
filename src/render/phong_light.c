@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/18 00:05:28 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/22 14:32:46 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ uint32_t get_phong_effect(t_vec3 dir, t_ray ray, t_scene *scene)
 		finished = get_ambient_color(tmp_color, scene);//get_full_color(dir, ray, scene);
 	else if (ray.object->id == PL)
 		finished = ray.object->shape.pl->color.gradient;
+	else if (ray.object->id == CY)
+		finished = ray.object->shape.cy->color.gradient;
 	else
 		finished = 0xFF;
     return (finished);
