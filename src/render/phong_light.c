@@ -105,15 +105,18 @@ uint32_t    get_full_color(t_vec3 dir , t_ray ray, t_scene *sc)
 
 uint32_t get_phong_effect(t_vec3 dir, t_ray ray, t_scene *scene)
 {
+    t_light     *light;
     uint32_t    finished;
-    t_rgb       tmp_color;
-
-    tmp_color = ray.object->shape.sp->color;
-    if (ray.object->id == SP)
-		finished = get_full_color(dir, ray, scene);
-	else if (ray.object->id == PL)
-		finished = ray.object->shape.pl->color.z;
-	else
-		finished = 0xFF;
+    t_vec3       light_dir;
+    double dotLN;
+   printf("HOLE\n");
+    light = scene->light;
+    //while (light)
+    //{
+        light_dir = substract_vec3(ray.hit_point, light->pos);       
+        dotLN = dot_product(&light_dir, &ray.normal);
+        printf("the dot product for the angles ldir and norm : %lf", dotLN);
+        finished = get_full_color(dir , ray,scene);
+    //}
     return (finished);
 }
