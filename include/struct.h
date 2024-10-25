@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/25 00:45:59 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/25 03:13:23 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,10 @@ typedef struct s_camera
 
 typedef struct s_light
 {
-	t_vec3	pos;
-	double 	bright;
-	t_rgb 	color; 
+	t_vec3			pos;
+	double 			bright;
+	t_rgb 			color; 
 	struct s_light *next;
-	
 }				t_light;
 
 typedef struct s_sphere
