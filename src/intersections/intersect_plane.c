@@ -23,14 +23,15 @@ t_ray   hit_plane(t_vec3 direction, t_vec3 origin, t_plane *pl)
     denom = dot_product(&pl->normal, &direction);
     if (fabs(denom) > 1e-6)
     { 
-        p0l0 = substract_vec3(pl->normal, origin);
+        p0l0 = unit_vec3( substract_vec3(pl->normal, origin));
         ray.distance = dot_product(&p0l0, &pl->normal) / denom;
         if (ray.distance >= 0)
         {
             ray.hit = true;
+            ray.normal = pl->normal;
             return (ray);
         }
     }
-    ray.normal = pl->normal;
+
     return (ray);
 }
