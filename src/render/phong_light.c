@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/18 00:05:28 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/25 02:58:29 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 #include "../include/minirt.h"
 #include <../libs/MLX42/include/MLX42/MLX42.h>
 
-    uint32_t	gradient_color(t_rgb color)
-    {
-        uint8_t	r;
-        uint8_t	g;
-        uint8_t	b;
-
-        r = (int)(color.x);
-        g = (int)(color.y);
-        b = (int)(color.z);
-        return (r << 24 | g << 16 | b << 8 | 255);
+uint32_t	gradient_color(t_rgb color)
+{
+    uint8_t	r;
+    uint8_t	g;
+    uint8_t	b;
+    
+    r = (int)(color.x);
+    g = (int)(color.y);
+    b = (int)(color.z);
+    return (r << 24 | g << 16 | b << 8 | 255);
 }
 
 double	maxim(double nb, double limit)
@@ -33,11 +33,6 @@ double	maxim(double nb, double limit)
 	return (limit);
 }
 
-/*1. Calculate the ambient lighting component
-I_ambient = k_ambient * I_light rj : I_amb ​= 0.2×1.0=0.2
-2. Apply ambient light to the object's color
-final_color = base_color * I_ambient ej: fi_col = (1,0,0)×0.2=(0.2,0,0)
-*/
 t_rgb scalar_mult_color(t_rgb color, double scalar)
 {
     return (t_rgb) {
@@ -46,6 +41,24 @@ t_rgb scalar_mult_color(t_rgb color, double scalar)
         .z = fmin(color.z * scalar, 255)
     };
 }
+// Final specular color (light color * intensity * specular factor)
+t_rgb get_specular_color(t_obj *obj, t_light *light, t_vec3 point, t_camera *cam)
+{
+    double spec;
+    t_vec3 normal;
+    t_vec3 light_dir;
+    t_vec3 reflect_dir;
+    t_vec3 view_dir;
+    
+    view_dir = substract_vec3(point, cam->origin);
+    light_dir = unit_vec3(substract_vec3(light->pos, point));
+    normal = unit_vec3(substract_vec3(point, obj->shape.sp->center));
+    reflect_dir = substract_vec3(scalar_mult(normal, 2 * dot_product(&normal, &light_dir)), light_dir);
+    spec = pow(fmax(dot_product(&view_dir, &reflect_dir), 0.0), 255.0);
+    
+    return scalar_mult(light->color, light->bright * spec);
+}
+
 t_rgb    get_ambient_color(t_rgb base, t_scene *sc)
 {
     t_rgb       I_amb;
@@ -55,65 +68,51 @@ t_rgb    get_ambient_color(t_rgb base, t_scene *sc)
     I_amb = scalar_mult(base, sc->ambient->bright);
     return(I_amb);
 }
-/*/ Calculate the light direction (from hit point to light)
-light_dir = unit_vec3(substract_vec3(light->position, ray->hit_point));
-// View direction (from hit point to camera)
-view_dir = unit_vec3(substract_vec3(cam->origin, ray->hit_point));
-// Diffuse shading: Lambertian reflection
-diffuse = fmax(0.0, dot_product(&light_dir, &ray->normal));  // ray->normal is the surface normal at hit point
-// Specular shading: reflection of light about the normal
-reflect_dir = reflect_vec(light_dir, ray->normal);  // Reflect the light vector around the normal
-specular = pow(fmax(0.0, dot_product(&reflect_dir, &view_dir)), shininess);
-*/
-t_rgb    get_difuse_color(t_rgb base, t_vec3 normal, t_vec3 hit_point, t_light *light)
-{
-    double  dotLN;
-    t_rgb   diffuse;
-    t_vec3  lite_dir_v;
-    //printf("Normal Vector: (%f, %f, %f)\n", normal.x, normal.y, normal.z);
-   // printf("Normal Vector: (%f, %f, %f)\n", hit_point.x, hit_point.y, hit_point.z);
 
-    lite_dir_v =  unit_vec3(substract_vec3(light->pos, hit_point));
-    dotLN = dot_product(&lite_dir_v, &normal);
-    diffuse =  multiply_vec3(base, light->color);
-   // printf(" base              : (%f, %f, %f)\n", base.x, base.y, base.z);
-  //  printf("Difuse light Vector: (%f, %f, %f)\n", diffuse.x, diffuse.y, diffuse.z);
-   // printf("Light Direction Vector: (%f, %f, %f)\n", lite_dir_v.x, lite_dir_v.y, lite_dir_v.z);
-    printf("Dot Product (L · N): %f\n", dotLN);
-    diffuse = scalar_mult(diffuse, dotLN);
-   // printf("Difuse light Vector: (%f, %f, %f)\n", diffuse.x, diffuse.y, diffuse.z);
-    diffuse = scalar_mult(base, light->bright);// * dotLN);
-   // printf("Difuse light Vector: (%f, %f, %f)\n", diffuse.x, diffuse.y, diffuse.z);
-    return (diffuse);
+t_vec3 get_diffuse_color(t_obj *obj, t_light *light, t_vec3 point)
+{
+    double dotLN;
+    t_vec3 normal;
+    t_vec3 diffuse;
+    t_vec3 light_dir;
+
+    normal = unit_vec3(substract_vec3(point, obj->shape.sp->center));
+    light_dir = unit_vec3(substract_vec3(light->pos, point));
+    dotLN = fmax(0, dot_product(&normal, &light_dir));
+    //printf("thi is the dot prod (%lf\n)", dotLN);
+    diffuse = scalar_mult(obj->shape.sp->color, light->bright * dotLN);
+    
+    return diffuse;
 }
 
-uint32_t    get_full_color(t_vec3 dir , t_ray ray, t_scene *sc)
+uint32_t    get_full_color(t_ray ray, t_scene *sc)
 {
-  //  t_rgb I_amb;
-  // t_rgb full;
-    t_rgb diffuse;
-    t_rgb objcolor;
-
-	(void)dir;
-    objcolor = ray.object->shape.sp->color;
-    //I_amb =  get_ambient_color(basecolor, sc);
-    diffuse = get_difuse_color(objcolor, ray.normal, ray.hit_point, sc->light);
-    //full = add_vec3(diffuse, I_amb);
-    //full = multiply_vec3(basecolor, full); 
-    return (gradient_color(diffuse));
+   t_rgb full;
+   t_rgb I_amb;
+   t_rgb diffuse;
+  // t_rgb specular;
+    
+    ray.object->normal = ray.normal;
+    I_amb =  get_ambient_color(ray.object->shape.sp->color, sc);
+	diffuse = get_diffuse_color(ray.object, sc->light, ray.hit_point);
+   // specular = get_specular_color(ray.object, sc->light, ray.hit_point, sc->camera);
+    full = add_vec3(I_amb, diffuse);
+    return (gradient_color(full));
 }
 
 uint32_t get_phong_effect(t_vec3 dir, t_ray ray, t_scene *scene)
 {
     uint32_t    finished;
-    t_rgb       tmp_color;
 
-    tmp_color = ray.object->shape.sp->color;
-    if (ray.object->id == SP)
-		finished = get_full_color(dir, ray, scene);
-	else if (ray.object->id == PL)
-		finished = ray.object->shape.pl->color.z;
-	else
-		finished = 0xFF;
+    (void)dir;
+
+    finished = get_full_color(ray, scene);
     return (finished);
 }
+
+/*t_vec3 reflect_vec(t_vec3 light_dir, t_vec3 normal)
+{
+    return substract_vec3(
+        scalar_mult(normal, 2 * dot_product(&light_dir, &normal)), 
+        light_dir);
+}*/

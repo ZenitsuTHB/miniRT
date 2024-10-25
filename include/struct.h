@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/21 11:12:32 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/25 00:45:59 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct s_light
 	t_vec3	pos;
 	double 	bright;
 	t_rgb 	color; 
+	struct s_light *next;
+	
 }				t_light;
 
 typedef struct s_sphere
@@ -115,6 +117,7 @@ typedef struct s_obj
 	t_shape			shape;
 	struct s_obj	*next;
 	struct s_obj	*prev;
+	t_vec3			normal;
 	t_rgb			color;
 }	t_obj;
 
@@ -148,6 +151,7 @@ typedef struct s_operation
   double		C;
   double		t[2];
   double		delta;
+  double		lambda;
 }       t_operation;
 
 // typedef struct s_world

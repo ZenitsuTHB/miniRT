@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/18 02:06:52 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/24 22:37:06 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	init_mlx(t_scene *scene);
 		INPUT
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
+uint32_t phong_shading(t_ray *ray, t_light *light, t_camera *cam);
 
 int			init_window(t_mlx *mlx);
 uint32_t	gradient_color(t_rgb color);
