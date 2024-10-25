@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/25 03:14:31 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/25 03:16:10 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,11 @@ uint32_t    get_full_color(t_ray ray, t_scene *sc)
 
 uint32_t get_phong_effect(t_vec3 dir, t_ray ray, t_scene *scene)
 {
-    t_light     *light;
     uint32_t    finished;
 
     (void)dir;
-
+    
+    
     finished = get_full_color(ray, scene);
     return (finished);
 }
