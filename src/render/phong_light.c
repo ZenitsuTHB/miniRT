@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/25 10:38:41 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/26 23:06:41 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,19 +94,19 @@ uint32_t    get_full_color(t_ray ray, t_scene *sc)
     obj = ray.object;
     if  (obj->id == SP)
     {
-        obj->color = obj->shape.sp->color;
+        obj->color = ray.object->shape.sp->color;
         obj->normal = unit_vec3(substract_vec3(ray.hit_point, obj->shape.sp->center));
        
     }
-   // else if (obj->id == PL)
-    //{
-      //  obj->color = ray.object->shape.pl->color;
-        //obj->normal = ray.object->shape.pl->normal;
-    //}
+    else if (obj->id == PL)
+    {
+        obj->color = ray.object->shape.pl->color;
+        obj->normal = ray.object->shape.pl->normal;
+    }
    // else
      //   ray.normal = (t_vec3){0,0,0};
-    I_amb =  get_ambient_color(ray.object->shape.sp->color, sc);
-	diffuse = get_diffuse_color(ray.object, sc->light, ray.hit_point);
+    I_amb =  get_ambient_color(obj->color, sc);
+	diffuse = get_diffuse_color(obj, sc->light, ray.hit_point);
    // specular = get_specular_color(ray.object, sc->light, ray.hit_point, sc->camera);
     full = add_vec3(I_amb, diffuse);
     return (gradient_color(full));
