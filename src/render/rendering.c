@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/22 13:03:20 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/27 12:10:06 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	hit_which_object(t_vec3 direction, t_vec3 origin, t_obj *obj, t_ray *ray)
 	//	*ray = hit_plane(direction, origin, obj->shape.pl);
 	if (obj->id == CY)
 		*ray = hit_cylinder(direction, origin, obj->shape.cy);
+	if (obj->id == CO)
+		*ray = hit_cone(direction, origin, obj->shape.co);
 	//else
 	//*ray = reset;
 }

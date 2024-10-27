@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/22 14:32:46 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/27 12:13:41 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,18 @@ uint32_t    get_full_color(t_vec3 dir , t_ray ray, t_scene *sc)
 uint32_t get_phong_effect(t_vec3 dir, t_ray ray, t_scene *scene)
 {
     uint32_t    finished;
-    t_rgb       tmp_color;
+    //t_rgb       tmp_color;
+	
 	(void)dir;
-    tmp_color = ray.object->shape.sp->color;
-    if (ray.object->id == SP)
-		finished = get_ambient_color(tmp_color, scene);//get_full_color(dir, ray, scene);
-	else if (ray.object->id == PL)
-		finished = ray.object->shape.pl->color.gradient;
-	else if (ray.object->id == CY)
-		finished = ray.object->shape.cy->color.gradient;
+    //tmp_color = ray.object->shape.sp->color;
+    //if (ray.object->id == SP)
+	//	finished = get_ambient_color(tmp_color, scene);//get_full_color(dir, ray, scene);
+	//else if (ray.object->id == PL)
+	//	finished = ray.object->shape.pl->color.gradient;
+	if (ray.object->id == CY)
+		finished = get_ambient_color(ray.object->shape.cy->color, scene);
+	else if (ray.object->id == CO)
+		finished = get_ambient_color(ray.object->shape.co->color, scene);
 	else
 		finished = 0xFF;
     return (finished);

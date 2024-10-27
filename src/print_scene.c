@@ -6,12 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/21 13:22:17 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/27 12:15:47 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
-#include <stdio.h>
 
 void	print_planes(t_plane *s)
 {
@@ -112,14 +111,14 @@ void	print_scene(t_scene scene)
 	printf("cam_dir y: %lf\n", scene.camera->cam_dir.y);
 	printf("cam_dir z: %lf\n", scene.camera->cam_dir.z);
 	printf("Fov: %d\n\n", scene.camera->fov);
-	/* printf("Light(L): \n\n");
+	printf("Light(L): \n\n");
 	printf("Pos x: %lf\n", scene.light->pos.x);
 	printf("Pos y: %lf\n", scene.light->pos.y);
 	printf("Pos z: %lf\n", scene.light->pos.z);
 	printf("Bright: %lf\n", scene.light->bright);
 	printf("Color red: %d\n", scene.light->color.red);
 	printf("Color blue: %d\n", scene.light->color.blue);
-	printf("Color green: %d\n\n", scene.light->color.green); */
+	printf("Color green: %d\n\n", scene.light->color.green);
 	obj = scene.obj;
 	if (!obj)
 		return ;
@@ -129,12 +128,12 @@ void	print_scene(t_scene scene)
 	{
 		if (obj->id == SP)
 			print_spheres(obj->shape.sp);
-		//if (obj->id == PL)
-		//	print_planes(obj->shape.pl);
+		if (obj->id == PL)
+			print_planes(obj->shape.pl);
 		if (obj->id == CY)
 			print_cylinders(obj->shape.cy);
-		//if (obj->id == CO)
-		//	print_cones(obj->shape.co); 
+		if (obj->id == CO)
+			print_cones(obj->shape.co); 
 		obj = obj->next;
 	}
 }

@@ -1,36 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect_cylinder.c                               :+:      :+:    :+:   */
+/*   intersect_cone.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 16:54:54 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/27 12:16:36 by adrmarqu         ###   ########.fr       */
+/*   Created: 2024/10/27 11:51:00 by adrmarqu          #+#    #+#             */
+/*   Updated: 2024/10/27 12:16:24 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 
-t_ray	hit_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cy)
+t_ray	hit_cone(t_vec3 dir, t_vec3 origin, t_cone *co)
 {
 	t_ray		ray;
 	t_operation	op;
-	t_vec3		cy_axis;
-	t_vec3		tmp;
+	t_vec3		axis;
+	t_vec3		hitcone;
+	double		tan;
+	double		dot_axis[2];
 	double		sqrt_delta;
+	double		t;
 	double		height;
-	double t;	
 
-	printf("Pintar CY\n");
+	printf("Pintar CO\n");
 	ray.hit = false;
 
-	op.OC = substract_vec3(cy->pos, origin);
-	cy_axis = unit_vec3(cy->normal);
+	op.OC = substract_vec3(origin, co->pos);
+	axis = unit_vec3(co->normal);
 
-	op.A = dot_product(&dir, &dir) - pow(dot_product(&dir, &cy_axis), 2);
-	op.B = 2 * (dot_product(&dir, &op.OC) - dot_product(&dir, &cy_axis) * dot_product(&op.OC, &cy_axis));
-	op.C = dot_product(&op.OC, &op.OC) - pow(dot_product(&op.OC, &cy_axis), 2) - pow(cy->radius, 2);
+	tan = (co->radius / co->height) * (co->radius / co->height);
+	
+	dot_axis[0] = dot_product(&dir, &axis);
+	dot_axis[1] = dot_product(&op.OC, &axis);
+
+	op.A = dot_product(&dir, &dir) - (1 + tan) * dot_axis[0] * dot_axis[0];
+	op.B = 2 * dot_product(&dir, &op.OC) - (1 + tan) * dot_axis[0] * dot_axis[1];
+	op.C = dot_product(&op.OC, &op.OC) - (1 + tan) * dot_axis[1] * dot_axis[1];
 
 	op.delta = op.B * op.B - 4 * op.A * op.C;
 	if (op.delta < 0)
@@ -45,15 +52,16 @@ t_ray	hit_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cy)
 		return (ray);
 
 	ray.hit_point = add_vec3(origin, scalar_mult(dir, t));
-	tmp = substract_vec3(ray.hit_point, cy->pos);
-	height = dot_product(&tmp, &cy_axis);
+	hitcone = substract_vec3(ray.hit_point, co->pos);
+	height = dot_product(&hitcone, &axis);
 
-	if (height < 0 || height > cy->height)
+	if (height < 0 || height > co->height)
 		return (ray);
 
-	printf("Pintado CY\n");
+	printf("Pintado CO\n");
 	ray.hit = true;
 	ray.distance = t;
-	ray.normal = unit_vec3(substract_vec3(tmp, scalar_mult(cy_axis, height)));
+	ray.normal = unit_vec3(substract_vec3(hitcone, scalar_mult(axis, height * (1 + tan))));
+
 	return (ray);
 }
