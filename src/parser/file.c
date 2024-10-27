@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/21 13:32:03 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/27 11:16:06 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	init_scene_null(t_scene *scene)
 
 static int	read_data(int fd, t_scene *scene)
 {
-	t_obj 	*obj;
 	char	*line;
 
 	while (1)
@@ -50,10 +49,10 @@ static int	read_data(int fd, t_scene *scene)
 		}
 		free(line);
 	}
-	obj = scene->obj;
-	while (obj->prev)
-		obj = obj->prev;
-	scene->obj = obj;
+	while (scene->obj->prev)
+		scene->obj = scene->obj->prev;
+	while (scene->light->prev)
+		scene->light = scene->light->prev;
 	if (!scene->ambient)
 		return (error_parser(YEL, MSG_AMB), 1);
 	if (!scene->camera)

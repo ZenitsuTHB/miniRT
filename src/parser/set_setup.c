@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:30:27 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/18 12:22:11 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/27 11:18:06 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,26 +79,34 @@ void	set_camera(t_scene *scene, char *data, int *error)
 
 void	set_light(t_scene *scene, char *data, int *error)
 {
-	t_light	*light;
+	t_light	*new;
 	char	**split;
 	char	*err;
 
-	light = malloc(sizeof(t_light));
-	if (!light)
+	new = malloc(sizeof(t_light));
+	if (!new)
 		return (error_parser(YEL, MSG_MEM));
 	split = ft_splitset(data, " \t");
 	if (!split)
 		return (error_parser(YEL, MSG_MEM));
 	if (ft_splitlen(split) != 4)
 		return (free_split(split), error_parser(YEL, MSG_NUM));
-	if (set_pos(split[1], &(light->pos)))
+	if (set_pos(split[1], &(new->pos)))
 		return (free_split(split));
-	light->bright = ft_strtod(split[2], &err);
-	if (*err || light->bright < 0.0 || light->bright > 1.0)
+	new->bright = ft_strtod(split[2], &err);
+	if (*err || new->bright < 0.0 || new->bright > 1.0)
 		return (free_split(split), error_parser(YEL, MSG_DATA));
-	if (set_color(split[3], &(light->color)))
+	if (set_color(split[3], &(new->color)))
 		return (free_split(split));
 	free_split(split);
-	scene->light = light;
+	new->next = NULL;
+	if (!scene->light)
+		new->prev = NULL;
+	else
+	{
+		scene->light->next = new;
+		new->prev = scene->light;
+	}
+	scene->light = new;
 	*error = 0;
 }

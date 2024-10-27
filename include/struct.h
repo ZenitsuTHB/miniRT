@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/25 03:13:23 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/27 11:14:37 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_light
 	double 			bright;
 	t_rgb 			color; 
 	struct s_light *next;
+	struct s_light *prev;
 }				t_light;
 
 typedef struct s_sphere

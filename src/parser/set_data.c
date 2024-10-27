@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:59:55 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/03 14:35:11 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/27 11:17:33 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,19 @@ static char	*get_id(char *str)
 static int	dup_control(char *id)
 {
 	static int	ambient = 0;
-	static int	light = 0;
+	//static int	light = 0;
 	static int	camera = 0;
 
 	if (!ft_strncmp(id, "A", 1))
 		ambient++;
-	if (!ft_strncmp(id, "L", 1))
-		light++;
+	//if (!ft_strncmp(id, "L", 1))
+	//	light++;
 	if (!ft_strncmp(id, "C", 1))
 		camera++;
 	if (ambient > 1)
 		return (error_parser(YEL, MSG_TAMB), 1);
-	if (light > 1)
-		return (error_parser(YEL, MSG_TLIGHT), 1);
+	//if (light > 1)
+	//	return (error_parser(YEL, MSG_TLIGHT), 1);
 	if (camera > 1)
 		return (error_parser(YEL, MSG_TCAM), 1);
 	return(0);
