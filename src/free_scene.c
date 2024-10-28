@@ -6,12 +6,26 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 17:46:40 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/05 11:58:22 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:18:03 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/struct.h"
 #include <stdlib.h>
+
+/*void	free_lights(t_light *light)
+{
+	t_light *tmp;
+
+	while (light->prev)
+		light = light->prev;
+	while (light)
+	{
+		tmp = light->next;
+		free(light);
+		light = tmp;
+	}
+}*/
 
 void	free_objects(t_obj *obj)
 {
@@ -47,5 +61,7 @@ void	free_scene(t_scene *scene)
 		free(scene->camera);
 	if (scene->light)
 		free(scene->light);
+	//if (scene->light)
+	//	free_lights(scene->light);
 	free_objects(scene->obj);
 }
