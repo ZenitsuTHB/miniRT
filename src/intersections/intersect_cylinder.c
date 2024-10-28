@@ -6,54 +6,100 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 16:54:54 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/27 12:16:36 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/28 13:29:01 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 
+int	calculate_abcd(t_operation *op, t_cylinder *cy, t_vec3 dir, t_vec3 cyo)
+{
+	double	a;
+	double	b;
+	double	c;
+
+	a = dot_product(&dir, &dir);
+	b = pow(dot_product(&dir, &cy->normal), 2);
+	op->A = a - b;
+	a = dot_product(&dir, &cyo);
+	b = dot_product(&dir, &cy->normal);
+	c = dot_product(&cyo, &cy->normal);
+	op->B = 2 * (a - b * c);
+	a = dot_product(&cyo, &cyo);
+	b = pow(dot_product(&cyo, &cy->normal), 2);
+	c = pow(cy->radius, 2);
+	op->C = a - b - c;
+	op->delta = op->B * op->B - 4 * op->A * op->C;
+	if (op->delta < 0)
+		return (1);
+	return (0);
+}
+
+void	calculate_t(t_operation *op)
+{
+	double	tmp;
+
+	op->t[0] = (-op->B - sqrt(op->delta)) / (2 * op->A);
+	op->t[1] = (-op->B + sqrt(op->delta)) / (2 * op->A);
+	if (op->t[0] > op->t[1])
+	{
+		tmp = op->t[0];
+		op->t[0] = op->t[1];
+		op->t[1] = tmp;
+	}
+}
+
+t_vec3	get_cyl_normal(t_vec3 hp, t_cylinder *cy, double m)
+{
+	t_vec3	a;
+	t_vec3	b;
+	t_vec3	c;
+
+	a = scalar_mult(cy->normal, m);
+	b = add_vec3(cy->pos, a);
+	c = substract_vec3(hp, b);
+	return (unit_vec3(c));
+}
+
 t_ray	hit_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cy)
 {
 	t_ray		ray;
 	t_operation	op;
-	t_vec3		cy_axis;
-	t_vec3		tmp;
-	double		sqrt_delta;
-	double		height;
-	double t;	
+	t_vec3		cyo;
+	t_vec3		hp;
+	double		m;
+	double		a;
+	double		b;
+	int			i;
 
-	printf("Pintar CY\n");
 	ray.hit = false;
-
-	op.OC = substract_vec3(cy->pos, origin);
-	cy_axis = unit_vec3(cy->normal);
-
-	op.A = dot_product(&dir, &dir) - pow(dot_product(&dir, &cy_axis), 2);
-	op.B = 2 * (dot_product(&dir, &op.OC) - dot_product(&dir, &cy_axis) * dot_product(&op.OC, &cy_axis));
-	op.C = dot_product(&op.OC, &op.OC) - pow(dot_product(&op.OC, &cy_axis), 2) - pow(cy->radius, 2);
-
-	op.delta = op.B * op.B - 4 * op.A * op.C;
-	if (op.delta < 0)
+	ray.distance = INFINITY;
+	cyo = substract_vec3(cy->pos, origin);
+	if (calculate_abcd(&op, cy, dir, cyo))
 		return (ray);
+	calculate_t(&op);
+	i = 0;
+	while (i < 2)
+	{
+		if (op.t[i] > 0)
+		{
+			hp = add_vec3(origin, scalar_mult(dir, op.t[i]));
+		
+			a = dot_product(&dir, &cy->normal);
+			b = dot_product(&cyo, &cy->normal);
 
-	sqrt_delta = sqrt(op.delta);
-	op.t[0] = (-op.B - sqrt_delta) / (2 * op.A);
-	op.t[1] = (-op.B + sqrt_delta) / (2 * op.A);
+			m = a * op.t[i] + b;
 
-	t = (op.t[0] > 0) ? op.t[0] : ((op.t[1] > 0) ? op.t[1] : -1);
-	if (t < 0)
-		return (ray);
-
-	ray.hit_point = add_vec3(origin, scalar_mult(dir, t));
-	tmp = substract_vec3(ray.hit_point, cy->pos);
-	height = dot_product(&tmp, &cy_axis);
-
-	if (height < 0 || height > cy->height)
-		return (ray);
-
-	printf("Pintado CY\n");
-	ray.hit = true;
-	ray.distance = t;
-	ray.normal = unit_vec3(substract_vec3(tmp, scalar_mult(cy_axis, height)));
+			if (m >= 0 && m <= cy->height)
+			{
+				ray.hit = true;
+				ray.distance = op.t[i];
+				ray.hit_point = hp;
+				ray.normal = get_cyl_normal(hp, cy, m);
+				return (ray);
+			}
+		}
+		i++;
+	}
 	return (ray);
 }
