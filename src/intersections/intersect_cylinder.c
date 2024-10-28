@@ -6,7 +6,7 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 16:54:54 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/28 13:29:01 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/28 13:44:51 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,44 +61,50 @@ t_vec3	get_cyl_normal(t_vec3 hp, t_cylinder *cy, double m)
 	return (unit_vec3(c));
 }
 
+int	check_interaction(t_ray *ray, t_operation op, t_cylinder *cy, int i)
+{
+	t_vec3	hp;
+	double	a;
+	double	b;
+	double	m;
+
+	if (op.t[i] > 0)
+	{
+		hp = add_vec3(op.tri.origin, scalar_mult(op.tri.dir, op.t[i]));
+		a = dot_product(&op.tri.dir, &cy->normal);
+		b = dot_product(&op.tri.co, &cy->normal);
+		m = a * op.t[i] + b;
+		if (m >= 0 && m <= cy->height)
+		{
+			ray->hit = true;
+			ray->distance = op.t[i];
+			ray->hit_point = hp;
+			ray->normal = get_cyl_normal(hp, cy, m);
+			return (1);
+		}
+	}
+	return (0);
+}
+
 t_ray	hit_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cy)
 {
 	t_ray		ray;
 	t_operation	op;
-	t_vec3		cyo;
-	t_vec3		hp;
-	double		m;
-	double		a;
-	double		b;
 	int			i;
 
 	ray.hit = false;
 	ray.distance = INFINITY;
-	cyo = substract_vec3(cy->pos, origin);
-	if (calculate_abcd(&op, cy, dir, cyo))
+	op.tri.dir = dir;
+	op.tri.origin = origin;
+	op.tri.co = substract_vec3(cy->pos, origin);
+	if (calculate_abcd(&op, cy, dir, op.tri.co))
 		return (ray);
 	calculate_t(&op);
 	i = 0;
 	while (i < 2)
 	{
-		if (op.t[i] > 0)
-		{
-			hp = add_vec3(origin, scalar_mult(dir, op.t[i]));
-		
-			a = dot_product(&dir, &cy->normal);
-			b = dot_product(&cyo, &cy->normal);
-
-			m = a * op.t[i] + b;
-
-			if (m >= 0 && m <= cy->height)
-			{
-				ray.hit = true;
-				ray.distance = op.t[i];
-				ray.hit_point = hp;
-				ray.normal = get_cyl_normal(hp, cy, m);
-				return (ray);
-			}
-		}
+		if (check_interaction(&ray, op, cy, i))
+			return (ray);
 		i++;
 	}
 	return (ray);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/22 14:23:35 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/28 13:39:02 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,13 @@ typedef struct s_scene
 	t_ray		*ray;
 }				t_scene;
 
+typedef struct	s_trilevec
+{
+	t_vec3	dir;
+	t_vec3	origin;
+	t_vec3	co;
+}	t_triplevec;
+
 typedef struct s_operation
 {
   t_vec3		OC;
@@ -155,6 +162,7 @@ typedef struct s_operation
   double		C;
   double		t[2];
   double		delta;
+  t_triplevec	tri;
 }       t_operation;
 
 // typedef struct s_world
