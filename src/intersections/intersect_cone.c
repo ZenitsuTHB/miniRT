@@ -6,13 +6,13 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 11:51:00 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/28 13:49:05 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/28 13:54:16 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 
-int	calculate_abcd(t_operation *op, t_cone *co, t_vec3 dir, t_vec3 cyo)
+int	calculate_abc(t_operation *op, t_cone *co, t_vec3 dir, t_vec3 cyo)
 {
 	double	a;
 	double	b;
@@ -35,7 +35,7 @@ int	calculate_abcd(t_operation *op, t_cone *co, t_vec3 dir, t_vec3 cyo)
 	return (0);
 }
 
-void	calculate_t(t_operation *op)
+void	calculate_ttt(t_operation *op)
 {
 	double	tmp;
 
@@ -61,7 +61,7 @@ t_vec3	get_cone_normal(t_vec3 hp, t_cone *co, double m)
 	return (unit_vec3(c));
 }
 
-int	check_interaction(t_ray *ray, t_operation op, t_cone *co, int i)
+int	check_interactions(t_ray *ray, t_operation op, t_cone *co, int i)
 {
 	t_vec3	hp;
 	double	a;
@@ -97,13 +97,13 @@ t_ray	hit_cone(t_vec3 dir, t_vec3 origin, t_cone *co)
 	op.tri.dir = dir;
 	op.tri.origin = origin;
 	op.tri.co = substract_vec3(co->pos, origin);
-	if (calculate_abcd(&op, co, dir, op.tri.co))
+	if (calculate_abc(&op, co, dir, op.tri.co))
 		return (ray);
-	calculate_t(&op);
+	calculate_ttt(&op);
 	i = 0;
 	while (i < 2)
 	{
-		if (check_interaction(&ray, op, co, i))
+		if (check_interactions(&ray, op, co, i))
 			return (ray);
 		i++;
 	}
