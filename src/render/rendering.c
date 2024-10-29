@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/25 12:15:10 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/29 17:58:39 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	hit_which_object(t_vec3 direction, t_vec3 origin, t_obj *obj, t_ray *ray)
 	//reset.hit = false;
 	if (obj->id == SP)
 		*ray = hit_sphere(direction, origin, obj->shape.sp);
-	else if (obj->id == PL)
+	if (obj->id == PL)
 		*ray = hit_plane(direction, origin, obj->shape.pl);
 	//else
 	//*ray = reset;
@@ -53,7 +53,7 @@ t_ray	intersect_obj(t_vec3 pxel_dir, t_vec3 ori, t_obj *obj, t_scene *scene)
 	}
 	if (ray.hit == false)
 		return(ray);
-	ray.color = get_phong_effect(pxel_dir, ray, scene);
+	ray.color = get_phong_effect(ray, scene);
 	return (ray);
 }
 

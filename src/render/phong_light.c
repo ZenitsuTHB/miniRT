@@ -6,13 +6,22 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/26 23:06:41 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/29 19:19:53 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "../include/minirt.h"
 #include <../libs/MLX42/include/MLX42/MLX42.h>
+
+t_rgb scalar_mult_color(t_rgb color, double scalar)
+{
+    return (t_rgb) {
+        .x = fmin(color.x * scalar, 255),
+        .y = fmin(color.y * scalar, 255),
+        .z = fmin(color.z * scalar, 255)
+    };
+}
 
 uint32_t	gradient_color(t_rgb color)
 {
@@ -33,14 +42,7 @@ double	maxim(double nb, double limit)
 	return (limit);
 }
 
-t_rgb scalar_mult_color(t_rgb color, double scalar)
-{
-    return (t_rgb) {
-        .x = fmin(color.x * scalar, 255),
-        .y = fmin(color.y * scalar, 255),
-        .z = fmin(color.z * scalar, 255)
-    };
-}
+//reflecdirection = light_dir - 2 * (normal * light_dir) * normal;
 // Final specular color (light color * intensity * specular factor)
 t_rgb get_specular_color(t_obj *obj, t_light *light, t_vec3 point, t_camera *cam)
 {
@@ -50,12 +52,16 @@ t_rgb get_specular_color(t_obj *obj, t_light *light, t_vec3 point, t_camera *cam
     t_vec3 reflect_dir;
     t_vec3 view_dir;
     
-    view_dir = substract_vec3(point, cam->origin);
-    light_dir = unit_vec3(substract_vec3(light->pos, point));
-    normal = unit_vec3(substract_vec3(point, obj->shape.sp->center));
-    reflect_dir = substract_vec3(scalar_mult(normal, 2 * dot_product(&normal, &light_dir)), light_dir);
-    spec = pow(fmax(dot_product(&view_dir, &reflect_dir), 0.0), 255.0);
-    
+    spec = 0.0;
+    normal = (t_vec3){0, 0, 0};
+    normal = obj->normal;
+    view_dir = unit_vec3(substract_vec3(point, cam->origin));
+    light_dir = unit_vec3(substract_vec3(point, light->pos));
+    spec = dot_product(&normal, &light_dir) * 2;
+    reflect_dir = scalar_mult(normal, spec);
+    reflect_dir = substract_vec3(reflect_dir, light_dir);
+    spec = 0.0;
+    spec = pow(fmax(dot_product(&view_dir, &reflect_dir), 0.0), 255.9);
     return scalar_mult(light->color, light->bright * spec);
 }
 
@@ -74,52 +80,62 @@ t_vec3 get_diffuse_color(t_obj *obj, t_light *light, t_vec3 point)
     double dotLN;
     t_vec3 diffuse;
     t_vec3 light_dir;
+    //printf("thi is the plane normal (%lf, %lf, %lf)\n", obj->normal.x, obj->normal.y, obj->normal.z);
 
     light_dir = unit_vec3(substract_vec3(light->pos, point));
+   // printf("thi is the light dir  (%lf, %lf, %lf)\n",light_dir.x,light_dir.y,light_dir.z);
     dotLN = fmax(0, dot_product(&obj->normal, &light_dir));
-    //printf("thi is the dot prod (%lf\n)", dotLN);
     diffuse = scalar_mult(obj->color, light->bright * dotLN);
     
     return diffuse;
 }
+void   get_normal_and_color(t_vec3 hitpoint, t_obj **object)
+{
 
-uint32_t    get_full_color(t_ray ray, t_scene *sc)
+    if  ((*object)->id == SP)
+    {
+        (*object)->color = (*object)->shape.sp->color;
+        (*object)->normal = unit_vec3(substract_vec3(hitpoint, (*object)->shape.sp->center));
+       
+    }
+    else if ((*object)->id == PL)
+    {
+        (*object)->color = (*object)->shape.pl->color;
+        (*object)->normal = (*object)->shape.pl->normal;
+    }
+    
+}
+
+uint32_t    get_full_color(t_ray ray, t_scene *sc, t_light **light)
 {
    t_rgb full;
    t_rgb I_amb;
    t_rgb diffuse;
-   t_obj *obj;
-  // t_rgb specular;
+   t_light *lighter;
+   t_rgb specular;
     
-    obj = ray.object;
-    if  (obj->id == SP)
+    lighter = *light;
+    get_normal_and_color(ray.hit_point, &ray.object);
+    while (lighter)
     {
-        obj->color = ray.object->shape.sp->color;
-        obj->normal = unit_vec3(substract_vec3(ray.hit_point, obj->shape.sp->center));
-       
+      //  printf("this is lit %p\n", lighter);
+        I_amb =  get_ambient_color(ray.object->color, sc);
+	    diffuse = get_diffuse_color(ray.object, lighter, ray.hit_point);
+        specular = get_specular_color(ray.object, lighter, ray.hit_point, sc->camera);
+        full = add_vec3(add_vec3(I_amb, diffuse), specular);
+        lighter = lighter->next;
+        
     }
-    else if (obj->id == PL)
-    {
-        obj->color = ray.object->shape.pl->color;
-        obj->normal = ray.object->shape.pl->normal;
-    }
-   // else
-     //   ray.normal = (t_vec3){0,0,0};
-    I_amb =  get_ambient_color(obj->color, sc);
-	diffuse = get_diffuse_color(obj, sc->light, ray.hit_point);
-   // specular = get_specular_color(ray.object, sc->light, ray.hit_point, sc->camera);
-    full = add_vec3(I_amb, diffuse);
     return (gradient_color(full));
 }
 
-uint32_t get_phong_effect(t_vec3 dir, t_ray ray, t_scene *scene)
+uint32_t get_phong_effect(t_ray ray, t_scene *scene)
 {
+    t_light     **light;
     uint32_t    finished;
 
-    (void)dir;
-    
-    
-    finished = get_full_color(ray, scene);
+    light = &scene->light;
+    finished = get_full_color(ray, scene, light);
     return (finished);
 }
 
