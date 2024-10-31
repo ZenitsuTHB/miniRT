@@ -59,6 +59,8 @@ t_rgb get_specular_color(t_obj *obj, t_light *light, t_vec3 point, t_camera *cam
     light_dir = unit_vec3(substract_vec3(point, light->pos));
     spec = dot_product(&normal, &light_dir) * 2;
     reflect_dir = scalar_mult(normal, spec);
+    //printf("this is light dir (%lf, %lf, %lf)\n", light_dir.x, light_dir.y, light_dir.z);
+    //printf("this is reflect_dir (%lf, %lf, %lf)\n", );
     reflect_dir = substract_vec3(reflect_dir, light_dir);
     spec = 0.0;
     spec = pow(fmax(dot_product(&view_dir, &reflect_dir), 0.0), 255.9);
@@ -68,8 +70,9 @@ t_rgb get_specular_color(t_obj *obj, t_light *light, t_vec3 point, t_camera *cam
 t_rgb    get_ambient_color(t_rgb base, t_scene *sc)
 {
     t_rgb       I_amb;
-   // t_rgb       lights;
+    // t_rgb       lights;
 
+    //lights = add_vec3(base, sc->ambient->color);
     //lights = multiply_vec3(base, sc->ambient->color);
     I_amb = scalar_mult(base, sc->ambient->bright);
     return(I_amb);
@@ -120,11 +123,11 @@ uint32_t    get_full_color(t_ray ray, t_scene *sc, t_light **light)
     {
       //  printf("this is lit %p\n", lighter);
         I_amb =  get_ambient_color(ray.object->color, sc);
-	    diffuse = get_diffuse_color(ray.object, lighter, ray.hit_point);
+	      diffuse = get_diffuse_color(ray.object, lighter, ray.hit_point);
         specular = get_specular_color(ray.object, lighter, ray.hit_point, sc->camera);
         full = add_vec3(add_vec3(I_amb, diffuse), specular);
         lighter = lighter->next;
-        
+       (void)full; 
     }
     return (gradient_color(full));
 }
