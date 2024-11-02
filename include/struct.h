@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/28 13:39:02 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/02 14:25:24 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,9 @@ typedef struct s_light
 {
 	t_vec3	pos;
 	double 	bright;
-	t_rgb 	color; 
+	t_rgb 	color;
+	struct s_light	*next;
+	struct s_light	*prev;
 }				t_light;
 
 typedef struct s_sphere
