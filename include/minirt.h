@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/05 12:08:46 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/02 13:51:48 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-int	init_scene(t_scene *scene);
+int	init_mlx(t_scene *scene);
 
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓
@@ -36,10 +36,17 @@ uint32_t	gradient_color(t_rgb color);
 
 // RENDER
 int			render_object(t_scene *scene);
-int			setting_camera(t_camera *camera);
+int			setting_up_camera(t_camera *camera);
 void		generate_ray(t_camera *camera, t_ray *ray, int i, int j);
-bool	hit_sphere(t_ray *ray, t_sphere *sp, double *t);
-bool hit_plane(t_ray *ray, t_plane *plane, double *t);
+t_ray       hit_sphere(t_vec3 direction, t_vec3 , t_sphere *);
+t_ray       hit_plane(t_vec3 direction, t_vec3 origin, t_plane *pl);
+t_ray       hit_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cy);
+t_ray       hit_cone(t_vec3 dir, t_vec3 origin, t_cone *co);
+t_vec3      get_pixel_direction(t_camera *cam, int pixel_x, int pixel_y);
+uint32_t    get_phong_effect(t_vec3 dir, t_ray ray, t_scene *scene);
+void		calculate_t(t_operation *op);
+
+
 
 
 int			error_message(char *color, char *msg);
@@ -50,7 +57,7 @@ void		manage_escape(mlx_key_data_t keydata, void *param);
 
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓
-    PARSER
+        PARSER
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
 

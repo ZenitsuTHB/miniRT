@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_objects.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:34:09 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/05 12:22:16 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:42:35 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,14 @@ static int	add_object(t_obj **obj, int id, char *data)
 	new = get_new_obj(*obj, id);
 	if (!new)
 		return (1);
-	new->shape.sp = get_sphere(id, data, &error);
-	new->shape.pl = get_plane(id, data, &error);
-	new->shape.cy = get_cylinder(id, data, &error);
-	new->shape.co = get_cone(id, data, &error);
+	if (id == SP)
+		new->shape.sp = get_sphere(id, data, &error);
+	else if (id ==  PL)
+		new->shape.pl = get_plane(id, data, &error);
+	else if (id == CY)
+		new->shape.cy = get_cylinder(id, data, &error);
+	else if (id == CO)
+		new->shape.co = get_cone(id, data, &error);
 	*obj = new;
 	return (error);
 }
@@ -51,6 +55,7 @@ static int	add_object(t_obj **obj, int id, char *data)
 void	set_object(t_scene *scene, char *id, char *data, int *error)
 {
 	int	status;
+
 
 	if (!ft_strncmp(id, "sp", 3))
 		status = add_object(&(scene->obj), SP, data);

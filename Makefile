@@ -15,17 +15,16 @@ LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBS    += $(LIBFT)/libft.a
 SRCSDIR := ./src
 
-SRCS	:= main.c free_scene.c print_scene.c #mlx_use.c  init_hard_coded.c 
+SRCS	:= main.c free_scene.c print_scene.c mlx_use.c
 
 PARSER	:= file.c parser_utils.c set_data.c set_setup.c \
 		   get_objects.c set_aux.c set_objects.c set_utils.c
 
+HIT		:= intersect_sphere.c intersect_plane.c intersect_cylinder.c intersect_cone.c
 
-HIT		:= #intersect_plane.c intersect_sphere.c
+RENDER  := rendering.c camera.c phong_light.c
 
-RENDER  := #rendering.c camera.c
-
-VECTOR	:= #vector_op.c vector_op1.c vector_op2.c
+VECTOR	:= vector_op.c vector_op1.c vector_op2.c
 
 OBJS	:= $(addprefix $(OBJ_D)/, ${SRCS:.c=.o})
 OBJS	+= $(addprefix $(OBJ_D)/render/, ${RENDER:.c=.o})

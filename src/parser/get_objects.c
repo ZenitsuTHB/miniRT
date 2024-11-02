@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_objects.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:04:37 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/05 12:07:12 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:37:15 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_sphere	*get_sphere(int id, char *data, int *error)
 		return (free(obj), error_parser(YEL, MSG_MEM), NULL);
 	if (ft_splitlen(split) != 4)
 		return (free(obj), free_split(split), error_parser(YEL, MSG_DATA), NULL);
-	if (set_pos(split[1], &(obj->pos)))
+	if (set_pos(split[1], &(obj->center)))
 		return (free(obj), free_split(split), NULL);
 	obj->radius = ft_strtod(split[2], &err) / 2;
 	if (*err)

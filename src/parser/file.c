@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/17 12:00:01 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/02 14:17:23 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,26 @@ static int	init_scene_null(t_scene *scene)
 static int	read_data(int fd, t_scene *scene)
 {
 	char	*line;
-	t_obj	*obj;
 
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (delete_newline(line))
-			if (set_data(scene, line))
-				return (free(line), 1);
+		if (*line != '#' && delete_newline(line) && set_data(scene, line))
+			return (free(line), 1);
 		free(line);
 	}
 	if (!scene->ambient)
 		return (error_parser(YEL, MSG_AMB), 1);
 	if (!scene->camera)
 		return (error_parser(YEL, MSG_CAM), 1);
+	while (scene->light->prev)
+		scene->light = scene->light->prev;
 	if (!scene->light)
 		return (error_parser(YEL, MSG_LIGHT), 1);
-	obj = scene->obj;
-	while (obj->prev)
-		obj = obj->prev;
-	scene->obj = obj;
+	while (scene->obj->prev)
+		scene->obj = scene->obj->prev;
 	return (0);
 }
 

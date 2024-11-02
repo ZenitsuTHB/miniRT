@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:15:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/03 12:50:19 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/16 10:54:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,12 @@ typedef enum e_type
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define WIDTH 1400
+# define x_coord 0
+# define y_coord 1
+
+# define WIDTH 1200
 # define HEIGHT 1000
-# define IMG_W 1000 //WIDTH
+# define IMG_W 1200 //WIDTH
 # define IMG_H 1000 // HEIGHT
 
 # define MSG_FEW "Too few arguments!"

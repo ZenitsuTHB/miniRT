@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/05 12:04:07 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/10/28 13:39:02 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,25 @@ typedef struct s_mlx
 
 typedef struct s_ambient
 {
-	double      bright;
+	double		bright;
 	t_rgb       color;
 }             t_ambient;
 
 typedef struct s_camera
 {
-	t_vec3		pos;
-	t_vec3		normal;
 	int			fov;
-	// Render
-	double		focal_len;
-	double		viewport_width;
-	double		viewport_height;
-	double		ratio;
-	t_vec3		horizontal;
-	t_vec3		vertical;
-	t_vec3		up;
-	t_vec3		lower_left_corner;
-	t_vec3		right;
+	t_vec3		origin;
 	t_vec3		cam_dir;
+	double		ratio;
+	double		focal_len;
+	double		vp_width;
+	double		vp_height;
+	t_vec3		up;
+	t_vec3		right;
+	t_vec3		neg_dir;
+	t_vec3		vertical;
+	t_vec3		horizontal;
+	t_vec3		l_l_corner;
 }				t_camera;
 
 typedef struct s_light
@@ -78,7 +77,7 @@ typedef struct s_light
 
 typedef struct s_sphere
 {
-	t_vec3		pos;
+	t_vec3		center;
 	double 		radius;
 	t_rgb		color;
 }				t_sphere;
@@ -108,7 +107,7 @@ typedef struct s_cone
 	t_rgb				color;
 }	t_cone;
 
-typedef struct s_shape
+typedef union u_shape
 {
 	t_sphere	*sp;
 	t_plane		*pl;
@@ -122,24 +121,19 @@ typedef struct s_obj
 	t_shape			shape;
 	struct s_obj	*next;
 	struct s_obj	*prev;
+	t_rgb			color;
 }	t_obj;
 
-typedef struct s_raytracing
+typedef struct s_ray
 {
-	double		ratio;
+	bool		hit;
+	double		distance;
 	t_vec3		origin;
-	t_vec3		direction;
-	double    img_pl_width;
-  	double    img_pl_height;
-}           t_ray;
-
-typedef struct s_hit
-{
-	double t;      // Distance from the ray's origin to the intersection point
-	t_vec3 point;  // Intersection point
-	t_vec3 normal; // Normal vector at the intersection point
-	t_obj *object;//Pointer to the intersected object
-}				t_hit;
+	t_vec3		normal;
+	t_vec3		hit_point;
+	t_obj		*object;
+	uint32_t	color;
+}				t_ray;
 
 typedef struct s_scene
 {
@@ -151,8 +145,25 @@ typedef struct s_scene
 	t_obj		*obj;
 	// Render
 	t_ray		*ray;
-	t_hit		*hit;
 }				t_scene;
+
+typedef struct	s_trilevec
+{
+	t_vec3	dir;
+	t_vec3	origin;
+	t_vec3	co;
+}	t_triplevec;
+
+typedef struct s_operation
+{
+  t_vec3		OC;
+  double		A;
+  double		B;
+  double		C;
+  double		t[2];
+  double		delta;
+  t_triplevec	tri;
+}       t_operation;
 
 // typedef struct s_world
 // {

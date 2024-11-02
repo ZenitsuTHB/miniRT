@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_op1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:13:17 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/23 12:18:47 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/10/14 22:29:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_vec3	scalar_mult(t_vec3 v, double scalar)
 // a vector divided by a scalar
 t_vec3	scalar_div(t_vec3 v, double scalar)
 {
+	if (scalar == 0)
+		return ((t_vec3){0, 0, 0});
 	return (create_vec3(v.x / scalar, v.y / scalar, v.z / scalar));
 }
 
