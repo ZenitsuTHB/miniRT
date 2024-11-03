@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/25 03:15:10 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/03 01:38:49 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ double  calculate_quadratic_root(t_operation op)
   return (-1.0);
 }
 
+//ray.hit_point = O + t.D, 
 t_ray hit_sphere(t_vec3 direction, t_vec3 origin, t_sphere *sp)
 {
   t_ray ray;
   t_operation op;
-
+  
   ft_bzero(&ray, sizeof(t_ray));
+  ft_bzero(&op, sizeof(t_operation));
   ray.hit = false;
 	op.OC = substract_vec3(origin, sp->center);
 	op.A = dot_product(&direction, &direction);

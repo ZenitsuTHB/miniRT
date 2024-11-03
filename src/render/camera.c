@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/25 01:52:52 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/03 10:36:36 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_vec3	get_pixel_direction(t_camera *cam, int pixel_x, int pixel_y)
 	added_scales = add_vec3(scaled[x_coord], scaled[y_coord]);
 	px_point = add_vec3(cam->l_l_corner, added_scales);
 	ray_dir = substract_vec3(px_point, cam->origin);
-	//ray_dir.z = 1.0;
 	return(unit_vec3(ray_dir));
 }
 
