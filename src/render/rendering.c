@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/29 17:58:39 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/06 00:57:20 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ t_ray	intersect_obj(t_vec3 pxel_dir, t_vec3 ori, t_obj *obj, t_scene *scene)
 {
 	t_ray		ray;
 	t_ray		tmp_ray;
-	//t_obj		*obj_head;
+	t_obj		*obj_head;
 
-	//obj_head = obj;
+	obj_head = obj;
 	tmp_ray.hit = false;
 	ray.hit = false;
 	ray.distance = INFINITY;
@@ -53,7 +53,7 @@ t_ray	intersect_obj(t_vec3 pxel_dir, t_vec3 ori, t_obj *obj, t_scene *scene)
 	}
 	if (ray.hit == false)
 		return(ray);
-	ray.color = get_phong_effect(ray, scene);
+	ray.color = get_phong_effect(ray, scene, obj_head);
 	return (ray);
 }
 

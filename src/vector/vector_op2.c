@@ -6,19 +6,27 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:16:34 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/21 16:27:07 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/06 01:46:25 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
 
-// function to normalize a vector
+double vector_length(t_vec3 v)
+{
+	double length;
+	
+	length = (v.x * v.x) + (v.y * v.y) + (v.z * v.z);
+	length = sqrt(length);
+	return (length);
+}
+
+/* function to normalize a vector*/
 t_vec3	unit_vec3(t_vec3 v)
 {
 	double	length;
 
-	length = (v.x * v.x) + (v.y * v.y) + (v.z * v.z);
-	length = sqrt(length);
+	length = vector_length(v);	
 	if (length == 0)
 		return ((t_vec3){0, 0, 0});
 	return (create_vec3(v.x / length, v.y / length, v.z / length));

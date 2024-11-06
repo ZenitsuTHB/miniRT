@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:00:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/09/23 13:39:06 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/06 01:39:41 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ t_vec3	create_vec3(double x, double y, double z)
 	new_vec.y = y;
 	new_vec.z = z;
 	return (new_vec);
-}
-
-void	init_vec3(t_vec3 *vector)
-{
-	ft_bzero(vector, sizeof(t_vec3));
 }
 
 t_vec3	add_vec3(const t_vec3 v1, const t_vec3 v2)

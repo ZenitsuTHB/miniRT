@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:25:21 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/14 22:32:03 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/06 01:46:57 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_vector	t_point;
 	VECTOR FUNCTIONS
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
+double					vector_length(t_vec3 v);
 double					deg_to_rad(double degree);
 double					euclidean_distance(t_vec3 v1, t_vec3 v2);
 
