@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:16:34 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/06 01:46:25 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/06 14:52:42 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,15 @@ double	euclidean_distance(t_vec3 v1, t_vec3 v2)
 	res = substract_vec3(v2, v1);
 	distance = (res.x * res.x) + (res.y * res.y) + (res.z * res.z);
 	return (sqrt(distance));
+}
+t_vec3	reflect_vec(t_vec3 light_dir, t_vec3 normal)
+{
+	double	teta_angle;
+	t_vec3	reflection;
+	t_vec3	scalar_reflect;
+
+	teta_angle = dot_product(&normal, &light_dir) * 2;
+	scalar_reflect = scalar_mult(normal, teta_angle);
+	reflection = substract_vec3(scalar_reflect, light_dir);
+	return (reflection);
 }

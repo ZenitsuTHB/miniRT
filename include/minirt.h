@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/06 02:53:31 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/06 14:53:57 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ int	init_mlx(t_scene *scene);
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
 uint32_t phong_shading(t_ray *ray, t_light *light, t_camera *cam);
+t_rgb	accumulation_color(t_rgb constant, t_rgb temp);
+t_rgb	clamp_color(t_rgb color);
+void	get_normal_and_color(t_vec3 hitpoint, t_obj **object);
+uint32_t	gradient_color(t_rgb color);
+
+bool	is_shadowed(t_vec3 l_origin, t_vec3 l_dir, t_obj *obj, t_ray ray);
 
 int			init_window(t_mlx *mlx);
 uint32_t	gradient_color(t_rgb color);

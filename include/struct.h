@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/06 02:33:37 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/06 14:28:52 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ typedef struct s_operation
 typedef struct s_phong
 {
     t_rgb full;
-    t_rgb I_amb;
+    t_rgb i_amb;
     t_rgb diff;
     t_rgb spec;
     t_rgb finished;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_setup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:30:27 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/27 11:18:06 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:21:00 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,13 @@ static void	init_other_variable(t_camera **cam)
 	(*cam)->horizontal = (t_vec3){0.0, 0.0, 0.0};
 	(*cam)->l_l_corner = (t_vec3){0.0, 0.0, 0.0};
 }
+
 void	set_camera(t_scene *scene, char *data, int *error)
 {
 	t_camera	*cam;
 	char		**split;
 	int			err;
-	
+
 	cam = malloc(sizeof(t_camera));
 	if (!cam)
 		return (error_parser(YEL, MSG_MEM));

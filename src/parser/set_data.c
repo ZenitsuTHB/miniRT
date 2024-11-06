@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:59:55 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/29 11:52:14 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/06 14:20:22 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ static int	dup_control(char *id)
 		camera++;
 	if (ambient > 1)
 		return (error_parser(YEL, MSG_TAMB), 1);
-	//if (light > 1)
+	// if (light > 1)
 	//	return (error_parser(YEL, MSG_TLIGHT), 1);
 	if (camera > 1)
 		return (error_parser(YEL, MSG_TCAM), 1);
-	return(0);
+	return (0);
 }
 
 int	set_data(t_scene *scene, char *str)
 {
-	char		*id;
-	int			error;
+	char	*id;
+	int		error;
 
 	error = 1;
 	id = get_id(str);

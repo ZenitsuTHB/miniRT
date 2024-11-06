@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:40:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/03 13:39:01 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:20:08 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	error_parser(char *color, char *msg)
 {
-	printf(RED"\n\tError\n");
-	printf("\t%s%s\n\n"NC, color, msg);
+	printf(RED "\n\tError\n");
+	printf("\t%s%s\n\n" NC, color, msg);
 }
 
 void	free_split(char **split)

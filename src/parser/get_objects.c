@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:04:37 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/15 15:37:15 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/06 14:19:33 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ t_sphere	*get_sphere(int id, char *data, int *error)
 	if (!split)
 		return (free(obj), error_parser(YEL, MSG_MEM), NULL);
 	if (ft_splitlen(split) != 4)
-		return (free(obj), free_split(split), error_parser(YEL, MSG_DATA), NULL);
+		return (free(obj), free_split(split), error_parser(YEL, MSG_DATA),
+			NULL);
 	if (set_pos(split[1], &(obj->center)))
 		return (free(obj), free_split(split), NULL);
 	obj->radius = ft_strtod(split[2], &err) / 2;
@@ -57,7 +58,8 @@ t_plane	*get_plane(int id, char *data, int *error)
 	if (!split)
 		return (free(obj), error_parser(YEL, MSG_MEM), NULL);
 	if (ft_splitlen(split) != 4)
-		return (free(obj), free_split(split), error_parser(YEL, MSG_DATA), NULL);
+		return (free(obj), free_split(split), error_parser(YEL, MSG_DATA),
+			NULL);
 	if (set_pos(split[1], &obj->pos) || set_normal(split[2], &obj->normal))
 		return (free(obj), free_split(split), NULL);
 	if (set_color(split[3], &obj->color))
@@ -80,7 +82,8 @@ t_cylinder	*get_cylinder(int id, char *data, int *error)
 	if (!split)
 		return (free(obj), error_parser(YEL, MSG_MEM), NULL);
 	if (ft_splitlen(split) != 6)
-		return (free(obj), free_split(split), error_parser(YEL, MSG_DATA), NULL);
+		return (free(obj), free_split(split), error_parser(YEL, MSG_DATA),
+			NULL);
 	if (set_pos(split[1], &obj->pos) || set_normal(split[2], &obj->normal))
 		return (free(obj), free_split(split), NULL);
 	obj->radius = ft_strtod(split[3], &err) / 2;
@@ -109,7 +112,8 @@ t_cone	*get_cone(int id, char *data, int *error)
 	if (!split)
 		return (free(obj), error_parser(YEL, MSG_MEM), NULL);
 	if (ft_splitlen(split) != 6)
-		return (free(obj), free_split(split), error_parser(YEL, MSG_DATA), NULL);
+		return (free(obj), free_split(split), error_parser(YEL, MSG_DATA),
+			NULL);
 	if (set_pos(split[1], &obj->pos) || set_normal(split[2], &obj->normal))
 		return (free(obj), free_split(split), NULL);
 	obj->radius = ft_strtod(split[3], &err) / 2;

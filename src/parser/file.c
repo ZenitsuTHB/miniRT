@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/27 11:16:06 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:19:01 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	delete_newline(char *line)
 		line[len - 1] = '\0';
 	return (1);
 }
+
 static int	init_scene_null(t_scene *scene)
 {
 	scene->light = NULL;
@@ -78,7 +79,7 @@ static int	ft_open_file(char *name)
 
 int	read_file(int ac, char *file, t_scene *scene)
 {
-	int		fd;
+	int	fd;
 
 	init_scene_null(scene);
 	if (ac < 2)
