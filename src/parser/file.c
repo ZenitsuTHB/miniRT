@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/07 10:34:07 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/07 12:48:43 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 static int	delete_newline(char *line)
 {
-	int	len;
+	int		len;
+	int		i;
 
 	len = ft_strlen(line);
-	if (!len || (len == 1 && line[0] == '\n'))
+	if (!len)
+		return (0);
+	i = 0;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	if (!line[i] || line[i] == '#' || line[i] == '\n')
 		return (0);
 	if (line[len - 1] == '\n')
 		line[len - 1] = '\0';
@@ -42,7 +48,7 @@ static int	read_data(int fd, t_scene *scene)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (*line != '#' && delete_newline(line) && set_data(scene, line))
+		if (delete_newline(line) && set_data(scene, line))
 			return (free(line), 1);
 		free(line);
 	}

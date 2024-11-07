@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:59:55 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/07 01:23:53 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/07 12:50:15 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*get_id(char *str)
 	char	**split;
 	char	*id;
 
-	split = ft_split(str, ' ');
+	split = ft_splitset(str, " \t");
 	if (!split)
 		return (NULL);
 	id = ft_strdup(split[0]);
@@ -28,19 +28,14 @@ static char	*get_id(char *str)
 static int	dup_control(char *id)
 {
 	static int	ambient = 0;
-	static int	light = 0;
 	static int	camera = 0;
 
 	if (!ft_strncmp(id, "A", 1))
 		ambient++;
-	if (!ft_strncmp(id, "L", 1))
-		light++;
 	if (!ft_strncmp(id, "C", 1))
 		camera++;
 	if (ambient > 1)
 		return (error_parser(YEL, MSG_TAMB), 1);
-	// if (light > 1)
-	//	return (error_parser(YEL, MSG_TLIGHT), 1);
 	if (camera > 1)
 		return (error_parser(YEL, MSG_TCAM), 1);
 	return (0);

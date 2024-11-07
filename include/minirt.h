@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/07 01:37:39 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/07 12:14:14 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ t_vec3      get_pixel_direction(t_camera *cam, int pixel_x, int pixel_y);
 uint32_t    get_phong_effect(t_ray ray, t_scene *scene, t_obj *obj);
 void		calculate_t(t_operation *op);
 void	hit_which_object(t_vec3 direction, t_vec3 origin, t_obj *obj, t_ray *ray);
+t_vec3		get_normal_cyl(t_vec3 hp, t_cylinder *cy);
+t_vec3		get_normal_cone(t_vec3 hp, t_cone *co);
 
 
 

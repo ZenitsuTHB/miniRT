@@ -6,12 +6,11 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:33:17 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/07 11:01:14 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/07 12:04:50 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minirt.h"
-#include <../libs/MLX42/include/MLX42/MLX42.h>
+#include "../../include/minirt.h"
 #include <math.h>
 
 t_rgb	clamp_color(t_rgb color)
@@ -58,12 +57,12 @@ void	get_normal_and_color(t_vec3 hitpoint, t_obj **object)
 	else if ((*object)->id == CY)
 	{
 		(*object)->color = (*object)->shape.cy->color;
-		(*object)->normal = (*object)->shape.cy->normal;
+		(*object)->normal = get_normal_cyl(hitpoint, (*object)->shape.cy);
 	}
 	else if ((*object)->id == CO)
 	{
 		(*object)->color = (*object)->shape.co->color;
-		(*object)->normal = (*object)->shape.co->normal;
+		(*object)->normal = get_normal_cone(hitpoint, (*object)->shape.co);
 	}
 }
 
