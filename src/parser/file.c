@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/06 14:19:01 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/07 01:22:36 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,8 @@ static int	read_data(int fd, t_scene *scene)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (*line != '#')
-		{
-			if (delete_newline(line))
-				if (set_data(scene, line))
-					return (free(line), 1);
-		}
+		if (*line != '#' && delete_newline(line) && set_data(scene, line))
+			return (free(line), 1);
 		free(line);
 	}
 	while (scene->obj->prev)
@@ -58,8 +54,12 @@ static int	read_data(int fd, t_scene *scene)
 		return (error_parser(YEL, MSG_AMB), 1);
 	if (!scene->camera)
 		return (error_parser(YEL, MSG_CAM), 1);
+	//while (scene->light->prev)
+	//	scene->light = scene->light->prev;
 	if (!scene->light)
 		return (error_parser(YEL, MSG_LIGHT), 1);
+	while (scene->obj->prev)
+		scene->obj = scene->obj->prev;
 	return (0);
 }
 

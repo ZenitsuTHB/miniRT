@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/06 14:28:52 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/07 01:29:00 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ typedef struct s_ray
 {
 	bool		hit;
 	double		distance;
+	t_vec3		origin;
 	t_vec3		normal;
 	t_vec3		hit_point;
 	t_obj		*object;
@@ -144,6 +145,13 @@ typedef struct s_scene
 	t_ray		*ray;
 }				t_scene;
 
+typedef struct	s_trilevec
+{
+	t_vec3	dir;
+	t_vec3	origin;
+	t_vec3	co;
+}	t_triplevec;
+
 typedef struct s_operation
 {
   t_vec3		OC;
@@ -153,6 +161,7 @@ typedef struct s_operation
   double		t[2];
   double		delta;
   double		lambda;
+  t_triplevec	tri;
 }       t_operation;
 
 typedef struct s_phong

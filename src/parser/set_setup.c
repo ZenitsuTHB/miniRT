@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:30:27 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/06 14:21:00 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/07 01:28:15 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	set_ambient(t_scene *scene, char *data, int *error)
 		return (error_parser(YEL, MSG_MEM));
 	split = ft_splitset(data, " \t");
 	if (!split)
-		return (error_parser(YEL, MSG_MEM));
+		return (free(amb), error_parser(YEL, MSG_MEM));
 	if (ft_splitlen(split) != 3)
-		return (free_split(split), error_parser(YEL, MSG_NUM));
+		return (free_split(split), free(amb), error_parser(YEL, MSG_NUM));
 	amb->bright = ft_strtod(split[1], &err);
 	if (*err || amb->bright < 0.0 || amb->bright > 1.0)
-		return (free_split(split), error_parser(YEL, MSG_DATA));
+		return (free_split(split), free(amb), error_parser(YEL, MSG_DATA));
 	if (set_color(split[2], &(amb->color)))
-		return (free_split(split));
+		return (free(amb), free_split(split));
 	free_split(split);
 	scene->ambient = amb;
 	*error = 0;
@@ -61,17 +61,17 @@ void	set_camera(t_scene *scene, char *data, int *error)
 		return (error_parser(YEL, MSG_MEM));
 	split = ft_splitset(data, " \t");
 	if (!split)
-		return (error_parser(YEL, MSG_MEM));
+		return (free(cam), error_parser(YEL, MSG_MEM));
 	if (ft_splitlen(split) != 4)
-		return (free_split(split), error_parser(YEL, MSG_NUM));
+		return (free(cam), free_split(split), error_parser(YEL, MSG_NUM));
 	if (set_pos(split[1], &cam->origin))
-		return (free_split(split));
+		return (free(cam), free_split(split));
 	if (set_normal(split[2], &cam->cam_dir))
-		return (free_split(split));
+		return (free(cam), free_split(split));
 	err = 0;
 	cam->fov = ft_atoi_error(split[3], &err);
 	if (err || cam->fov < 0 || cam->fov > 180)
-		return (free_split(split), error_parser(YEL, MSG_DATA));
+		return (free(cam), free_split(split), error_parser(YEL, MSG_DATA));
 	free_split(split);
 	init_other_variable(&cam);
 	scene->camera = cam;
@@ -83,22 +83,26 @@ void	set_light(t_scene *scene, char *data, int *error)
 	t_light	*new;
 	char	**split;
 	char	*err;
+	int		len;
 
 	new = malloc(sizeof(t_light));
 	if (!new)
 		return (error_parser(YEL, MSG_MEM));
 	split = ft_splitset(data, " \t");
 	if (!split)
-		return (error_parser(YEL, MSG_MEM));
-	if (ft_splitlen(split) != 4)
-		return (free_split(split), error_parser(YEL, MSG_NUM));
-	if (set_pos(split[1], &(new->pos)))
-		return (free_split(split));
-	new->bright = ft_strtod(split[2], &err);
-	if (*err || new->bright < 0.0 || new->bright > 1.0)
-		return (free_split(split), error_parser(YEL, MSG_DATA));
-	if (set_color(split[3], &(new->color)))
-		return (free_split(split));
+		return (free(light), error_parser(YEL, MSG_MEM));
+	len = ft_splitlen(split);
+	if (len < 3 || len > 4)
+		return (free(light), free_split(split), error_parser(YEL, MSG_NUM));
+	if (set_pos(split[1], &(light->pos)))
+		return (free(light), free_split(split));
+	light->bright = ft_strtod(split[2], &err);
+	if (*err || light->bright < 0.0 || light->bright > 1.0)
+		return (free(light), free_split(split), error_parser(YEL, MSG_DATA));
+	if (len == 3 && set_color("255,255,255", &(light->color)))
+		return (free(light), free_split(split));
+	else if (len == 4 && set_color(split[3], &(light->color)))
+		return (free(light), free_split(split));
 	free_split(split);
 	new->next = NULL;
 	if (!scene->light)
