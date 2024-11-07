@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:30:27 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/07 01:28:15 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/07 01:40:21 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,19 +90,19 @@ void	set_light(t_scene *scene, char *data, int *error)
 		return (error_parser(YEL, MSG_MEM));
 	split = ft_splitset(data, " \t");
 	if (!split)
-		return (free(light), error_parser(YEL, MSG_MEM));
+		return (free(new), error_parser(YEL, MSG_MEM));
 	len = ft_splitlen(split);
 	if (len < 3 || len > 4)
-		return (free(light), free_split(split), error_parser(YEL, MSG_NUM));
-	if (set_pos(split[1], &(light->pos)))
-		return (free(light), free_split(split));
-	light->bright = ft_strtod(split[2], &err);
-	if (*err || light->bright < 0.0 || light->bright > 1.0)
-		return (free(light), free_split(split), error_parser(YEL, MSG_DATA));
-	if (len == 3 && set_color("255,255,255", &(light->color)))
-		return (free(light), free_split(split));
-	else if (len == 4 && set_color(split[3], &(light->color)))
-		return (free(light), free_split(split));
+		return (free(new), free_split(split), error_parser(YEL, MSG_NUM));
+	if (set_pos(split[1], &(new->pos)))
+		return (free(new), free_split(split));
+	new->bright = ft_strtod(split[2], &err);
+	if (*err || new->bright < 0.0 || new->bright > 1.0)
+		return (free(new), free_split(split), error_parser(YEL, MSG_DATA));
+	if (len == 3 && set_color("255,255,255", &(new->color)))
+		return (free(new), free_split(split));
+	else if (len == 4 && set_color(split[3], &(new->color)))
+		return (free(new), free_split(split));
 	free_split(split);
 	new->next = NULL;
 	if (!scene->light)

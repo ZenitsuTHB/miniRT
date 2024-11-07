@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/07 01:27:43 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/07 01:34:30 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	print_planes(t_plane *s)
 	printf("Normal x: %lf\n", s->normal.x);
 	printf("Normal y: %lf\n", s->normal.y);
 	printf("Normal z: %lf\n", s->normal.z);
-	printf("Color red: %d\n", s->color.red);
-	printf("Color green: %d\n", s->color.green);
-	printf("Color blue: %d\n", s->color.blue);
+	printf("Color red: %lf\n", s->color.x);
+	printf("Color green: %lf\n", s->color.y);
+	printf("Color blue: %lf\n", s->color.z);
 	printf("\n");
 	i++;
 }
@@ -47,9 +47,9 @@ void	print_cylinders(t_cylinder *s)
 	printf("Normal z: %lf\n", s->normal.z);
 	printf("Radious: %lf\n", s->radius);
 	printf("Height: %lf\n", s->height);
-	printf("Color red: %d\n", s->color.red);
-	printf("Color green: %d\n", s->color.green);
-	printf("Color blue: %d\n", s->color.blue);
+	printf("Color red: %lf\n", s->color.x);
+	printf("Color green: %lf\n", s->color.y);
+	printf("Color blue: %lf\n", s->color.z);
 	printf("\n");
 	i++;
 }
@@ -69,9 +69,9 @@ void	print_cones(t_cone *s)
 	printf("Normal z: %lf\n", s->normal.z);
 	printf("Radious: %lf\n", s->radius);
 	printf("Height: %lf\n", s->height);
-	printf("Color red: %d\n", s->color.red);
-	printf("Color green: %d\n", s->color.green);
-	printf("Color blue: %d\n", s->color.blue);
+	printf("Color red: %lf\n", s->color.x);
+	printf("Color green: %lf\n", s->color.y);
+	printf("Color blue: %lf\n", s->color.z);
 	printf("\n");
 	i++;
 }
