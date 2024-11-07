@@ -6,12 +6,12 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:01:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/09 09:35:51 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/07 01:12:42 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/struct.h"
 #include "../include/minirt.h"
+#include "../include/struct.h"
 #include <../libs/MLX42/include/MLX42/MLX42.h>
 
 int	init_mlx(t_scene *scene)
@@ -19,7 +19,7 @@ int	init_mlx(t_scene *scene)
 	scene->mlx = malloc(sizeof(t_mlx));
 	if (!scene->mlx)
 		return (error_message(RED, MALLOC_ERROR));
-  return (0);
+	return (0);
 }
 
 int	init_window(t_mlx *mlx)
@@ -36,10 +36,9 @@ int	init_window(t_mlx *mlx)
 void	manage_escape(mlx_key_data_t keydata, void *param)
 {
 	t_mlx	*mlx;
-  t_scene *scene;
+	t_scene	*scene;
 
-  scene = (t_scene *)param;
-
+	scene = (t_scene *)param;
 	mlx = scene->mlx;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
@@ -47,7 +46,6 @@ void	manage_escape(mlx_key_data_t keydata, void *param)
 		mlx_delete_image(mlx->con, mlx->img);
 		mlx_close_window((mlx->con));
 		mlx_terminate(mlx->con);
-		// Cleanning function TODO
 		exit(0);
 	}
 	else
