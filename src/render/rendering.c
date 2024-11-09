@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/07 01:30:39 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/09 19:17:49 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,17 @@ int	render_object(t_scene *scene)
 		return (error_message(YEL, ERROR_WIND));
 	mlx = scene->mlx;
 	mlx->x = 0;
-	while (mlx->x < WIDTH)
+	while (mlx->x++ < WIDTH)
 	{
 		mlx->y = 0;
-		while (mlx->y < HEIGHT)
+		while (mlx->y++ < HEIGHT)
 		{
 			px_direction = get_pixel_direction(cam, mlx->x, mlx->y);
 			ray = intersect_obj(px_direction, cam->origin, scene->obj, scene);
 			if (!ray.hit)
 				ray.color = 0xFF;
 			mlx_put_pixel(mlx->img, mlx->x, mlx->y, ray.color);
-			mlx->y++;
 		}
-		mlx->x++;
 	}
 	mlx_image_to_window(mlx->con, mlx->img, 0, 0);
 	return (0);

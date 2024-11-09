@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cone.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 11:51:00 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/02 14:12:49 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/09 19:15:56 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	calculate_abcd_cone(t_operation *op, t_cone *co, t_vec3 dir, t_vec3 con)
 	double	c;
 	double	k;
 
-	k = pow(co->radius / co->height, 2);	
+	k = pow(co->radius / co->height, 2);
 	a = dot_product(&dir, &dir);
 	b = pow(dot_product(&dir, &co->normal), 2);
 	op->A = a - (1 + k) * b;
@@ -49,7 +49,8 @@ t_vec3	get_cone_normal(t_vec3 hp, t_cone *co, double m)
 	c = substract_vec3(hp, b);
 	adjusted_normal = unit_vec3(c);
 	k = co->radius / co->height;
-	adjusted_normal = substract_vec3(adjusted_normal, scalar_mult(co->normal, k));
+	adjusted_normal = substract_vec3(adjusted_normal,
+			scalar_mult(co->normal, k));
 	return (unit_vec3(adjusted_normal));
 }
 

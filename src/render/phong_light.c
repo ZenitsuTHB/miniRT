@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/07 10:31:38 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/09 19:20:36 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include <../libs/MLX42/include/MLX42/MLX42.h>
 #include <math.h>
 
-// reflecdirection = light_dir - 2 * (normal * light_dir) * normal;
-// Final specular color (light color * intensity * specular factor)
+/* reflecdirection = light_dir - 2 * (normal * light_dir) * normal;
+ Final specular color (light color * intensity * specular factor)*/
 t_rgb	get_specular_color(t_obj *obj, t_light *light, t_vec3 point,
 		t_camera *cam)
 {
@@ -28,7 +28,6 @@ t_rgb	get_specular_color(t_obj *obj, t_light *light, t_vec3 point,
 	spec = 0.0;
 	normal = (t_vec3){0, 0, 0};
 	normal = obj->normal;
-	
 	view_dir = unit_vec3(substract_vec3(point, cam->origin));
 	light_dir = unit_vec3(substract_vec3(point, light->pos));
 	reflect_dir = reflect_vec(light_dir, normal);
@@ -36,7 +35,7 @@ t_rgb	get_specular_color(t_obj *obj, t_light *light, t_vec3 point,
 	return (scalar_mult(light->color, light->bright * spec));
 }
 
-// AmbL = basecolor * Iamb;
+/* AmbL = basecolor * Iamb;*/
 t_rgb	get_ambient_color(t_rgb base, t_scene *sc)
 {
 	t_rgb	i_amb;
@@ -45,7 +44,7 @@ t_rgb	get_ambient_color(t_rgb base, t_scene *sc)
 	return (i_amb);
 }
 
-// diffuse = light_intensity * COSINE tEtA(angle(normal, lightdir)) * obj_color;
+/* diffuse = light_intensity*COSINE tEtA(angle(normal, lightdir))*obj_color;*/
 t_vec3	get_diffuse_color(t_obj *obj, t_light *light, t_vec3 point)
 {
 	double	dot_ln;
