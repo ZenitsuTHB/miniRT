@@ -3,95 +3,84 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 16:54:54 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/28 13:44:51 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/10 21:25:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 
-int	calculate_abcd(t_operation *op, t_cylinder *cy, t_vec3 dir, t_vec3 cyo)
+int calculate_abcd(t_operation *op, t_cylinder *cy, t_vec3 dir, t_vec3 cyo)
 {
-	double	a;
-	double	b;
-	double	c;
+    double dot_dir_dir;
+    double dot_dir_cyo;
+    double dot_cyo_cyo;
+    double dot_cyo_normal;
+    double dot_dir_normal;
 
-	a = dot_product(&dir, &dir);
-	b = pow(dot_product(&dir, &cy->normal), 2);
-	op->A = a - b;
-	a = dot_product(&dir, &cyo);
-	b = dot_product(&dir, &cy->normal);
-	c = dot_product(&cyo, &cy->normal);
-	op->B = 2 * (a - b * c);
-	a = dot_product(&cyo, &cyo);
-	b = pow(dot_product(&cyo, &cy->normal), 2);
-	c = pow(cy->radius, 2);
-	op->C = a - b - c;
-	op->delta = op->B * op->B - 4 * op->A * op->C;
-	if (op->delta < 0)
-		return (1);
-	return (0);
+	dot_dir_dir = dot_product(&dir, &dir);
+	dot_dir_normal = dot_product(&dir, &cy->normal);
+    dot_cyo_normal = dot_product(&cyo, &cy->normal);
+    dot_dir_cyo = dot_product(&dir, &cyo);
+    dot_cyo_cyo = dot_product(&cyo, &cyo);
+    op->A = dot_dir_dir - (dot_dir_normal * dot_dir_normal);
+    op->B = 2 * (dot_dir_cyo - dot_dir_normal * dot_cyo_normal);
+    op->C = dot_cyo_cyo - (dot_cyo_normal * dot_cyo_normal)
+	 - (cy->radius * cy->radius);
+    op->delta = op->B * op->B - 4 * op->A * op->C;
+    if (op->delta < 0)
+        return (1);
+    return (0);
 }
 
-void	calculate_t(t_operation *op)
-{
-	double	tmp;
-
-	op->t[0] = (-op->B - sqrt(op->delta)) / (2 * op->A);
-	op->t[1] = (-op->B + sqrt(op->delta)) / (2 * op->A);
-	if (op->t[0] > op->t[1])
-	{
-		tmp = op->t[0];
-		op->t[0] = op->t[1];
-		op->t[1] = tmp;
-	}
+// Calculate the point on the cylinder axis closest to the hit point.
+// Return the unit vector of the computed normal.
+// Compute the normal by finding the vector from the axis to the hit point.
+t_vec3 get_cyl_normal(t_vec3 hp, t_cylinder *cy, double m)
+{	
+    t_vec3 axis_offset;
+    t_vec3 axis_point;
+    t_vec3 normal_vec;
+	
+	axis_offset = scalar_mult(cy->normal, m);
+	axis_point = add_vec3(cy->pos, axis_offset);
+	normal_vec = substract_vec3(hp, axis_point);    
+    return unit_vec3(normal_vec);
 }
 
-t_vec3	get_cyl_normal(t_vec3 hp, t_cylinder *cy, double m)
-{
-	t_vec3	a;
-	t_vec3	b;
-	t_vec3	c;
 
-	a = scalar_mult(cy->normal, m);
-	b = add_vec3(cy->pos, a);
-	c = substract_vec3(hp, b);
-	return (unit_vec3(c));
-}
-
-int	check_interaction(t_ray *ray, t_operation op, t_cylinder *cy, int i)
+void	check_intersection(t_ray *ray, t_operation op, t_cylinder *cy)
 {
 	t_vec3	hp;
 	double	a;
 	double	b;
 	double	m;
 
-	if (op.t[i] > 0)
+	if (op.lambda > 0)
 	{
-		hp = add_vec3(op.tri.origin, scalar_mult(op.tri.dir, op.t[i]));
+		hp = add_vec3(op.tri.origin, scalar_mult(op.tri.dir, op.lambda));
 		a = dot_product(&op.tri.dir, &cy->normal);
 		b = dot_product(&op.tri.co, &cy->normal);
-		m = a * op.t[i] + b;
+		m = a * op.lambda + b;
 		if (m >= 0 && m <= cy->height)
 		{
 			ray->hit = true;
-			ray->distance = op.t[i];
+			ray->distance = op.lambda;
 			ray->hit_point = hp;
 			ray->normal = get_cyl_normal(hp, cy, m);
-			return (1);
 		}
 	}
-	return (0);
 }
 
 t_ray	hit_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cy)
 {
 	t_ray		ray;
 	t_operation	op;
-	int			i;
 
+	ft_bzero(&ray, (sizeof(t_ray)));
+	ft_bzero(&op, (sizeof(t_operation)));
 	ray.hit = false;
 	ray.distance = INFINITY;
 	op.tri.dir = dir;
@@ -99,13 +88,9 @@ t_ray	hit_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cy)
 	op.tri.co = substract_vec3(cy->pos, origin);
 	if (calculate_abcd(&op, cy, dir, op.tri.co))
 		return (ray);
-	calculate_t(&op);
-	i = 0;
-	while (i < 2)
-	{
-		if (check_interaction(&ray, op, cy, i))
-			return (ray);
-		i++;
-	}
+	op.lambda = calculate_quadratic_root(op);
+	if (op.lambda < 0)
+		return (ray);
+	check_intersection(&ray, op, cy);
 	return (ray);
 }

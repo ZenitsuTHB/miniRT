@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cone.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 11:51:00 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/09 19:15:56 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/10 12:20:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,37 +54,36 @@ t_vec3	get_cone_normal(t_vec3 hp, t_cone *co, double m)
 	return (unit_vec3(adjusted_normal));
 }
 
-int	check_interaction_cone(t_ray *ray, t_operation op, t_cone *co, int i)
+void	check_interaction_cone(t_ray *ray, t_operation op, t_cone *co)
 {
 	t_vec3	hp;
 	double	a;
 	double	b;
 	double	m;
 
-	if (op.t[i] > 0)
+	if (op.lambda > 0)
 	{
-		hp = add_vec3(op.tri.origin, scalar_mult(op.tri.dir, op.t[i]));
+		hp = add_vec3(op.tri.origin, scalar_mult(op.tri.dir, op.lambda));
 		a = dot_product(&op.tri.dir, &co->normal);
 		b = dot_product(&op.tri.co, &co->normal);
-		m = a * op.t[i] + b;
+		m = a * op.lambda + b;
 		if (m >= 0 && m <= co->height)
 		{
 			ray->hit = true;
-			ray->distance = op.t[i];
+			ray->distance = op.lambda;
 			ray->hit_point = hp;
 			ray->normal = get_cone_normal(hp, co, m);
-			return (1);
 		}
 	}
-	return (0);
 }
 
 t_ray	hit_cone(t_vec3 dir, t_vec3 origin, t_cone *co)
 {
 	t_ray		ray;
 	t_operation	op;
-	int			i;
 
+	ft_bzero(&ray, (sizeof(t_ray)));
+	ft_bzero(&op, (sizeof(t_operation)));
 	ray.hit = false;
 	ray.distance = INFINITY;
 	op.tri.dir = dir;
@@ -92,13 +91,7 @@ t_ray	hit_cone(t_vec3 dir, t_vec3 origin, t_cone *co)
 	op.tri.co = substract_vec3(co->pos, origin);
 	if (calculate_abcd_cone(&op, co, dir, op.tri.co))
 		return (ray);
-	calculate_t(&op);
-	i = 0;
-	while (i < 2)
-	{
-		if (check_interaction_cone(&ray, op, co, i))
-			return (ray);
-		i++;
-	}
+	op.lambda = calculate_quadratic_root(op);
+	check_interaction_cone(&ray, op, co);
 	return (ray);
 }

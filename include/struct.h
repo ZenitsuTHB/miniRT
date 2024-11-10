@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/07 11:28:31 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/10 11:16:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,12 +145,12 @@ typedef struct s_scene
 	t_ray		*ray;
 }				t_scene;
 
-typedef struct	s_trilevec
+typedef struct	s_matrix3X3
 {
 	t_vec3	dir;
 	t_vec3	origin;
 	t_vec3	co;
-}	t_triplevec;
+}	t_matrix3X3;
 
 typedef struct s_operation
 {
@@ -161,7 +161,7 @@ typedef struct s_operation
   double		t[2];
   double		delta;
   double		lambda;
-  t_triplevec	tri;
+  t_matrix3X3	tri;
 }       t_operation;
 
 typedef struct s_phong
