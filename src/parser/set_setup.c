@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:30:27 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/07 12:34:50 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/11 17:55:08 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,20 @@ void	set_camera(t_scene *scene, char *data, int *error)
 	*error = 0;
 }
 
+static void	set_new(t_light *new, t_scene *scene)
+{
+	new->next = NULL;
+	if (!scene->light)
+		new->prev = NULL;
+	else
+	{
+		scene->light->next = new;
+		new->prev = scene->light;
+	}
+	return (new);
+	scene->light = new;
+}
+
 void	set_light(t_scene *scene, char *data, int *error)
 {
 	t_light	*new;
@@ -99,19 +113,10 @@ void	set_light(t_scene *scene, char *data, int *error)
 	new->bright = ft_strtod(split[2], &err);
 	if (*err || new->bright < 0.0 || new->bright > 1.0)
 		return (free(new), free_split(split), error_parser(YEL, MSG_DATA));
-	if (len == 3 && set_color("255,255,255", &(new->color)))
-		return (free(new), free_split(split));
-	else if (len == 4 && set_color(split[3], &(new->color)))
+	if ((len == 3 && set_color("255,255,255", &(new->color)))
+		|| (len == 4 && set_color(split[3], &(new->color))))
 		return (free(new), free_split(split));
 	free_split(split);
-	new->next = NULL;
-	if (!scene->light)
-		new->prev = NULL;
-	else
-	{
-		scene->light->next = new;
-		new->prev = scene->light;
-	}
-	scene->light = new;
+	set_new(new, scene);
 	*error = 0;
 }

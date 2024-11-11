@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/07 12:48:43 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/11 17:55:34 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ static int	read_data(int fd, t_scene *scene)
 		return (error_parser(YEL, MSG_AMB), 1);
 	if (!scene->camera)
 		return (error_parser(YEL, MSG_CAM), 1);
-	//while (scene->light->prev)
-	//	scene->light = scene->light->prev;
 	if (!scene->light)
 		return (error_parser(YEL, MSG_LIGHT), 1);
 	while (scene->obj->prev)

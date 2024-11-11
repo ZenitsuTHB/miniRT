@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:04:37 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/06 14:19:33 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/11 17:59:47 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_plane	*get_plane(int id, char *data, int *error)
 t_cylinder	*get_cylinder(int id, char *data, int *error)
 {
 	t_cylinder	*obj;
-	char		**split;
+	char		**sp;
 	char		*err;
 
 	obj = malloc(sizeof(t_cylinder));
@@ -78,29 +78,28 @@ t_cylinder	*get_cylinder(int id, char *data, int *error)
 		return (error_parser(YEL, MSG_MEM), NULL);
 	if (id != CY)
 		return (free(obj), put_zero(error), NULL);
-	split = ft_splitset(data, " \t");
-	if (!split)
+	sp = ft_splitset(data, " \t");
+	if (!sp)
 		return (free(obj), error_parser(YEL, MSG_MEM), NULL);
-	if (ft_splitlen(split) != 6)
-		return (free(obj), free_split(split), error_parser(YEL, MSG_DATA),
-			NULL);
-	if (set_pos(split[1], &obj->pos) || set_normal(split[2], &obj->normal))
-		return (free(obj), free_split(split), NULL);
-	obj->radius = ft_strtod(split[3], &err) / 2;
+	if (ft_splitlen(sp) != 6)
+		return (free(obj), free_split(sp), error_parser(YEL, MSG_DATA), NULL);
+	if (set_pos(sp[1], &obj->pos) || set_normal(sp[2], &obj->normal))
+		return (free(obj), free_split(sp), NULL);
+	obj->radius = ft_strtod(sp[3], &err) / 2;
 	if (*err)
-		return (free(obj), free_split(split), NULL);
-	obj->height = ft_strtod(split[4], &err);
+		return (free(obj), free_split(sp), NULL);
+	obj->height = ft_strtod(sp[4], &err);
 	if (*err)
-		return (free(obj), free_split(split), NULL);
-	if (set_color(split[5], &obj->color))
-		return (free(obj), free_split(split), NULL);
-	return (free_split(split), put_zero(error), obj);
+		return (free(obj), free_split(sp), NULL);
+	if (set_color(sp[5], &obj->color))
+		return (free(obj), free_split(sp), NULL);
+	return (free_split(sp), put_zero(error), obj);
 }
 
 t_cone	*get_cone(int id, char *data, int *error)
 {
 	t_cone	*obj;
-	char	**split;
+	char	**sp;
 	char	*err;
 
 	obj = malloc(sizeof(t_cone));
@@ -108,21 +107,20 @@ t_cone	*get_cone(int id, char *data, int *error)
 		return (error_parser(YEL, MSG_MEM), NULL);
 	if (id != CO)
 		return (free(obj), put_zero(error), NULL);
-	split = ft_splitset(data, " \t");
-	if (!split)
+	sp = ft_splitset(data, " \t");
+	if (!sp)
 		return (free(obj), error_parser(YEL, MSG_MEM), NULL);
-	if (ft_splitlen(split) != 6)
-		return (free(obj), free_split(split), error_parser(YEL, MSG_DATA),
-			NULL);
-	if (set_pos(split[1], &obj->pos) || set_normal(split[2], &obj->normal))
-		return (free(obj), free_split(split), NULL);
-	obj->radius = ft_strtod(split[3], &err) / 2;
+	if (ft_splitlen(sp) != 6)
+		return (free(obj), free_split(sp), error_parser(YEL, MSG_DATA), NULL);
+	if (set_pos(sp[1], &obj->pos) || set_normal(sp[2], &obj->normal))
+		return (free(obj), free_split(sp), NULL);
+	obj->radius = ft_strtod(sp[3], &err) / 2;
 	if (*err)
-		return (free(obj), free_split(split), NULL);
-	obj->height = ft_strtod(split[4], &err);
+		return (free(obj), free_split(sp), NULL);
+	obj->height = ft_strtod(sp[4], &err);
 	if (*err)
-		return (free(obj), free_split(split), NULL);
-	if (set_color(split[5], &obj->color))
-		return (free(obj), free_split(split), NULL);
-	return (free_split(split), put_zero(error), obj);
+		return (free(obj), free_split(sp), NULL);
+	if (set_color(sp[5], &obj->color))
+		return (free(obj), free_split(sp), NULL);
+	return (free_split(sp), put_zero(error), obj);
 }
