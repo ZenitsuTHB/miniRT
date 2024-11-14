@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/10 11:33:52 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 22:31:14 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	init_mlx(t_scene *scene);
 		INPUT
 ┗━━━━━━━━・▼・━━━━━━━━┛
 */
+
+//debug
+void print_vec3(t_vec3 v);
+
 uint32_t phong_shading(t_ray *ray, t_light *light, t_camera *cam);
 t_rgb	accumulation_color(t_rgb constant, t_rgb temp);
 t_rgb	clamp_color(t_rgb color);

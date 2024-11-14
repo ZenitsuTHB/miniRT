@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/07 01:34:30 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/14 22:37:39 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ void	print_planes(t_plane *s)
 	printf("Color blue: %lf\n", s->color.z);
 	printf("\n");
 	i++;
+}
+
+void print_vec3(t_vec3 v)
+{
+	printf("vector x --- [%lf]\t", v.x);
+	printf("vector y --- [%lf]\t", v.y);
+	printf("vector z --- [%lf]\n", v.z);
 }
 
 void	print_cylinders(t_cylinder *s)

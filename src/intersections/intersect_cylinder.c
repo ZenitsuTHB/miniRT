@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 16:54:54 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/10 21:25:35 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 23:23:26 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,12 @@ t_vec3 get_cyl_normal(t_vec3 hp, t_cylinder *cy, double m)
 
 void	check_intersection(t_ray *ray, t_operation op, t_cylinder *cy)
 {
-	t_vec3	hp;
 	double	a;
 	double	b;
 	double	m;
 
 	if (op.lambda > 0)
 	{
-		hp = add_vec3(op.tri.origin, scalar_mult(op.tri.dir, op.lambda));
 		a = dot_product(&op.tri.dir, &cy->normal);
 		b = dot_product(&op.tri.co, &cy->normal);
 		m = a * op.lambda + b;
@@ -68,9 +66,11 @@ void	check_intersection(t_ray *ray, t_operation op, t_cylinder *cy)
 		{
 			ray->hit = true;
 			ray->distance = op.lambda;
-			ray->hit_point = hp;
-			ray->normal = get_cyl_normal(hp, cy, m);
+			ray->hit_point =  add_vec3(op.tri.origin, 
+			scalar_mult(op.tri.dir, op.lambda));
+			ray->normal = get_cyl_normal(ray->hit_point, cy, m);
 		}
+		//print_vec3(ray->normal);
 	}
 }
 
