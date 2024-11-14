@@ -1,0 +1,70 @@
+#include "MiniRT.h"
+#include <math.h>
+
+t_vec3 calculate_normal(const t_cylinder *cy, const t_point3 hit_point)
+{
+    t_vec3 tmp;
+    t_vec3 proj;
+    t_vec3 normal;
+
+    // Encuentra la proyección del vector centro-hit en la dirección del cilindro
+    tmp = substract_vec3(hit_point, cy->center);
+    proj = scalar_mult(cy->dir, dot(&tmp, &cy->dir));
+    normal = substract_vec3(tmp, proj);
+    
+    return (unit_vector(&normal));
+}
+
+t_ray hit_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cy)
+{
+    t_ray       ray;          // Estructura de retorno para el rayo
+    t_evars     vars;         // Estructura de variables cuadráticas
+    t_vec3      oc;           // Vector desde el origen del rayo al centro del cilindro
+    double      projection;   // Proyección para verificar la altura del impacto
+
+    // Inicializamos `ray` y `vars`
+    ft_bzero(&ray, sizeof(t_ray));
+    ray.hit = false;
+
+    // Vector desde el origen del rayo hasta el centro de la base del cilindro
+    oc = substract_vec3(origin, cy->center);
+
+    // Cálculo de los coeficientes cuadráticos A, B y C
+    vars.a = dot(&dir, &dir) - pow(dot(&dir, &cy->dir), 2);
+    vars.half_b = dot(&oc, &dir) - (dot(&dir, &cy->dir) * dot(&oc, &cy->dir));
+    vars.c = dot(&oc, &oc) - pow(dot(&oc, &cy->dir), 2) - pow(cy->radius, 2);
+
+    // Discriminante para verificar intersección
+    vars.discriminant = vars.half_b * vars.half_b - vars.a * vars.c;
+    if (vars.discriminant < 0)
+        return (ray); // No hay intersección real
+
+    // Calcular la raíz cuadrada del discriminante
+    vars.sqrtd = sqrt(vars.discriminant);
+
+    // Encontrar la raíz positiva más cercana
+    vars.root = (-vars.half_b - vars.sqrtd) / vars.a;
+    if (vars.root < 0)
+    {
+        vars.root = (-vars.half_b + vars.sqrtd) / vars.a;
+        if (vars.root < 0)
+            return (ray); // Intersección está detrás del origen
+    }
+
+    // Calcular el punto de impacto en el cilindro
+    ray.hit_point = add_vec3(origin, scalar_mult(dir, vars.root));
+
+    // Verificar si el punto de impacto está dentro de la altura del cilindro
+    t_vec3 hit_to_base = substract_vec3(ray.hit_point, cy->center);
+    projection = dot(&hit_to_base, &cy->dir);
+    if (projection < 0 || projection > cy->height)
+        return (ray); // El impacto está fuera de los límites de altura del cilindro
+
+    // Si está dentro, configuramos los datos de `ray`
+    ray.hit = true;
+    ray.distance = vars.root;
+    ray.normal = calculate_normal(cy, ray.hit_point); // Calculamos la normal en el punto
+    ray.color = cy->color; // Asignamos el color del cilindro (si se define en la estructura)
+
+    return (ray);
+}

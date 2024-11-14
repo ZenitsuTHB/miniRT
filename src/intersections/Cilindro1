@@ -1,0 +1,61 @@
+#include "vector_utils.h"  // Se asume que contiene las operaciones vectoriales como dot_product, substract_vec3, etc.
+#include "math.h"          // Para el uso de sqrt y fabs
+#include "ray.h"           // Donde se define t_ray
+#include "shapes.h"        // Donde se define t_cylinder
+#include "operation.h"     // Donde se define t_operation
+
+t_ray	hit_cylinder(t_vec3 direction, t_vec3 origin, t_cylinder *cy)
+{
+    t_ray		ray;
+    t_operation op;
+    t_vec3		cy_to_ray_origin; // Vector desde el centro del cilindro hasta el origen del rayo
+    double		lambda;          // Variable para almacenar el parámetro de intersección (si existe)
+
+    ft_bzero(&ray, sizeof(t_ray)); // Inicializamos ray en cero
+    ray.hit = false;               // Marcamos que aún no hay intersección
+
+    // Vector desde el centro del cilindro hacia el origen del rayo
+    cy_to_ray_origin = substract_vec3(origin, cy->pos);
+
+    // Proyectamos la dirección del rayo y el origen relativo del rayo en el plano perpendicular al eje del cilindro
+    op.A = dot_product(direction, direction) - pow(dot_product(direction, cy->normal), 2);
+    op.B = 2 * (dot_product(direction, cy_to_ray_origin) - dot_product(direction, cy->normal) * dot_product(cy_to_ray_origin, cy->normal));
+    op.C = dot_product(cy_to_ray_origin, cy_to_ray_origin) - pow(dot_product(cy_to_ray_origin, cy->normal), 2) - pow(cy->radius, 2);
+
+    // Calculamos el discriminante de la ecuación cuadrática
+    op.delta = op.B * op.B - 4 * op.A * op.C;
+    if (op.delta < 0) // No hay solución real, por lo tanto, no hay intersección
+        return ray;
+
+    // Calculamos la raíz de la ecuación cuadrática
+    lambda = calculate_quadratic_root(op);
+    if (lambda < 0) // Si la solución es negativa, la intersección está detrás del origen
+        return ray;
+
+    // Calculamos el punto de intersección y marcamos el rayo como un "hit"
+    ray.hit = true;
+    ray.hit_point = add_vec3(origin, scalar_mult(direction, lambda));
+    ray.distance = lambda;
+
+    return ray;
+}
+
+
+t_vec3	get_cylinder_normal(t_cylinder *cy, t_vec3 hit_point)
+{
+    t_vec3	cy_to_hit;         // Vector desde el centro del cilindro hasta el punto de intersección
+    t_vec3	projected_point;    // Proyección de cy_to_hit en el eje del cilindro
+    t_vec3	normal;             // La normal final en el punto de intersección
+
+    // Vector desde el centro del cilindro hasta el punto de intersección
+    cy_to_hit = substract_vec3(hit_point, cy->pos);
+
+    // Proyección de cy_to_hit en el eje del cilindro
+    projected_point = scalar_mult(cy->normal, dot_product(cy_to_hit, cy->normal));
+
+    // La normal es el vector perpendicular al eje del cilindro
+    normal = substract_vec3(cy_to_hit, projected_point);
+    normal = normalize_vec3(normal); // Normalizamos para obtener un vector unitario
+
+    return normal;
+}
