@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/07 12:14:14 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:41:47 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void		calculate_t(t_operation *op);
 void	hit_which_object(t_vec3 direction, t_vec3 origin, t_obj *obj, t_ray *ray);
 t_vec3		get_normal_cyl(t_vec3 hp, t_cylinder *cy);
 t_vec3		get_normal_cone(t_vec3 hp, t_cone *co);
+double		calculate_quadratic_root(t_operation op);
 
 
 

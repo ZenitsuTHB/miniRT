@@ -6,11 +6,25 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 11:51:00 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/02 14:12:49 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:14:48 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
+
+void	calculate_t(t_operation *op)
+{
+	double	tmp;
+
+	op->t[0] = (-op->B - sqrt(op->delta)) / (2 * op->A);
+	op->t[1] = (-op->B + sqrt(op->delta)) / (2 * op->A);
+	if (op->t[0] > op->t[1])
+	{
+		tmp = op->t[0];
+		op->t[0] = op->t[1];
+		op->t[1] = tmp;
+	}
+}
 
 int	calculate_abcd_cone(t_operation *op, t_cone *co, t_vec3 dir, t_vec3 con)
 {
