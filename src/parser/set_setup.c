@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:30:27 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/11 17:55:08 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:36:06 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ static void	set_new(t_light *new, t_scene *scene)
 		scene->light->next = new;
 		new->prev = scene->light;
 	}
-	return (new);
 	scene->light = new;
 }
 
