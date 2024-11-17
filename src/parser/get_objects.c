@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:04:37 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/11 17:59:47 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/17 19:20:10 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	put_zero(int *var)
 	*var = 0;
 }
 
-t_sphere	*get_sphere(int id, char *data, int *error)
+t_sphere	*get_sphere(char *data, int *error)
 {
 	t_sphere	*obj;
 	char		**split;
@@ -26,8 +26,6 @@ t_sphere	*get_sphere(int id, char *data, int *error)
 	obj = malloc(sizeof(t_sphere));
 	if (!obj)
 		return (error_parser(YEL, MSG_MEM), NULL);
-	if (id != SP)
-		return (free(obj), put_zero(error), NULL);
 	split = ft_splitset(data, " \t");
 	if (!split)
 		return (free(obj), error_parser(YEL, MSG_MEM), NULL);
@@ -44,7 +42,7 @@ t_sphere	*get_sphere(int id, char *data, int *error)
 	return (free_split(split), put_zero(error), obj);
 }
 
-t_plane	*get_plane(int id, char *data, int *error)
+t_plane	*get_plane(char *data, int *error)
 {
 	t_plane	*obj;
 	char	**split;
@@ -52,8 +50,6 @@ t_plane	*get_plane(int id, char *data, int *error)
 	obj = malloc(sizeof(t_plane));
 	if (!obj)
 		return (error_parser(YEL, MSG_MEM), NULL);
-	if (id != PL)
-		return (free(obj), put_zero(error), NULL);
 	split = ft_splitset(data, " \t");
 	if (!split)
 		return (free(obj), error_parser(YEL, MSG_MEM), NULL);
@@ -67,7 +63,7 @@ t_plane	*get_plane(int id, char *data, int *error)
 	return (free_split(split), put_zero(error), obj);
 }
 
-t_cylinder	*get_cylinder(int id, char *data, int *error)
+t_cylinder	*get_cylinder(char *data, int *error)
 {
 	t_cylinder	*obj;
 	char		**sp;
@@ -76,8 +72,6 @@ t_cylinder	*get_cylinder(int id, char *data, int *error)
 	obj = malloc(sizeof(t_cylinder));
 	if (!obj)
 		return (error_parser(YEL, MSG_MEM), NULL);
-	if (id != CY)
-		return (free(obj), put_zero(error), NULL);
 	sp = ft_splitset(data, " \t");
 	if (!sp)
 		return (free(obj), error_parser(YEL, MSG_MEM), NULL);
@@ -96,7 +90,7 @@ t_cylinder	*get_cylinder(int id, char *data, int *error)
 	return (free_split(sp), put_zero(error), obj);
 }
 
-t_cone	*get_cone(int id, char *data, int *error)
+t_cone	*get_cone(char *data, int *error)
 {
 	t_cone	*obj;
 	char	**sp;
@@ -105,8 +99,6 @@ t_cone	*get_cone(int id, char *data, int *error)
 	obj = malloc(sizeof(t_cone));
 	if (!obj)
 		return (error_parser(YEL, MSG_MEM), NULL);
-	if (id != CO)
-		return (free(obj), put_zero(error), NULL);
 	sp = ft_splitset(data, " \t");
 	if (!sp)
 		return (free(obj), error_parser(YEL, MSG_MEM), NULL);
@@ -118,9 +110,10 @@ t_cone	*get_cone(int id, char *data, int *error)
 	if (*err)
 		return (free(obj), free_split(sp), NULL);
 	obj->height = ft_strtod(sp[4], &err);
-	if (*err)
+	if (*err || set_color(sp[5], &obj->color))
 		return (free(obj), free_split(sp), NULL);
-	if (set_color(sp[5], &obj->color))
-		return (free(obj), free_split(sp), NULL);
+	obj->angle = atan(obj->radius / obj->height);
+	obj->tan_squared = pow(obj->radius / obj->height, 2);
+	obj->base_center = add_vec3(obj->pos, scalar_mult(obj->normal, obj->height));
 	return (free_split(sp), put_zero(error), obj);
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:11:18 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/03 14:47:53 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/17 19:14:21 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void		set_camera(t_scene *scene, char *data, int *error);
 void		set_light(t_scene *scene, char *data, int *error);
 void		set_object(t_scene *scene, char *id, char *data, int *error);
 
-t_sphere	*get_sphere(int id, char *data, int *error);
-t_plane		*get_plane(int id, char *data, int *error);
-t_cylinder	*get_cylinder(int id, char *data, int *error);
-t_cone		*get_cone(int id, char *data, int *error);
+t_sphere	*get_sphere(char *data, int *error);
+t_plane		*get_plane(char *data, int *error);
+t_cylinder	*get_cylinder(char *data, int *error);
+t_cone		*get_cone(char *data, int *error);
 
 int			set_color(char *str, t_rgb *rgb);
 int			set_pos(char *str, t_vec3 *pos);

@@ -6,25 +6,11 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:08:06 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/17 17:34:50 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/17 19:32:41 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
-
-/*
-t_vec3	get_normal_cyl(t_vec3 hp, t_cylinder *cy)
-{
-	t_vec3	ap;
-	t_vec3	normal;
-	double	m;
-
-	ap = substract_vec3(hp, cy->pos);
-	m = dot_product(&ap, &cy->normal);
-	ap = add_vec3(cy->pos, scalar_mult(cy->normal, m));
-	normal = substract_vec3(hp, ap);
-	return (unit_vec3(normal));
-}*/
 
 t_vec3	get_normal_cone(t_vec3 hp, t_cone *co)
 {

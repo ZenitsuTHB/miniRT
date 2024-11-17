@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 12:16:52 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/06 14:20:16 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/17 19:42:43 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ int	set_normal(char *str, t_vec3 *normal)
 	if (*error || normal->z < -1.0 || normal->z > 1.0)
 		return (free_split(split), error_parser(YEL, MSG_DATA), 1);
 	free_split(split);
+	*normal = unit_vec3(*normal);
 	return (0);
 }

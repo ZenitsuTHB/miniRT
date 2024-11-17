@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/07 11:28:31 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/17 19:20:35 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@ typedef struct s_cone
 	t_vec3				normal;
 	double				radius;
 	double				height;
+	double				angle;
+	double				tan_squared;
+	t_vec3				base_center;
 	t_rgb				color;
 }	t_cone;
 

@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:34:09 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/07 12:30:19 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/17 19:14:00 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static int	add_object(t_obj **obj, int id, char *data)
 	if (!new)
 		return (1);
 	if (id == SP)
-		new->shape.sp = get_sphere(id, data, &error);
+		new->shape.sp = get_sphere(data, &error);
 	else if (id == PL)
-		new->shape.pl = get_plane(id, data, &error);
+		new->shape.pl = get_plane(data, &error);
 	else if (id == CY)
-		new->shape.cy = get_cylinder(id, data, &error);
+		new->shape.cy = get_cylinder(data, &error);
 	else if (id == CO)
-		new->shape.co = get_cone(id, data, &error);
+		new->shape.co = get_cone(data, &error);
 	*obj = new;
 	return (error);
 }
