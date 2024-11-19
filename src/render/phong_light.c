@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/14 23:46:10 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/16 20:19:09 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ t_rgb	get_specular_color(t_obj *obj, t_light *light, t_vec3 point,
 	normal = obj->normal;
 	view_dir = unit_vec3(substract_vec3(point, cam->origin));
 	light_dir = unit_vec3(substract_vec3(point, light->pos));
-	reflect_dir = reflect_vec(light_dir, normal);
+//	reflect_dir = reflect_vec(light_dir, normal);
+	reflect_dir = light_dir - scalar_mult(&normal, (dot_product(&normal, &light_dir)));
+	reflect_dir = light_dir - 2 * (normal * light_dir) * normal;
+
 	spec = pow(fmax(dot_product(&view_dir, &reflect_dir), 0.0), 32.9);
 	return (scalar_mult(light->color, light->bright * spec));
 }
@@ -76,7 +79,7 @@ uint32_t	get_full_color(t_ray ray, t_scene *sc, t_light **light, t_obj *obj)
 		else
 		{
 			vars.diff = get_diffuse_color(ray.object, l, point);
-			//vars.spec = get_specular_color(ray.object, l, point, sc->camera);
+			vars.spec = get_specular_color(ray.object, l, point, sc->camera);
 			vars.full = add_vec3(vars.diff, vars.i_amb);
 		}
 		vars.finished = accumulation_color(vars.finished, vars.full);

@@ -6,11 +6,16 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:13:17 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/21 15:28:03 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/16 20:13:51 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
+
+t_vec3	scalar_substract(t_vec3 v, double scalar)
+{
+	return (create_vec3(v.x - scalar, v.y - scalar, v.z - scalar));
+}
 
 // a vector multiplied by a scalar
 t_vec3	scalar_mult(t_vec3 v, double scalar)
