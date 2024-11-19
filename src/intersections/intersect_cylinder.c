@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 16:54:54 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/17 20:17:19 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:03:28 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,17 +157,16 @@ t_ray hit_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cy) {
 
             // Verificar si el punto de impacto está dentro de la altura del cilindro
             if (projection >= 0 && projection <= cy->height) {
-                ray.hit = true;
+                ray.hit = 1;
                 ray.distance = op.lambda;
             }
         }
     }
 
-    // Verificar las tapas del cilindro
     if (check_cylinder_caps(dir, origin, cy, &t_cap, &cap_hit_point)) {
         // Si el punto de la tapa es más cercano o si no había intersección previa
         if (!ray.hit || t_cap < ray.distance) {
-            ray.hit = true;
+            ray.hit = 2;
             ray.distance = t_cap;
             ray.hit_point = cap_hit_point;
         }

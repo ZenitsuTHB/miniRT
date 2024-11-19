@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/17 19:48:08 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/19 20:19:39 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,7 @@ uint32_t	get_phong_effect(t_ray ray, t_scene *scene, t_obj *obj)
 
 	light = &scene->light;
 	phong_color = get_full_color(ray, scene, light, obj);
+	if (ray.object->id == CY && ray.hit == 2)
+		phong_color = gradient_color(clamp_color(ray.object->shape.cy->color));
 	return (phong_color);
 }

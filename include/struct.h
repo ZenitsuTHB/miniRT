@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/17 19:20:35 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:50:37 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ typedef struct s_obj
 
 typedef struct s_ray
 {
-	bool		hit;
+	int		hit;
 	double		distance;
 	t_vec3		origin;
 	t_vec3		normal;
