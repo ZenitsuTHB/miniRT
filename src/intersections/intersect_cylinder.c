@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 16:54:54 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/19 13:03:28 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/20 23:10:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ bool check_cylinder_caps(t_vec3 dir, t_vec3 origin, t_cylinder *cy, double *t_ca
     d = dot_product(&cy->normal, &dir);  // Producto punto con la dirección del rayo
 
     // Comprobar si el rayo es paralelo al plano de la tapa superior
-    if (fabs(d) > 1e-6)
+    if (fabs(d) > 1e-4)
     {
         v = substract_vec3(top_center, origin);  // Vector desde el origen del rayo al centro de la tapa superior
         t = dot_product(&cy->normal, &v) / d;  // Distancia de intersección
@@ -124,7 +124,8 @@ bool check_cylinder_caps(t_vec3 dir, t_vec3 origin, t_cylinder *cy, double *t_ca
     return false;
 }
 */
-t_ray hit_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cy) {
+t_ray hit_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cy)
+{
     t_ray ray;
     t_operation op;
     t_vec3 cy_to_ray_origin;

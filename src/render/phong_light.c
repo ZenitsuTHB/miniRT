@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/19 20:19:39 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/20 23:25:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_rgb	get_ambient_color(t_rgb base, t_scene *sc)
 {
 	t_rgb	i_amb;
 
+	i_amb = vproduct_vec3(&base, &sc->ambient->color);
 	i_amb = scalar_mult(base, sc->ambient->bright);
 	return (i_amb);
 }
@@ -77,9 +78,9 @@ uint32_t	get_full_color(t_ray ray, t_scene *sc, t_light **light, t_obj *obj)
 		else
 		{
 			vars.diff = get_diffuse_color(ray.object, l, point);
-			//vars.spec = get_specular_color(ray.object, l, point, sc->camera);
-			//vars.full = add_vec3(add_vec3(vars.spec, vars.diff), vars.i_amb);
-			vars.full = add_vec3(vars.diff, vars.i_amb);
+			vars.spec = get_specular_color(ray.object, l, point, sc->camera);
+			vars.full = add_vec3(add_vec3(vars.spec, vars.diff), vars.i_amb);
+			//vars.full = add_vec3(vars.diff, vars.i_amb);
 		}
 		vars.finished = accumulation_color(vars.finished, vars.full);
 		vars.full = (t_rgb){0, 0, 0};
@@ -95,7 +96,5 @@ uint32_t	get_phong_effect(t_ray ray, t_scene *scene, t_obj *obj)
 
 	light = &scene->light;
 	phong_color = get_full_color(ray, scene, light, obj);
-	if (ray.object->id == CY && ray.hit == 2)
-		phong_color = gradient_color(clamp_color(ray.object->shape.cy->color));
 	return (phong_color);
 }
