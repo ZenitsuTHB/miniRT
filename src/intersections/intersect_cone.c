@@ -6,12 +6,12 @@
 /*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 11:51:00 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/17 19:26:40 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:28:49 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
-/*
+
 void	calculate_t(t_operation *op)
 {
 	double	tmp;
@@ -33,7 +33,7 @@ int	calculate_abcd_cone(t_operation *op, t_cone *co, t_vec3 dir, t_vec3 con)
 	double	c;
 	double	k;
 
-	k = pow(co->radius / co->height, 2);	
+	k = pow(co->radius / co->height, 2);
 	a = dot_product(&dir, &dir);
 	b = pow(dot_product(&dir, &co->normal), 2);
 	op->A = a - (1 + k) * b;
@@ -63,7 +63,8 @@ t_vec3	get_cone_normal(t_vec3 hp, t_cone *co, double m)
 	c = substract_vec3(hp, b);
 	adjusted_normal = unit_vec3(c);
 	k = co->radius / co->height;
-	adjusted_normal = substract_vec3(adjusted_normal, scalar_mult(co->normal, k));
+	a = scalar_mult(co->normal, k);
+	adjusted_normal = substract_vec3(adjusted_normal, a);
 	return (unit_vec3(adjusted_normal));
 }
 
@@ -115,7 +116,8 @@ t_ray	hit_cone(t_vec3 dir, t_vec3 origin, t_cone *co)
 	}
 	return (ray);
 }
-*/
+
+/*
 
 t_ray hit_cone(t_vec3 direction, t_vec3 origin, t_cone *co)
 {
@@ -135,9 +137,12 @@ t_ray hit_cone(t_vec3 direction, t_vec3 origin, t_cone *co)
     double dir_dot_normal = dot_product(&direction, &co->normal);
     double origin_dot_normal = dot_product(&cone_to_origin, &co->normal);
 
-    op.A = dot_product(&direction, &direction) - (1 + co->tan_squared) * pow(dir_dot_normal, 2);
-    op.B = 2 * (dot_product(&direction, &cone_to_origin) - (1 + co->tan_squared) * dir_dot_normal * origin_dot_normal);
-    op.C = dot_product(&cone_to_origin, &cone_to_origin) - (1 + co->tan_squared) * pow(origin_dot_normal, 2);
+    op.A = dot_product(&direction, &direction) 
+	- (1 + co->tan_squared) * pow(dir_dot_normal, 2);
+    op.B = 2 * (dot_product(&direction, &cone_to_origin) 
+	- (1 + co->tan_squared) * dir_dot_normal * origin_dot_normal);
+    op.C = dot_product(&cone_to_origin, &cone_to_origin) 
+	- (1 + co->tan_squared) * pow(origin_dot_normal, 2);
 
     // Discriminante
     op.delta = op.B * op.B - 4 * op.A * op.C;
@@ -175,12 +180,15 @@ t_ray hit_cone(t_vec3 direction, t_vec3 origin, t_cone *co)
 
         if (t_cap > 0)
         {
-            t_vec3 cap_hit_point = add_vec3(origin, scalar_mult(direction, t_cap));
+            t_vec3 cap_hit_point = add_vec3(origin, 
+			scalar_mult(direction, t_cap));
 
             // Verifica si el punto de impacto está dentro del radio de la base
-            if (euclidean_distance(base_center, cap_hit_point) <= pow(co->radius, 2))
+            if (euclidean_distance(base_center, cap_hit_point) 
+				<= pow(co->radius, 2))
             {
-                if (!ray.hit || t_cap < ray.distance) // Actualiza si es más cercano
+                // Actualiza si es más cercano
+                if (!ray.hit || t_cap < ray.distance)
                 {
                     ray.hit = true;
                     ray.distance = t_cap;
@@ -191,4 +199,4 @@ t_ray hit_cone(t_vec3 direction, t_vec3 origin, t_cone *co)
     }
 
     return ray;
-}
+}*/

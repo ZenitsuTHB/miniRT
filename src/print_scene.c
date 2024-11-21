@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/07 01:34:30 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/21 17:12:24 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	print_cones(t_cone *s)
 	printf("\n");
 	i++;
 }
- 
+
 void	print_spheres(t_sphere *s)
 {
 	static int	i = 1;
@@ -98,27 +98,6 @@ void	print_scene(t_scene scene)
 {
 	t_obj	*obj;
 
-	printf("Ambient(A): \n\n");
-	printf("Ratio: %lf\n", scene.ambient->bright);
-	printf("Color red: %lf\n", scene.ambient->color.x);
-	printf("Color blue: %lf\n", scene.ambient->color.y);
-	printf("Color green: %lf\n\n", scene.ambient->color.z); 
-	printf("Camera(C): \n\n");
-	printf("Pos x: %lf\n", scene.camera->origin.x);
-	printf("Pos y: %lf\n", scene.camera->origin.y);
-	printf("Pos z: %lf\n", scene.camera->origin.z);
-	printf("cam_dir x: %lf\n", scene.camera->cam_dir.x);
-	printf("cam_dir y: %lf\n", scene.camera->cam_dir.y);
-	printf("cam_dir z: %lf\n", scene.camera->cam_dir.z);
-	printf("Fov: %d\n\n", scene.camera->fov);
-	 printf("Light(L): \n\n");
-	printf("Pos x: %lf\n", scene.light->pos.x);
-	printf("Pos y: %lf\n", scene.light->pos.y);
-	printf("Pos z: %lf\n", scene.light->pos.z);
-	printf("Bright: %lf\n", scene.light->bright);
-	printf("Color red: %lf\n", scene.light->color.x);
-	printf("Color blue: %lf\n", scene.light->color.y);
-	printf("Color green: %lf\n\n", scene.light->color.z); 
 	obj = scene.obj;
 	if (!obj)
 		return ;
@@ -133,7 +112,34 @@ void	print_scene(t_scene scene)
 		if (obj->id == CY)
 			print_cylinders(obj->shape.cy);
 		if (obj->id == CO)
-			print_cones(obj->shape.co); 
+			print_cones(obj->shape.co);
 		obj = obj->next;
 	}
 }
+
+/*
+
+
+	printf("Ambient(A): \n\n");
+	printf("Ratio: %lf\n", scene.ambient->bright);
+	printf("Color red: %lf\n", scene.ambient->color.x);
+	printf("Color blue: %lf\n", scene.ambient->color.y);
+	printf("Color green: %lf\n\n", scene.ambient->color.z);
+	printf("Camera(C): \n\n");
+	printf("Pos x: %lf\n", scene.camera->origin.x);
+	printf("Pos y: %lf\n", scene.camera->origin.y);
+	printf("Pos z: %lf\n", scene.camera->origin.z);
+	printf("cam_dir x: %lf\n", scene.camera->cam_dir.x);
+	printf("cam_dir y: %lf\n", scene.camera->cam_dir.y);
+	printf("cam_dir z: %lf\n", scene.camera->cam_dir.z);
+	printf("Fov: %d\n\n", scene.camera->fov);
+	printf("Light(L): \n\n");
+	printf("Pos x: %lf\n", scene.light->pos.x);
+	printf("Pos y: %lf\n", scene.light->pos.y);
+	printf("Pos z: %lf\n", scene.light->pos.z);
+	printf("Bright: %lf\n", scene.light->bright);
+	printf("Color red: %lf\n", scene.light->color.x);
+	printf("Color blue: %lf\n", scene.light->color.y);
+	printf("Color green: %lf\n\n", scene.light->color.z);
+
+*/

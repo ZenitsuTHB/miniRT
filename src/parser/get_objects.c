@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:04:37 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/17 19:20:10 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:13:44 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ t_cone	*get_cone(char *data, int *error)
 		return (free(obj), free_split(sp), NULL);
 	obj->angle = atan(obj->radius / obj->height);
 	obj->tan_squared = pow(obj->radius / obj->height, 2);
-	obj->base_center = add_vec3(obj->pos, scalar_mult(obj->normal, obj->height));
+	obj->base_center = add_vec3(obj->pos,
+			scalar_mult(obj->normal, obj->height));
 	return (free_split(sp), put_zero(error), obj);
 }

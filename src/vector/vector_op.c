@@ -6,12 +6,12 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:00:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/06 01:39:41 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/21 17:14:23 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/minirt.h"
-# include "../libs/libft/libft.h"
+#include "../include/minirt.h"
+#include "../libs/libft/libft.h"
 
 t_vec3	create_vec3(double x, double y, double z)
 {

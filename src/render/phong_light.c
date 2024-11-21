@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/21 12:22:52 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/21 17:16:59 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_rgb	get_specular_color(t_obj *obj, t_light *light, t_vec3 point,
 	spec = 0.0;
 	normal = (t_vec3){0, 0, 0};
 	normal = obj->normal;
-	
 	view_dir = unit_vec3(substract_vec3(point, cam->origin));
 	light_dir = unit_vec3(substract_vec3(point, light->pos));
 	reflect_dir = reflect_vec(light_dir, normal);
@@ -80,7 +79,6 @@ uint32_t	get_full_color(t_ray ray, t_scene *sc, t_light **light, t_obj *obj)
 			vars.diff = get_diffuse_color(ray.object, l, point);
 			vars.spec = get_specular_color(ray.object, l, point, sc->camera);
 			vars.full = add_vec3(add_vec3(vars.spec, vars.diff), vars.i_amb);
-			//vars.full = add_vec3(vars.diff, vars.i_amb);
 		}
 		vars.finished = accumulation_color(vars.finished, vars.full);
 		vars.full = (t_rgb){0, 0, 0};

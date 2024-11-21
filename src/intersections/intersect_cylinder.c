@@ -6,172 +6,114 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 16:54:54 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/20 23:10:49 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/21 18:21:45 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 
-bool check_cylinder_caps(t_vec3 dir, t_vec3 origin, t_cylinder *cy, double *t_cap, t_vec3 *cap_hit_point)
+bool	check_cap(t_triplevec tri, t_cylinder *cy, double *t_cap, t_vec3 *chp)
 {
-    double d;           // Denominador para verificar si el rayo es paralelo al plano de la tapa
-    t_vec3 v;           // Vector desde el origen del rayo al centro de la tapa
-    double t;           // Distancia de intersección con el plano
-    t_vec3 point_on_plane;  // Punto de intersección del rayo con el plano de la tapa
-    t_vec3 to_center;   // Distancia entre el punto de intersección y el centro de la tapa
-
-    // Comprobar la tapa inferior
-    d = dot_product(&cy->normal, &dir);  // Producto punto entre la normal de la tapa y la dirección del rayo
-
-    // Comprobar si el rayo es paralelo al plano de la tapa
-    if (fabs(d) > 1e-6)
-    {
-        v = substract_vec3(cy->pos, origin);  // Vector desde el origen del rayo al centro de la tapa
-        t = dot_product(&cy->normal, &v) / d;  // Distancia de intersección
-
-        if (t > 0)  // Solo consideramos intersecciones hacia adelante (t > 0)
-        {
-            point_on_plane = add_vec3(origin, scalar_mult(dir, t));  // Punto de intersección
-
-            // Comprobar si el punto está dentro del radio del disco (tapa inferior)
-            to_center = substract_vec3(point_on_plane, cy->pos);
-            if (dot_product(&to_center, &to_center) <= cy->radius * cy->radius)
-            {
-                *t_cap = t;
-                *cap_hit_point = point_on_plane;
-                return true;  // Intersección con la tapa inferior
-            }
-        }
-    }
-
-    // Comprobar la tapa superior
-    t_vec3 top_center = add_vec3(cy->pos, scalar_mult(cy->normal, cy->height));  // Centro de la tapa superior
-    d = dot_product(&cy->normal, &dir);  // Producto punto con la dirección del rayo
-
-    // Comprobar si el rayo es paralelo al plano de la tapa superior
-    if (fabs(d) > 1e-4)
-    {
-        v = substract_vec3(top_center, origin);  // Vector desde el origen del rayo al centro de la tapa superior
-        t = dot_product(&cy->normal, &v) / d;  // Distancia de intersección
-
-        if (t > 0)  // Solo consideramos intersecciones hacia adelante (t > 0)
-        {
-            point_on_plane = add_vec3(origin, scalar_mult(dir, t));  // Punto de intersección
-
-            // Comprobar si el punto está dentro del radio del disco (tapa superior)
-            to_center = substract_vec3(point_on_plane, top_center);
-            if (dot_product(&to_center, &to_center) <= cy->radius * cy->radius)
-            {
-                *t_cap = t;
-                *cap_hit_point = point_on_plane;
-                return true;  // Intersección con la tapa superior
-            }
-        }
-    }
-
-    return false;  // No hay intersección con ninguna de las tapas
-}
-/*
-
-bool check_cylinder_caps(t_vec3 dir, t_vec3 origin, t_cylinder *cy, double *t_cap, t_vec3 *cap_hit_point)
-{
-    double d;
+	double	d;
 	t_vec3	v;
-    t_vec3 cap_center;
-    t_vec3 point_on_plane;
+	double	t;
+	t_vec3	point_on_plane;
+	t_vec3	to_center;
 
-    // Comprobar la tapa inferior
-    cap_center = cy->pos; // La posición es el centro de la tapa inferior
-    d = dot_product(&cy->normal, &dir);
-
-    // Comprobar si el rayo es paralelo a la tapa
-    if (fabs(d) > 1e-6)
-    {
-		v = substract_vec3(cap_center, origin);
-        double t = dot_product(&cy->normal, &v) / d;
-        if (t > 0)
-        {
-            point_on_plane = add_vec3(origin, scalar_mult(dir, t));
-            if (euclidean_distance(cap_center, point_on_plane) <= pow(cy->radius, 2))
-            {
-                *t_cap = t;
-                *cap_hit_point = point_on_plane;
-                return true;
-            }
-        }
-    }
-
-    // Comprobar la tapa superior
-    cap_center = add_vec3(cy->pos, scalar_mult(cy->normal, cy->height));
-    d = dot_product(&cy->normal, &dir);
-
-    if (fabs(d) > 1e-6)
-    {
-		v = substract_vec3(cap_center, origin);
-        double t = dot_product(&cy->normal, &v) / d;
-        if (t > 0)
-        {
-            point_on_plane = add_vec3(origin, scalar_mult(dir, t));
-            if (euclidean_distance(cap_center, point_on_plane) <= pow(cy->radius, 2))
-            {
-                *t_cap = t;
-                *cap_hit_point = point_on_plane;
-                return true;
-            }
-        }
-    }
-
-    return false;
+	d = dot_product(&cy->normal, &tri.dir);
+	if (fabs(d) > 1e-6)
+	{
+		v = substract_vec3(tri.co, tri.origin);
+		t = dot_product(&cy->normal, &v) / d;
+		if (t > 0)
+		{
+			point_on_plane = add_vec3(tri.origin, scalar_mult(tri.dir, t));
+			to_center = substract_vec3(point_on_plane, tri.co);
+			if (dot_product(&to_center, &to_center) <= cy->radius * cy->radius)
+			{
+				*t_cap = t;
+				*chp = point_on_plane;
+				return (true);
+			}
+		}
+	}
+	return (false);
 }
-*/
-t_ray hit_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cy)
+
+bool	check_cylinder_caps(t_triplevec duo, t_cylinder *cy,
+		double *t_cap, t_vec3 *cap_hit_point)
 {
-    t_ray ray;
-    t_operation op;
-    t_vec3 cy_to_ray_origin;
-    double t_cap;
-    t_vec3 cap_hit_point;
+	duo.co = cy->pos;
+	if (check_cap(duo, cy, t_cap, cap_hit_point))
+		return (true);
+	duo.co = add_vec3(cy->pos, scalar_mult(cy->normal, cy->height));
+	return (check_cap(duo, cy, t_cap, cap_hit_point));
+}
 
-    ft_bzero(&ray, sizeof(t_ray));
-    ray.hit = false;
+void	get_abcd_cyl(t_cylinder *cy, t_vec3 origin, t_vec3 dir, t_operation *op)
+{
+	t_vec3	cy_to_ray_origin;
+	double	cy_dot_dir;
+	double	cy_dot_origin;
+	double	tmp;
 
-    // Vector desde el centro del cilindro hasta el origen del rayo
-    cy_to_ray_origin = substract_vec3(origin, cy->pos);
+	cy_to_ray_origin = substract_vec3(origin, cy->pos);
+	cy_dot_dir = dot_product(&dir, &cy->normal);
+	cy_dot_origin = dot_product(&cy_to_ray_origin, &cy->normal);
+	op->A = dot_product(&dir, &dir) - cy_dot_dir * cy_dot_dir;
+	tmp = dot_product(&dir, &cy_to_ray_origin);
+	op->B = 2 * (tmp - cy_dot_dir * cy_dot_origin);
+	tmp = dot_product(&cy_to_ray_origin, &cy_to_ray_origin);
+	op->C = tmp - cy_dot_origin * cy_dot_origin - pow(cy->radius, 2);
+	op->delta = op->B * op->B - 4 * op->A * op->C;
+}
 
-    // Cálculo de los coeficientes cuadráticos para el cuerpo del cilindro
-    op.A = dot_product(&dir, &dir) - pow(dot_product(&dir, &cy->normal), 2);
-    op.B = 2 * (dot_product(&dir, &cy_to_ray_origin) - dot_product(&dir, &cy->normal) * dot_product(&cy_to_ray_origin, &cy->normal));
-    op.C = dot_product(&cy_to_ray_origin, &cy_to_ray_origin) - pow(dot_product(&cy_to_ray_origin, &cy->normal), 2) - pow(cy->radius, 2);
+t_ray	hit_cyl_body(t_vec3 dir, t_vec3 origin, t_cylinder *cy, t_operation *op)
+{
+	t_ray	ray;
+	t_vec3	hit_to_base;
+	double	projection;
 
-    // Depuración de coeficientes
-    //printf("A: %f, B: %f, C: %f\n", op.A, op.B, op.C);
+	ft_bzero(&ray, sizeof(t_ray));
+	if (op->delta >= 0)
+	{
+		op->lambda = calculate_quadratic_root(*op);
+		if (op->lambda > 0)
+		{
+			ray.hit_point = add_vec3(origin, scalar_mult(dir, op->lambda));
+			hit_to_base = substract_vec3(ray.hit_point, cy->pos);
+			projection = dot_product(&hit_to_base, &cy->normal);
+			if (projection >= 0 && projection <= cy->height)
+			{
+				ray.hit = 1;
+				ray.distance = op->lambda;
+			}
+		}
+	}
+	return (ray);
+}
 
-    // Discriminante
-    op.delta = op.B * op.B - 4 * op.A * op.C;
-    if (op.delta >= 0) {
-        op.lambda = calculate_quadratic_root(op);
-        if (op.lambda > 0) {
-            // Punto de intersección en el cuerpo del cilindro
-            ray.hit_point = add_vec3(origin, scalar_mult(dir, op.lambda));
-            t_vec3 hit_to_base = substract_vec3(ray.hit_point, cy->pos);
-            double projection = dot_product(&hit_to_base, &cy->normal);
+t_ray	hit_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cy)
+{
+	t_ray			body_ray;
+	t_ray			final_ray;
+	t_operation		op;
+	double			t_cap;
+	t_vec3			cap_hit_point;
 
-            // Verificar si el punto de impacto está dentro de la altura del cilindro
-            if (projection >= 0 && projection <= cy->height) {
-                ray.hit = 1;
-                ray.distance = op.lambda;
-            }
-        }
-    }
-
-    if (check_cylinder_caps(dir, origin, cy, &t_cap, &cap_hit_point)) {
-        // Si el punto de la tapa es más cercano o si no había intersección previa
-        if (!ray.hit || t_cap < ray.distance) {
-            ray.hit = 2;
-            ray.distance = t_cap;
-            ray.hit_point = cap_hit_point;
-        }
-    }
-
-    return ray;
+	get_abcd_cyl(cy, origin, dir, &op);
+	body_ray = hit_cyl_body(dir, origin, cy, &op);
+	final_ray = body_ray;
+	op.tri.dir = dir;
+	op.tri.origin = origin;
+	if (check_cylinder_caps(op.tri, cy, &t_cap, &cap_hit_point))
+	{
+		if (!final_ray.hit || t_cap < final_ray.distance)
+		{
+			final_ray.hit = 2;
+			final_ray.distance = t_cap;
+			final_ray.hit_point = cap_hit_point;
+		}
+	}
+	return (final_ray);
 }
