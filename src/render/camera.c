@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/21 00:59:18 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/21 14:43:15 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	setting_up_camera(t_camera *cam)
 	t_vec3	look_upward;
 
 	cam->cam_dir = unit_vec3(substract_vec3(cam->cam_dir, cam->origin));
-	cam->vp_height = -1.7 * tan(deg_to_rad(cam->fov / 4)) * cam->focal_len;
+	cam->vp_height = -0.4 * tan(deg_to_rad(cam->fov / 2)) * cam->focal_len;
 	cam->vp_width = cam->vp_height * cam->ratio;
-	half_width = cam->vp_width;
+	half_width = -cam->vp_width;
 	half_height = cam->vp_height;
 	cam->neg_dir = unit_vec3(scalar_mult(cam->cam_dir, -1));
 	look_upward = (t_vec3){0, 1, 0};

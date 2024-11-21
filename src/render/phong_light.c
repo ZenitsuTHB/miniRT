@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/20 23:25:33 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/21 12:22:52 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_rgb	get_specular_color(t_obj *obj, t_light *light, t_vec3 point,
 	view_dir = unit_vec3(substract_vec3(point, cam->origin));
 	light_dir = unit_vec3(substract_vec3(point, light->pos));
 	reflect_dir = reflect_vec(light_dir, normal);
-	spec = pow(fmax(dot_product(&view_dir, &reflect_dir), 0.0), 32.9);
+	spec = pow(fmax(dot_product(&view_dir, &reflect_dir), 0.0), 64.9);
 	return (scalar_mult(light->color, light->bright * spec));
 }
 
