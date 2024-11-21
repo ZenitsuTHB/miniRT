@@ -6,15 +6,15 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/19 12:50:37 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/21 18:45:43 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#include <math.h>
-#include <../libs/MLX42/include/MLX42/MLX42.h>
+# include <math.h>
+# include <../libs/MLX42/include/MLX42/MLX42.h>
 
 /*
 ┏━━━━━━━━・▼・━━━━━━━━┓
@@ -24,95 +24,95 @@
 
 typedef struct s_vector
 {
-	double				x;
-	double				y;
-	double				z;
+	double			x;
+	double			y;
+	double			z;
 }	t_vec3;
 
-typedef struct s_vector t_rgb;
+typedef struct s_vector	t_rgb;
 
 typedef struct s_mlx
 {
-	int         x;
-	int         y;
-	mlx_t       *con;
-	mlx_image_t *img;
-}             t_mlx;
+	int				x;
+	int				y;
+	mlx_t			*con;
+	mlx_image_t		*img;
+}	t_mlx;
 
 typedef struct s_ambient
 {
-	double		bright;
-	t_rgb       color;
-}             t_ambient;
+	double			bright;
+	t_rgb			color;
+}	t_ambient;
 
 typedef struct s_camera
 {
-	int			fov;
-	t_vec3		origin;
-	t_vec3		cam_dir;
-	double		ratio;
-	double		focal_len;
-	double		vp_width;
-	double		vp_height;
-	t_vec3		up;
-	t_vec3		right;
-	t_vec3		neg_dir;
-	t_vec3		vertical;
-	t_vec3		horizontal;
-	t_vec3		l_l_corner;
-}				t_camera;
+	int				fov;
+	t_vec3			origin;
+	t_vec3			cam_dir;
+	double			ratio;
+	double			focal_len;
+	double			vp_width;
+	double			vp_height;
+	t_vec3			up;
+	t_vec3			right;
+	t_vec3			neg_dir;
+	t_vec3			vertical;
+	t_vec3			horizontal;
+	t_vec3			l_l_corner;
+}	t_camera;
 
 typedef struct s_light
 {
 	t_vec3			pos;
-	t_rgb 			color; 
-	double 			bright;
-	struct s_light *next;
-	struct s_light *prev;
+	t_rgb			color;
+	double			bright;
+	struct s_light	*next;
+	struct s_light	*prev;
 	t_vec3			direction;
-}				t_light;
+}	t_light;
 
 typedef struct s_sphere
 {
-	t_vec3		center;
-	double 		radius;
-	t_rgb		color;
-}				t_sphere;
+	t_vec3			center;
+	double			radius;
+	t_rgb			color;
+}	t_sphere;
 
 typedef struct s_plane
 {
-	t_vec3 	pos;
-	t_vec3 normal;
-	t_rgb		color;
-}				t_plane;
+	t_vec3			pos;
+	t_vec3			normal;
+	t_rgb			color;
+}	t_plane;
 
 typedef struct s_cylinder
 {
-	t_vec3            pos;
-	t_vec3            normal;
-	double            radius;
-	double            height;
-	t_rgb             color;
+	t_vec3			pos;
+	t_vec3			normal;
+	double			radius;
+	double			height;
+	t_rgb			color;
 }	t_cylinder;
 
 typedef struct s_cone
 {
-	t_vec3				pos;
-	t_vec3				normal;
-	double				radius;
-	double				height;
-	double				angle;
-	double				tan_squared;
-	t_vec3				base_center;
-	t_rgb				color;
+	t_vec3			pos;
+	t_vec3			normal;
+	double			radius;
+	double			height;
+	double			angle;
+	double			tan_squared;
+	t_vec3			base_center;
+	t_rgb			color;
 }	t_cone;
 
 typedef union u_shape
 {
-	t_sphere	*sp;
-	t_plane		*pl;
-	t_cylinder	*cy;
-	t_cone		*co;
+	t_sphere		*sp;
+	t_plane			*pl;
+	t_cylinder		*cy;
+	t_cone			*co;
 }	t_shape;
 
 typedef struct s_obj
@@ -127,63 +127,51 @@ typedef struct s_obj
 
 typedef struct s_ray
 {
-	int		hit;
-	double		distance;
-	t_vec3		origin;
-	t_vec3		normal;
-	t_vec3		hit_point;
-	t_obj		*object;
-	uint32_t	color;
-}				t_ray;
+	int				hit;
+	double			distance;
+	t_vec3			origin;
+	t_vec3			normal;
+	t_vec3			hit_point;
+	t_obj			*object;
+	uint32_t		color;
+}	t_ray;
 
 typedef struct s_scene
 {
-	t_mlx		*mlx;
-	// Parseo
-	t_light		*light;
-	t_camera	*camera;
-	t_ambient	*ambient;
-	t_obj		*obj;
-	// Render
-	t_ray		*ray;
-}				t_scene;
+	t_mlx			*mlx;
+	t_light			*light;
+	t_camera		*camera;
+	t_ambient		*ambient;
+	t_obj			*obj;
+	t_ray			*ray;
+}	t_scene;
 
-typedef struct	s_trilevec
+typedef struct s_trilevec
 {
-	t_vec3	dir;
-	t_vec3	origin;
-	t_vec3	co;
+	t_vec3			dir;
+	t_vec3			origin;
+	t_vec3			co;
 }	t_triplevec;
 
 typedef struct s_operation
 {
-  t_vec3		OC;
-  double		A;
-  double		B;
-  double		C;
-  double		t[2];
-  double		delta;
-  double		lambda;
-  t_triplevec	tri;
-}       t_operation;
+	t_vec3			oc;
+	double			a;
+	double			b;
+	double			c;
+	double			t[2];
+	double			delta;
+	double			lambda;
+	t_triplevec		tri;
+}	t_operation;
 
 typedef struct s_phong
 {
-    t_rgb full;
-    t_rgb i_amb;
-    t_rgb diff;
-    t_rgb spec;
-    t_rgb finished;
-}   t_phong;
-// typedef struct s_world
-// {
-//     t_objects       type;
-// 		t_materia       materia;
-//     bool            (*hit)(const t_ray *, t_objects, t_hit *);
-//     void            (*free_type)(t_objects);
-//     t_rgb           (*get_color)(t_vec3 *, struct s_world *, t_img_tex *);
-//     struct s_world  *next;
-// }                   t_world;
-// BONUS DATA
+	t_rgb			full;
+	t_rgb			i_amb;
+	t_rgb			diff;
+	t_rgb			spec;
+	t_rgb			finished;
+}	t_phong;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/21 14:43:15 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/21 18:31:17 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ t_vec3	get_pixel_direction(t_camera *cam, int pixel_x, int pixel_y)
 	t_vec3	px_point;
 	double	normalized[2];
 
-	normalized[x_coord] = ((double)pixel_x / (IMG_W - 1));
-	normalized[y_coord] = ((double)pixel_y / (IMG_H - 1));
-	scaled[x_coord] = scalar_mult(cam->horizontal, normalized[x_coord]);
-	scaled[y_coord] = scalar_mult(cam->vertical, normalized[y_coord]);
-	added_scales = add_vec3(scaled[x_coord], scaled[y_coord]);
+	normalized[X_COORD] = ((double)pixel_x / (IMG_W - 1));
+	normalized[Y_COORD] = ((double)pixel_y / (IMG_H - 1));
+	scaled[X_COORD] = scalar_mult(cam->horizontal, normalized[X_COORD]);
+	scaled[Y_COORD] = scalar_mult(cam->vertical, normalized[Y_COORD]);
+	added_scales = add_vec3(scaled[X_COORD], scaled[Y_COORD]);
 	px_point = add_vec3(cam->l_l_corner, added_scales);
 	ray_dir = substract_vec3(px_point, cam->origin);
 	return (unit_vec3(ray_dir));

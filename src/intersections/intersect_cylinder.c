@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 16:54:54 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/21 18:21:45 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:48:48 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ void	get_abcd_cyl(t_cylinder *cy, t_vec3 origin, t_vec3 dir, t_operation *op)
 	cy_to_ray_origin = substract_vec3(origin, cy->pos);
 	cy_dot_dir = dot_product(&dir, &cy->normal);
 	cy_dot_origin = dot_product(&cy_to_ray_origin, &cy->normal);
-	op->A = dot_product(&dir, &dir) - cy_dot_dir * cy_dot_dir;
+	op->a = dot_product(&dir, &dir) - cy_dot_dir * cy_dot_dir;
 	tmp = dot_product(&dir, &cy_to_ray_origin);
-	op->B = 2 * (tmp - cy_dot_dir * cy_dot_origin);
+	op->b = 2 * (tmp - cy_dot_dir * cy_dot_origin);
 	tmp = dot_product(&cy_to_ray_origin, &cy_to_ray_origin);
-	op->C = tmp - cy_dot_origin * cy_dot_origin - pow(cy->radius, 2);
-	op->delta = op->B * op->B - 4 * op->A * op->C;
+	op->c = tmp - cy_dot_origin * cy_dot_origin - pow(cy->radius, 2);
+	op->delta = op->b * op->b - 4 * op->a * op->c;
 }
 
 t_ray	hit_cyl_body(t_vec3 dir, t_vec3 origin, t_cylinder *cy, t_operation *op)

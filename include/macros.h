@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:15:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/16 10:54:56 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/21 18:27:34 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ typedef enum e_type
 	PL,
 	CY,
 	CO
-} t_type;
+}	t_type;
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define x_coord 0
-# define y_coord 1
+# define X_COORD 0
+# define Y_COORD 1
 
 # define WIDTH 1200
 # define HEIGHT 1000
@@ -62,7 +62,7 @@ typedef enum e_type
 # define ERROR_WIND "Can't initialize Window !"
 # define ERROR_ARG "Bad number of arguments detected !"
 # define ERROR_EXTENSION "Bad file extension !"
-#define MALLOC_ERROR "Allocation Failed !!!"
-#define RENDER_ERROR "Failed to Render_Image"
+# define MALLOC_ERROR "Allocation Failed !!!"
+# define RENDER_ERROR "Failed to Render_Image"
 
 #endif

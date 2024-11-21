@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:25:21 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/20 23:21:50 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/21 18:34:08 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ double					vector_length(t_vec3 v);
 double					deg_to_rad(double degree);
 double					euclidean_distance(t_vec3 v1, t_vec3 v2);
 
-t_vec3	vproduct_vec3(t_vec3 *v1, t_vec3 *v2);
+t_vec3					vproduct_vec3(t_vec3 *v1, t_vec3 *v2);
 
-t_vec3	reflect_vec(t_vec3 light_dir, t_vec3 normal);
+t_vec3					reflect_vec(t_vec3 light_dir, t_vec3 normal);
 t_vec3					cross_product(const t_vec3 *v1, const t_vec3 *v2);
 t_vec3					unit_vec3(t_vec3 v);
 t_vec3					create_vec3(double x, double y, double z);
