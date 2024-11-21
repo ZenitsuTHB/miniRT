@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitset.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:38:38 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/10/03 14:39:37 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/21 22:40:18 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	check_space(char c, char *set)
 
 static int	ft_cnt_word(const char *s, char *set)
 {
-	int		i;
-	int		word;
-	int		count;
+	int	i;
+	int	word;
+	int	count;
 
 	i = 0;
 	word = 0;
@@ -71,9 +71,10 @@ static char	**ft_create(char const *s, char *set, char **res)
 	start = 0;
 	while (s[i])
 	{
-		if (i > 0 && !check_space(s[i], set) && check_space(s[i - 1] , set))
+		if (i > 0 && !check_space(s[i], set) && check_space(s[i - 1], set))
 			start = i;
-		if (!check_space(s[i], set) && (check_space(s[i + 1], set) || s[i + 1] == '\0'))
+		if (!check_space(s[i], set) && (check_space(s[i + 1], set)
+				|| s[i + 1] == '\0'))
 		{
 			res[j] = ft_substr(s, start, i - start + 1);
 			if (!res[j])
@@ -85,8 +86,7 @@ static char	**ft_create(char const *s, char *set, char **res)
 		}
 		i++;
 	}
-	res[j] = NULL;
-	return (res);
+	return (res[j] = NULL, res);
 }
 
 char	**ft_splitset(char const *s, char *set)

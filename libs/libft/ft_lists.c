@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 15:31:03 by avolcy            #+#    #+#             */
-/*   Updated: 2024/10/04 22:04:58 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/21 22:40:46 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	ft_lstadd_back(void *lst, void *new)
 {
 	void	**aux;
-	
+
 	if (!lst || !new)
 		return ;
 	aux = *(void **)lst;
-	if(!aux)
+	if (!aux)
 	{
 		aux = new;
 		return ;
@@ -42,8 +42,8 @@ void	ft_lstadd_front(void *lst, void *new)
 
 void	lst_clear(void *list, void (*del)(void *))
 {
-	void *tmp;
-	void **aux;
+	void	*tmp;
+	void	**aux;
 
 	if (!list || !del)
 		return ;
@@ -71,4 +71,3 @@ void	lst_for_each(void *list, void (*func)(void *))
 		aux = *aux;
 	}
 }
-

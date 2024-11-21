@@ -6,15 +6,15 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 16:39:23 by avolcy            #+#    #+#             */
-/*   Updated: 2024/08/28 18:51:35 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/21 22:41:05 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int is_space(int c)
+int	is_space(int c)
 {
-	return (c == 32 || (c >=9 && c <= 13));
+	return (c == 32 || (c >= 9 && c <= 13));
 }
 
 int	ft_atoi(const char *str)
