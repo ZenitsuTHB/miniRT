@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/20 22:41:46 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/22 13:10:57 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char *argv[])
 	t_scene	scene;
 
 	if (read_file(argc, argv[1], &scene))
-		return (free_scene(&scene), EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	init_mlx(&scene);
 	if (render_object(&scene))
 		return (error_message(YEL, RENDER_ERROR));

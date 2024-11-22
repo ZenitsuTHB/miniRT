@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 17:46:40 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/11 18:04:18 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:10:26 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_lights(t_light *light)
 {
 	void	*next;
 
-	while (light->prev)
+	while (light && light->prev)
 		light = light->prev;
 	while (light)
 	{
@@ -33,7 +33,7 @@ void	free_objects(t_obj *obj)
 
 	if (!obj)
 		return ;
-	while (obj->prev)
+	while (obj && obj->prev)
 		obj = obj->prev;
 	while (obj)
 	{
