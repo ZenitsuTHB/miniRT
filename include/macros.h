@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:15:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/21 18:27:34 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:55:40 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef enum e_type
 # define MSG_FEW "Too few arguments!"
 # define MSG_TOO "Too many arguments!"
 # define MSG_EXT "Bad file extension!"
-# define MSG_OPEN "The file does not exists!"
+# define MSG_OPEN "The file does not exists or do you not have rights!"
 # define MSG_MEM "Fail to allocate memory!"
 # define MSG_OBJ "Wrong object: "
 # define MSG_AMB "You need an ambient light!"

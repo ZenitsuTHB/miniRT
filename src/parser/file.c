@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:10:35 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/22 13:12:16 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:32:10 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,17 @@ static int	read_data(int fd, t_scene *scene)
 
 static int	ft_open_file(char *name)
 {
-	int	fd;
-	int	len;
+	int			fd;
+	int			len_name;
+	const int	len_ext = 3;
 
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
 		return (error_parser(YEL, MSG_OPEN), fd);
-	len = ft_strlen(name) - 3;
-	if (len <= 3 || ft_strncmp(name + len, ".rt", 3))
+	if (name[0] == '.' && name[1] == '.')
+		return (error_parser(YEL, "We are not accepting '..file'"), -1);
+	len_name = ft_strlen(name) - len_ext;
+	if (ft_strncmp(name + len_name, ".rt", 3))
 		return (error_parser(YEL, MSG_EXT), -1);
 	return (fd);
 }
