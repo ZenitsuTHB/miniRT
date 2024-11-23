@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:59:36 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/21 17:23:58 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:32:44 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	hit_which_object(t_vec3 direction, t_vec3 origin, t_obj *obj,
 		*ray = hit_plane(direction, origin, obj->shape.pl);
 	if (obj->id == CY)
 		*ray = hit_cylinder(direction, origin, obj->shape.cy);
-	if (obj->id == CO)
-		*ray = hit_cone(direction, origin, obj->shape.co);
+	if (obj->id == CU)
+		*ray = hit_cube(direction, origin, obj->shape.cu);
 }
 
 t_ray	intersect_obj(t_vec3 pxel_dir, t_vec3 ori, t_obj *obj, t_scene *scene)

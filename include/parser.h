@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:11:18 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/21 18:33:40 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:30:22 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		set_object(t_scene *scene, char *id, char *data, int *error);
 t_sphere	*get_sphere(char *data, int *error);
 t_plane		*get_plane(char *data, int *error);
 t_cylinder	*get_cylinder(char *data, int *error);
-t_cone		*get_cone(char *data, int *error);
+t_cube		*get_cube(char *data, int *error);
 
 int			set_color(char *str, t_rgb *rgb);
 int			set_pos(char *str, t_vec3 *pos);
@@ -37,5 +37,7 @@ void		free_split(char **split);
 int			ft_splitlen(char **split);
 double		ft_strtod(char *str, char **error);
 int			ft_atoi_error(const char *str, int *error);
+
+int			get_angle(double height, double radius, double *angle);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:34:09 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/17 19:14:00 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:21:45 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static int	add_object(t_obj **obj, int id, char *data)
 		new->shape.pl = get_plane(data, &error);
 	else if (id == CY)
 		new->shape.cy = get_cylinder(data, &error);
-	else if (id == CO)
-		new->shape.co = get_cone(data, &error);
+	else if (id == CU)
+		new->shape.cu = get_cube(data, &error);
 	*obj = new;
 	return (error);
 }
@@ -62,8 +62,8 @@ void	set_object(t_scene *scene, char *id, char *data, int *error)
 		status = add_object(&(scene->obj), PL, data);
 	else if (!ft_strncmp(id, "cy", 3))
 		status = add_object(&(scene->obj), CY, data);
-	else if (!ft_strncmp(id, "co", 3))
-		status = add_object(&(scene->obj), CO, data);
+	else if (!ft_strncmp(id, "cu", 3))
+		status = add_object(&(scene->obj), CU, data);
 	else
 	{
 		printf(RED "\n\tError\n" YEL "\t%s%s\n\n" NC, MSG_OBJ, id);

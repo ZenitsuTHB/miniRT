@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:22:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/21 18:45:43 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:43:28 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,24 +95,20 @@ typedef struct s_cylinder
 	t_rgb			color;
 }	t_cylinder;
 
-typedef struct s_cone
+typedef struct s_cube
 {
-	t_vec3			pos;
+	t_vec3			center;
 	t_vec3			normal;
-	double			radius;
-	double			height;
-	double			angle;
-	double			tan_squared;
-	t_vec3			base_center;
+	double			size;
 	t_rgb			color;
-}	t_cone;
+}	t_cube;
 
 typedef union u_shape
 {
 	t_sphere		*sp;
 	t_plane			*pl;
 	t_cylinder		*cy;
-	t_cone			*co;
+	t_cube			*cu;
 }	t_shape;
 
 typedef struct s_obj
