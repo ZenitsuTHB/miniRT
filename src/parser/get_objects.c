@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:04:37 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/21 17:13:44 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:45:22 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ t_sphere	*get_sphere(char *data, int *error)
 	obj->radius = ft_strtod(split[2], &err) / 2;
 	if (*err)
 		return (free(obj), free_split(split), NULL);
+	if (obj->radius <= 0)
+		return (free(obj), free_split(split),
+			error_parser(YEL, "Wrong radius"), NULL);
 	if (set_color(split[3], &obj->color))
 		return (free(obj), free_split(split), NULL);
 	return (free_split(split), put_zero(error), obj);
@@ -85,36 +88,36 @@ t_cylinder	*get_cylinder(char *data, int *error)
 	obj->height = ft_strtod(sp[4], &err);
 	if (*err)
 		return (free(obj), free_split(sp), NULL);
+	if (obj->radius <= 0 || obj->height <= 0)
+		return (free(obj), free_split(sp), error_parser(YEL, "Negative"), NULL);
 	if (set_color(sp[5], &obj->color))
 		return (free(obj), free_split(sp), NULL);
 	return (free_split(sp), put_zero(error), obj);
 }
 
-t_cone	*get_cone(char *data, int *error)
+t_cube	*get_cube(char *data, int *error)
 {
-	t_cone	*obj;
+	t_cube	*obj;
 	char	**sp;
 	char	*err;
 
-	obj = malloc(sizeof(t_cone));
+	obj = malloc(sizeof(t_cube));
 	if (!obj)
 		return (error_parser(YEL, MSG_MEM), NULL);
 	sp = ft_splitset(data, " \t");
 	if (!sp)
 		return (free(obj), error_parser(YEL, MSG_MEM), NULL);
-	if (ft_splitlen(sp) != 6)
+	if (ft_splitlen(sp) != 5)
 		return (free(obj), free_split(sp), error_parser(YEL, MSG_DATA), NULL);
-	if (set_pos(sp[1], &obj->pos) || set_normal(sp[2], &obj->normal))
+	if (set_pos(sp[1], &obj->center) || set_normal(sp[2], &obj->normal))
 		return (free(obj), free_split(sp), NULL);
-	obj->radius = ft_strtod(sp[3], &err) / 2;
+	obj->size = ft_strtod(sp[3], &err);
 	if (*err)
 		return (free(obj), free_split(sp), NULL);
-	obj->height = ft_strtod(sp[4], &err);
-	if (*err || set_color(sp[5], &obj->color))
+	if (obj->size <= 0)
+		return (free(obj), free_split(sp),
+			error_parser(YEL, "Negative size"), NULL);
+	if (set_color(sp[4], &obj->color))
 		return (free(obj), free_split(sp), NULL);
-	obj->angle = atan(obj->radius / obj->height);
-	obj->tan_squared = pow(obj->radius / obj->height, 2);
-	obj->base_center = add_vec3(obj->pos,
-			scalar_mult(obj->normal, obj->height));
 	return (free_split(sp), put_zero(error), obj);
 }

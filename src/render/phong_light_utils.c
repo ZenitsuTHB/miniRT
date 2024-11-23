@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:33:17 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/07 12:04:50 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:33:34 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void	get_normal_and_color(t_vec3 hitpoint, t_obj **object)
 		(*object)->color = (*object)->shape.cy->color;
 		(*object)->normal = get_normal_cyl(hitpoint, (*object)->shape.cy);
 	}
-	else if ((*object)->id == CO)
+	else if ((*object)->id == CU)
 	{
-		(*object)->color = (*object)->shape.co->color;
-		(*object)->normal = get_normal_cone(hitpoint, (*object)->shape.co);
+		(*object)->color = (*object)->shape.cu->color;
+		(*object)->normal = get_normal_cube(hitpoint, (*object)->shape.cu);
 	}
 }
 

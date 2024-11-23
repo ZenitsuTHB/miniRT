@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 17:46:40 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/22 12:10:26 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:31:02 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	free_objects(t_obj *obj)
 			free(obj->shape.pl);
 		if (obj->shape.cy)
 			free(obj->shape.cy);
-		if (obj->shape.co)
-			free(obj->shape.co);
+		if (obj->shape.cu)
+			free(obj->shape.cu);
 		free(obj);
 		obj = next;
 	}

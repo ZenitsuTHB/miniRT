@@ -6,27 +6,36 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:08:06 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/19 12:45:05 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/23 14:26:35 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 
-t_vec3	get_normal_cone(t_vec3 hp, t_cone *co)
+static t_vec3	get_normal_cube2(double delta, int x, int y, int z)
 {
 	t_vec3	normal;
-	t_vec3	ap;
-	double	m;
-	double	k;
 
-	k = co->radius / co->height;
-	ap = substract_vec3(hp, co->pos);
-	m = dot_product(&ap, &co->normal);
-	ap = add_vec3(co->pos, scalar_mult(co->normal, m));
-	normal = substract_vec3(hp, ap);
-	ap = scalar_mult(co->normal, k * sqrt(dot_product(&normal, &normal)));
-	normal = substract_vec3(normal, ap);
-	return (unit_vec3(normal));
+	if (delta > 0)
+		normal = (t_vec3){x, y, z};
+	else
+		normal = (t_vec3){-x, -y, -z};
+	return (normal);
+}
+
+t_vec3	get_normal_cube(t_vec3 hit_point, t_cube *cu)
+{
+	t_vec3	normal;
+	t_vec3	delta;
+
+	delta = substract_vec3(hit_point, cu->center);
+	if (fabs(delta.x) > fabs(delta.y) && fabs(delta.x) > fabs(delta.z))
+		normal = get_normal_cube2(delta.x, 1, 0, 0);
+	else if (fabs(delta.y) > fabs(delta.x) && fabs(delta.y) > fabs(delta.z))
+		normal = get_normal_cube2(delta.y, 0, 1, 0);
+	else
+		normal = get_normal_cube2(delta.z, 0, 0, 1);
+	return (normal);
 }
 
 t_vec3	get_normal_cyl(t_vec3 hp, t_cylinder *cy)

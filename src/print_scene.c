@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:31:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/21 17:12:24 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:45:50 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,20 @@ void	print_cylinders(t_cylinder *s)
 	i++;
 }
 
-void	print_cones(t_cone *s)
+void	print_cubes(t_cube *s)
 {
 	static int	i = 1;
 
 	if (!s)
 		return ;
-	printf("Cono %d:\n\n", i);
-	printf("Pos x: %lf\n", s->pos.x);
-	printf("Pos y: %lf\n", s->pos.y);
-	printf("Pos z: %lf\n", s->pos.z);
+	printf("Cubo %d:\n\n", i);
+	printf("Pos x: %lf\n", s->center.x);
+	printf("Pos y: %lf\n", s->center.y);
+	printf("Pos z: %lf\n", s->center.z);
 	printf("Normal x: %lf\n", s->normal.x);
 	printf("Normal y: %lf\n", s->normal.y);
 	printf("Normal z: %lf\n", s->normal.z);
-	printf("Radious: %lf\n", s->radius);
-	printf("Height: %lf\n", s->height);
+	printf("Size: %lf\n", s->size);
 	printf("Color red: %lf\n", s->color.x);
 	printf("Color green: %lf\n", s->color.y);
 	printf("Color blue: %lf\n", s->color.z);
@@ -111,8 +110,8 @@ void	print_scene(t_scene scene)
 			print_planes(obj->shape.pl);
 		if (obj->id == CY)
 			print_cylinders(obj->shape.cy);
-		if (obj->id == CO)
-			print_cones(obj->shape.co);
+		if (obj->id == CU)
+			print_cubes(obj->shape.cu);
 		obj = obj->next;
 	}
 }

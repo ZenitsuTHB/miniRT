@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:15:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/22 13:55:40 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:32:12 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef enum e_type
 	SP = 1,
 	PL,
 	CY,
-	CO
+	CU
 }	t_type;
 
 # ifndef M_PI

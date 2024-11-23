@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:40:34 by adrmarqu          #+#    #+#             */
-/*   Updated: 2024/11/06 14:20:08 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/23 12:44:25 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,18 @@ int	ft_splitlen(char **split)
 	while (split[i])
 		i++;
 	return (i);
+}
+
+int	get_angle(double height, double radius, double *angle)
+{
+	const double	min = 0.0;
+	const double	max = M_PI / 2;
+
+	if (!height)
+		return (0);
+	*angle = atan(radius / height);
+	if (*angle > min && *angle < max)
+		return (0);
+	return (error_parser(YEL, "The angle is wrong (angle(0-90)"
+			"= atan(radius / height))"), 1);
 }

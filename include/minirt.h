@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:42:59 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/21 18:38:01 by adrmarqu         ###   ########.fr       */
+/*   Updated: 2024/11/23 14:42:28 by adrmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <float.h>
 
 int			init_mlx(t_scene *scene);
 
@@ -48,14 +49,14 @@ void		generate_ray(t_camera *camera, t_ray *ray, int i, int j);
 t_ray		hit_sphere(t_vec3 direction, t_vec3, t_sphere *sp);
 t_ray		hit_plane(t_vec3 direction, t_vec3 origin, t_plane *pl);
 t_ray		hit_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cy);
-t_ray		hit_cone(t_vec3 dir, t_vec3 origin, t_cone *co);
+t_ray		hit_cube(t_vec3 dir, t_vec3 origin, t_cube *cu);
 t_vec3		get_pixel_direction(t_camera *cam, int pixel_x, int pixel_y);
 uint32_t	get_phong_effect(t_ray ray, t_scene *scene, t_obj *obj);
 void		calculate_t(t_operation *op);
 void		hit_which_object(t_vec3 direction, t_vec3 origin,
 				t_obj *obj, t_ray *ray);
 t_vec3		get_normal_cyl(t_vec3 hp, t_cylinder *cy);
-t_vec3		get_normal_cone(t_vec3 hp, t_cone *co);
+t_vec3		get_normal_cube(t_vec3 hp, t_cube *cu);
 double		calculate_quadratic_root(t_operation op);
 
 int			error_message(char *color, char *msg);
