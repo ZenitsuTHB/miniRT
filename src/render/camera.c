@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:46:30 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/23 18:09:26 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/24 00:05:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,17 @@ t_vec3	lower_left_corner(t_camera *cam, double half_W, double half_H)
 
 int	setting_up_camera(t_camera *cam)
 {
+	t_vec3	dir;
 	double	half_width;
 	double	half_height;
 	t_vec3	look_upward;
 
-	cam->cam_dir = unit_vec3(substract_vec3(cam->cam_dir, cam->origin));
+	dir = unit_vec3(cam->cam_dir);
 	cam->vp_height = -tan(deg_to_rad(cam->fov / 2)) * cam->focal_len;
 	cam->vp_width = cam->vp_height * cam->ratio;
 	half_width = -cam->vp_width / 2;
 	half_height = cam->vp_height / 2;
-	cam->neg_dir = unit_vec3(scalar_mult(cam->cam_dir, -1));
+	cam->neg_dir = unit_vec3(scalar_mult(dir, -1));
 	look_upward = (t_vec3){0, 1, 0};
 	cam->right = unit_vec3(cross_product(&look_upward, &cam->neg_dir));
 	cam->up = cross_product(&cam->neg_dir, &cam->right);
