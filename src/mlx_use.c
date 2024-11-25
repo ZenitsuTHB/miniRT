@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:01:11 by avolcy            #+#    #+#             */
-/*   Updated: 2024/11/07 01:12:42 by avolcy           ###   ########.fr       */
+/*   Updated: 2024/11/24 18:35:51 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void	manage_escape(mlx_key_data_t keydata, void *param)
 	}
 	else
 	{
-		printf("Key pressed: %d\n", keydata.key);
+		printf("No functionality for : %d yet !\n", keydata.key);
 	}
 }
