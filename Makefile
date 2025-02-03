@@ -24,6 +24,7 @@ HIT		:= intersect_sphere.c intersect_plane.c intersect_cylinder.c intersect_cube
 
 RENDER  := rendering.c camera.c phong_light.c  phong_light_utils.c get_normals.c
 
+
 VECTOR	:= vector_op.c vector_op1.c vector_op2.c
 
 OBJS	:= $(addprefix $(OBJ_D)/, ${SRCS:.c=.o})
